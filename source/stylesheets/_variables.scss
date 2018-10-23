@@ -25,7 +25,7 @@ under the License.
 ////////////////////
 $nav-bg: #28282E !default;
 $examples-bg: #28282E !default;
-$code-bg: rgba(0,0,0,0.15) !default;
+$code-bg: #202026 !default;
 $code-annotation-bg: #28282E !default;
 $nav-subitem-bg: #28282E !default;
 $nav-active-bg: #E50770 !default;
@@ -50,6 +50,7 @@ $inline-code-text: #b93d6a !default; // inline code text color
 $header-color: rgba(0,0,0,1) !default; // header text color
 $main-text: rgba(0,0,0,0.8) !default; // main content text color
 $nav-text: rgba(255,255,255,0.7) !default;
+$nav-title-text: rgba(255,255,255,0.3) !default;
 $nav-active-text: #FFF !default;
 $nav-hover-text: #FFF;
 $nav-active-parent-text: #fff !default; // parent links of the current section
