@@ -68,10 +68,6 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 
 ## Flows
 
-Get info on your apps [Flows](https://docs.flow.ai/docs/thinking-in-flows.html). Flow objects represent the combination of intents related to reply actions.
-
-### The Flow object
-
 > Example Flow object:
 
 ```json
@@ -113,8 +109,6 @@ Get info on your apps [Flows](https://docs.flow.ai/docs/thinking-in-flows.html).
 			}]
 		},
 		"actions": [{
-			"actionId": "3320ae20-cb09-484f-b8d4-c5eb8afeaab2",
-			"createdAt": "2018-10-24T06:45:19.472Z",
 			"type": "TEXT",
 			"payload": {
 				"texts": [
@@ -129,6 +123,10 @@ Get info on your apps [Flows](https://docs.flow.ai/docs/thinking-in-flows.html).
 }
 ```
 
+A Flow represents a [conversation topic](https://docs.flow.ai/docs/thinking-in-flows.html). It's combines a series of [Step objects](#the-step-object) that the AI engine uses to determine what actions to perform.
+
+### The Flow object
+
 Property | Description
 --------- | -----------
 **flowId** *string* | Unique ID of the Flow
@@ -140,7 +138,69 @@ Property | Description
 **disabled** *boolean* | Indicates if it should be ignored
 **steps** *array* | Collection of Step objects
 
-#### Step object
+
+### The Step object
+
+> Example INTENT Step:
+
+```json
+{
+	"stepId": "31aef3cf-8c96-442b-9871-7fc9be322da1",
+	"title": "Hello!",
+	"type": "INTENT",
+	"contexts": [],
+	"actions": [{
+		"type": "TEXT",
+		"payload": {
+			"texts": [
+				"Simple reply"
+			],
+			"quickReplies": [],
+			"tags": []
+		}
+	}],
+	"intent": {
+		"intentId": "67841005-31b1-45b3-b939-3879dfd377de",
+		"title": "Hello_World_Greeting",
+		"createdAt": "2018-10-24T06:45:19.484Z",
+		"examples": [{
+			"entities": [],
+			"query": "Hello"
+		}, {
+			"entities": [],
+			"query": "hi"
+		}, {
+			"entities": [],
+			"query": "Hey"
+		}]
+	}
+}
+```
+
+> Example EVENT Step:
+
+```json
+{
+	"stepId": "c7512efe-9c2e-4cd4-9fdc-11fc1d31dfb8",
+	"type": "EVENT",
+	"title": "EVENT NAME",
+	"contexts": ["31aef3cf-8c96-442b-9871-7fc9be322da1"],
+	"actions": [{
+		"type": "TEXT",
+		"payload": {
+			"texts": [
+				"Simple reply"
+			],
+			"quickReplies": [],
+			"tags": []
+		}
+	}]
+}
+```
+
+Each Step is part of a Flow. Steps are used by the AI engine to determine what reply action to send when for example an intent is matched.
+
+Steps can be related to other steps and configure complex tree like dialog structures,
 
 Property | Description
 --------- | -----------
