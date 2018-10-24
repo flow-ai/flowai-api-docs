@@ -234,6 +234,9 @@
             <a href="#management-api" class="toc-h1 toc-link" data-title="Management API">Management API</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#authentication-2" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+                  <li>
                     <a href="#flows" class="toc-h2 toc-link" data-title="Flows">Flows</a>
                       <ul class="toc-list-h3">
                           <li>
@@ -348,25 +351,306 @@
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+  -H <span class="s2">"Authorization: MY_MANAGEMENT_API_KEY"</span>
 </code></pre>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Make sure to replace <code>MY_MANAGEMENT_API_KEY</code> with your API key.</p>
 </blockquote>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Authenticate your API requests by providing a Management API key as a bearer token. All API requests expect this bearer token to be present.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
+<p>You can register a new Management API key within your <a href="https://app.flow.ai/settings/organisation">organisation settings</a>.</p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
 </aside>
-<h1 id='management-api'>Management API</h1><h2 id='flows'>Flows</h2><h3 id='the-flow-object'>The Flow object</h3><h3 id='create-a-flow'>Create a Flow</h3><h3 id='retrieve-a-flow'>Retrieve a Flow</h3><h3 id='update-a-flow'>Update a Flow</h3><h3 id='list-all-flows'>List all Flows</h3><h2 id='intents'>Intents</h2><h3 id='the-intent-object'>The Intent object</h3><h3 id='create-an-intent'>Create an Intent</h3><h3 id='retrieve-an-intent'>Retrieve an Intent</h3><h3 id='update-an-intent'>Update an Intent</h3><h3 id='list-all-intents'>List all Intents</h3><h2 id='entity-types'>Entity types</h2><h3 id='the-entity-type-object'>The Entity type object</h3><h3 id='create-an-entity-type'>Create an Entity type</h3><h3 id='retrieve-an-entity-type'>Retrieve an Entity type</h3><h3 id='update-an-entity-type'>Update an Entity type</h3><h3 id='list-all-entity-types'>List all Entity types</h3><h2 id='projects'>Projects</h2><h3 id='the-project-object'>The Project object</h3><h3 id='create-a-project'>Create a Project</h3><h3 id='retrieve-a-project'>Retrieve a Project</h3><h3 id='update-a-project'>Update a Project</h3><h3 id='list-all-projects'>List all Projects</h3><h2 id='members'>Members</h2><h3 id='the-member-object'>The Member object</h3><h3 id='list-all-members'>List all Members</h3><h1 id='errors'>Errors</h1>
+<h1 id='management-api'>Management API</h1><h2 id='authentication-2'>Authentication</h2>
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl <span class="s2">"api_endpoint_here"</span>
+  -H <span class="s2">"Authorization: MY_MANAGEMENT_API_KEY"</span>
+</code></pre>
+<blockquote>
+<p>Make sure to replace <code>MY_MANAGEMENT_API_KEY</code> with your API key.</p>
+</blockquote>
+
+<p>Authenticate your API requests by providing a Management API key as a bearer token. All API requests expect this bearer token to be present.</p>
+
+<p>You can register a new Management API key within your <a href="https://app.flow.ai/settings/organisation">organisation settings</a>.</p>
+
+<aside class="notice">
+Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
+</aside>
+<h2 id='flows'>Flows</h2>
+<p>Get info on your apps <a href="https://docs.flow.ai/docs/thinking-in-flows.html">Flows</a>. Flow objects represent the combination of intents related to reply actions.</p>
+<h3 id='the-flow-object'>The Flow object</h3>
+<blockquote>
+<p>Example Flow object:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"flowId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c48b0a06-9727-4735-8886-49286fae78e3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db3e3895-fe06-4dcc-a7a0-35b0c0ec55c3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"brainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"86bc0fa0-25f7-4d3d-9dcf-eaa2a6f810b1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello World"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:19.541Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"disabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="s2">"stepId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31aef3cf-8c96-442b-9871-7fc9be322da1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello!"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTENT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"intent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"intentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67841005-31b1-45b3-b939-3879dfd377de"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello_World_Greeting"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:19.484Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="w">
+            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Good day"</span><span class="w">
+            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Good afternoon"</span><span class="w">
+            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good morning"</span><span class="w">
+            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hi"</span><span class="w">
+            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey"</span><span class="w">
+            </span><span class="p">}]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+            </span><span class="s2">"actionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3320ae20-cb09-484f-b8d4-c5eb8afeaab2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:19.472Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"texts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Hi there! This is a customer service demo bot! "</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Hello! I am a customer service demo bot!"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"quickReplies"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"delay"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"actionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2e226094-fc83-42c1-acab-421ea8786258"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:19.477Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"delay"</span><span class="p">:</span><span class="w"> </span><span class="mi">1100</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"quickReplies"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"texts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"My name is Demo, what is your name?"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"I'm Demo. What can I call you?"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>flowId</strong> <em>string</em></td>
+<td>Unique ID of the Flow</td>
+</tr>
+<tr>
+<td><strong>projectId</strong> <em>string</em></td>
+<td>Project ID the Flow belongs to</td>
+</tr>
+<tr>
+<td><strong>brainId</strong> <em>string</em></td>
+<td>ID of the AI brain the Flow belongs to</td>
+</tr>
+<tr>
+<td><strong>title</strong> <em>string</em></td>
+<td>Name of the Flow</td>
+</tr>
+<tr>
+<td><strong>group</strong> <em>string</em></td>
+<td>Group name</td>
+</tr>
+<tr>
+<td><strong>createdAt</strong> <em>date string</em></td>
+<td>Date the flow was created</td>
+</tr>
+<tr>
+<td><strong>disabled</strong> <em>boolean</em></td>
+<td>Indicates if it should be ignored</td>
+</tr>
+<tr>
+<td><strong>steps</strong> <em>array</em></td>
+<td>Collection of Step objects</td>
+</tr>
+</tbody></table>
+<h4 id='step-object'>Step object</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>stepId</strong> <em>string</em></td>
+<td>Unique ID of the Step</td>
+</tr>
+<tr>
+<td><strong>title</strong> <em>string</em></td>
+<td>Name of the Step</td>
+</tr>
+<tr>
+<td><strong>type</strong> <em>string</em></td>
+<td>Type of step. Should be a value of <code>INTENT</code>, <code>EVENT</code>, <code>UNKNOWN</code>, <code>IMAGE</code>, <code>FILE</code>, <code>AUDIO</code>, <code>VIDEO</code>, <code>LOCATION</code>, <code>NOTHING</code>, <code>ANYTHING</code></td>
+</tr>
+<tr>
+<td><strong>contexts</strong> <em>array</em></td>
+<td>Collection of stepIds that precede the step</td>
+</tr>
+<tr>
+<td><strong>intent</strong> <em>object</em></td>
+<td>Intent object, required if type is <code>INTENT</code></td>
+</tr>
+<tr>
+<td><strong>actions</strong> <em>array</em></td>
+<td>Collection of Reply actions</td>
+</tr>
+</tbody></table>
+<h3 id='create-a-flow'>Create a Flow</h3><h3 id='retrieve-a-flow'>Retrieve a Flow</h3>
+<blockquote>
+<p>GET /flows/info</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"flowId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c48b0a06-9727-4735-8886-49286fae78e3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db3e3895-fe06-4dcc-a7a0-35b0c0ec55c3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"brainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"86bc0fa0-25f7-4d3d-9dcf-eaa2a6f810b1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello World"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Demo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:19.541Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"disabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="s2">"stepId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31aef3cf-8c96-442b-9871-7fc9be322da1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello!"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTENT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"intent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"intentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67841005-31b1-45b3-b939-3879dfd377de"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello_World_Greeting"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:19.484Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="w">
+            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Good day"</span><span class="w">
+            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Good afternoon"</span><span class="w">
+            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"good morning"</span><span class="w">
+            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hi"</span><span class="w">
+            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey"</span><span class="w">
+            </span><span class="p">}]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+            </span><span class="s2">"actionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3320ae20-cb09-484f-b8d4-c5eb8afeaab2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:19.472Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"texts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"Hi there! This is a customer service demo bot! "</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"Hello! I am a customer service demo bot!"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"quickReplies"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"delay"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"actionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2e226094-fc83-42c1-acab-421ea8786258"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:19.477Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"delay"</span><span class="p">:</span><span class="w"> </span><span class="mi">1100</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"quickReplies"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+                </span><span class="s2">"texts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"My name is Demo, what is your name?"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"I'm Demo. What can I call you?"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='update-a-flow'>Update a Flow</h3><h3 id='list-all-flows'>List all Flows</h3>
+<p>This endpoint retrieves all Flows.</p>
+
+<blockquote>
+<p>GET /flows/list</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[{</span><span class="w">
+    </span><span class="s2">"flowId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"53ced89e-08e4-40bc-89b8-f7ea02ba6cd5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db3e3895-fe06-4dcc-a7a0-35b0c0ec55c3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"brainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"86bc0fa0-25f7-4d3d-9dcf-eaa2a6f810b1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Get started"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Weather"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:03.828Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"disabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="s2">"stepId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4237653c-ad8d-4bf8-8ff5-da9dd7cb5636"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTENT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Get started"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"5bd014ef0838670032b1aa11"</span><span class="p">],</span><span class="w">
+        </span><span class="s2">"intent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bd014ef0838670032b1aa16"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"flowId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1a4c7fd-fa2b-4f67-a391-15b9e98d47ea"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"db3e3895-fe06-4dcc-a7a0-35b0c0ec55c3"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"brainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"86bc0fa0-25f7-4d3d-9dcf-eaa2a6f810b1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Weather"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Weather"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:03.820Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"disabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="s2">"stepId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ea8b18e6-eb07-4ad6-8df2-518c43c180e3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTENT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is the weather like"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"5bd014ef0838670032b1aa13"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"stepId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e010bb48-a51b-48f3-ab46-81ce10f05454"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SLOT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SLOT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ea8b18e6-eb07-4ad6-8df2-518c43c180e3"</span><span class="p">],</span><span class="w">
+        </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"5bd014ef0838670032b1aa12"</span><span class="p">],</span><span class="w">
+        </span><span class="s2">"slot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"validation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REQUIRED"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"entityId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system.query"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}]</span><span class="w">
+</span></code></pre><h2 id='intents'>Intents</h2><h3 id='the-intent-object'>The Intent object</h3><h3 id='create-an-intent'>Create an Intent</h3><h3 id='retrieve-an-intent'>Retrieve an Intent</h3><h3 id='update-an-intent'>Update an Intent</h3><h3 id='list-all-intents'>List all Intents</h3>
+<p>This endpoint retrieves all Intents.</p>
+<h2 id='entity-types'>Entity types</h2><h3 id='the-entity-type-object'>The Entity type object</h3><h3 id='create-an-entity-type'>Create an Entity type</h3><h3 id='retrieve-an-entity-type'>Retrieve an Entity type</h3><h3 id='update-an-entity-type'>Update an Entity type</h3><h3 id='list-all-entity-types'>List all Entity types</h3>
+<p>This endpoint retrieves all Entity types.</p>
+<h2 id='projects'>Projects</h2><h3 id='the-project-object'>The Project object</h3><h3 id='create-a-project'>Create a Project</h3><h3 id='retrieve-a-project'>Retrieve a Project</h3><h3 id='update-a-project'>Update a Project</h3><h3 id='list-all-projects'>List all Projects</h3>
+<p>This endpoint retrieves all Flows.</p>
+<h2 id='members'>Members</h2><h3 id='the-member-object'>The Member object</h3><h3 id='list-all-members'>List all Members</h3>
+<p>This endpoint retrieves all organisation members.</p>
+<h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
