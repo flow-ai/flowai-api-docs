@@ -405,7 +405,7 @@ html, body {
 
   h3, h4, h5, h6 {
     @extend %header-font;
-    font-size: 15px;
+    font-size: 16px;
     margin-top: 2.5em;
     margin-bottom: 0.8em;
   }
@@ -435,9 +435,27 @@ html, body {
     th,td {
       text-align: left;
       vertical-align: top;
-      line-height: 1.6;
+      line-height: 24px;
       code {
         white-space: nowrap;
+      }
+
+      strong {
+        @extend %bold-font;
+        line-height: 16px;
+        width: 100px;
+        display: block;
+        text-align: right;
+        color: $method-item-label-text;
+        font-weight: 400;
+      }
+      em {
+        line-height: 16px;
+        display: block;
+        text-align: right;
+        font-style: normal;
+        color: $method-item-validation-text;
+        font-size: 11px;
       }
     }
 
@@ -445,7 +463,6 @@ html, body {
       @extend %bold-font;
       font-weight: 400;
       padding: 8px 16px;
-      border-bottom: 1px solid $table-border-color;
       vertical-align: bottom;
     }
     th:first-child {
@@ -456,18 +473,11 @@ html, body {
     }
 
     td {
+      border-top: 1px solid $table-border-color;
       padding: 16px;
     }
     td:first-child {
       padding-left: 0;
-    }
-
-    tr:nth-child(odd)>td {
-      background-color: lighten($main-bg,4.2%);
-    }
-
-    tr:nth-child(even)>td {
-      background-color: lighten($main-bg,2.4%);
     }
   }
 
