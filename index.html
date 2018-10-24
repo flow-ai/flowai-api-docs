@@ -243,6 +243,9 @@
                             <a href="#the-flow-object" class="toc-h3 toc-link" data-title="The Flow object">The Flow object</a>
                           </li>
                           <li>
+                            <a href="#the-step-object" class="toc-h3 toc-link" data-title="The Step object">The Step object</a>
+                          </li>
+                          <li>
                             <a href="#create-a-flow" class="toc-h3 toc-link" data-title="Create a Flow">Create a Flow</a>
                           </li>
                           <li>
@@ -384,8 +387,6 @@ curl <span class="s2">"api_endpoint_here"</span>
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
 </aside>
 <h2 id='flows'>Flows</h2>
-<p>Get info on your apps <a href="https://docs.flow.ai/docs/thinking-in-flows.html">Flows</a>. Flow objects represent the combination of intents related to reply actions.</p>
-<h3 id='the-flow-object'>The Flow object</h3>
 <blockquote>
 <p>Example Flow object:</p>
 </blockquote>
@@ -427,8 +428,6 @@ Treat API keys with care. Never share keys with other users or applications. Do 
             </span><span class="p">}]</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-            </span><span class="s2">"actionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3320ae20-cb09-484f-b8d4-c5eb8afeaab2"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:19.472Z"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"texts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -442,6 +441,8 @@ Treat API keys with care. Never share keys with other users or applications. Do 
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<p>A Flow represents a <a href="https://docs.flow.ai/docs/thinking-in-flows.html">conversation topic</a>. It&#39;s combines a series of <a href="#the-step-object">Step objects</a> that the AI engine uses to determine what actions to perform.</p>
+<h3 id='the-flow-object'>The Flow object</h3>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -481,7 +482,66 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 <td>Collection of Step objects</td>
 </tr>
 </tbody></table>
-<h4 id='step-object'>Step object</h4>
+<h3 id='the-step-object'>The Step object</h3>
+<blockquote>
+<p>Example INTENT Step:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"stepId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31aef3cf-8c96-442b-9871-7fc9be322da1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello!"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTENT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"texts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Simple reply"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"quickReplies"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="s2">"intent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"intentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"67841005-31b1-45b3-b939-3879dfd377de"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello_World_Greeting"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-24T06:45:19.484Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"examples"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+            </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hi"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"entities"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey"</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example EVENT Step:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"stepId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c7512efe-9c2e-4cd4-9fdc-11fc1d31dfb8"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EVENT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EVENT NAME"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"31aef3cf-8c96-442b-9871-7fc9be322da1"</span><span class="p">],</span><span class="w">
+    </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"texts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Simple reply"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"quickReplies"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Each Step is part of a Flow. Steps are used by the AI engine to determine what reply action to send when for example an intent is matched.</p>
+
+<p>Steps can be related to other steps and configure complex tree like dialog structures,</p>
+
 <table><thead>
 <tr>
 <th>Property</th>
