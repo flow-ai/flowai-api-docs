@@ -226,7 +226,42 @@
             <a href="#messaging-api" class="toc-h1 toc-link" data-title="Messaging API">Messaging API</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#audience" class="toc-h2 toc-link" data-title="Audience">Audience</a>
+                  </li>
+                  <li>
+                    <a href="#base-url" class="toc-h2 toc-link" data-title="Base URL">Base URL</a>
+                  </li>
+                  <li>
                     <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+                  <li>
+                    <a href="#send" class="toc-h2 toc-link" data-title="Send">Send</a>
+                  </li>
+                  <li>
+                    <a href="#webhooks" class="toc-h2 toc-link" data-title="Webhooks">Webhooks</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#setting-up-your-webhook" class="toc-h3 toc-link" data-title="Setting Up Your Webhook">Setting Up Your Webhook</a>
+                          </li>
+                          <li>
+                            <a href="#webhook-events" class="toc-h3 toc-link" data-title="Webhook Events">Webhook Events</a>
+                          </li>
+                          <li>
+                            <a href="#event-format" class="toc-h3 toc-link" data-title="Event Format">Event Format</a>
+                          </li>
+                          <li>
+                            <a href="#required-200-ok-response" class="toc-h3 toc-link" data-title="Required 200 OK Response">Required 200 OK Response</a>
+                          </li>
+                          <li>
+                            <a href="#performance-requirements" class="toc-h3 toc-link" data-title="Performance Requirements">Performance Requirements</a>
+                          </li>
+                          <li>
+                            <a href="#validating-webhook-events" class="toc-h3 toc-link" data-title="Validating Webhook Events">Validating Webhook Events</a>
+                          </li>
+                          <li>
+                            <a href="#templates" class="toc-h3 toc-link" data-title="Templates">Templates</a>
+                          </li>
+                      </ul>
                   </li>
               </ul>
           </li>
@@ -348,13 +383,29 @@
 <p>The Flow.ai API is organized around <a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">REST</a>. Our API has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients.</p>
 
 <p>Our messaging API supports <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">cross-origin resource sharing</a>, allowing you to interact securely with our API from a client-side web application (though you should never expose your secret API key in any public client-side code). <a href="http://www.json.org/">JSON</a> is returned by all API responses, including errors.</p>
-<h1 id='messaging-api'>Messaging API</h1><h2 id='authentication'>Authentication</h2>
+<h1 id='messaging-api'>Messaging API</h1>
+<p>An API to built conversational interfaces (e.g., chatbots, voice-powered apps and devices).</p>
+<h2 id='audience'>Audience</h2>
+<p>The API is specifically made for developers that want to use the Flow.ai engine within their own technology stack or solution.</p>
+
+<p>Some example use cases:</p>
+
+<ul>
+<li>Mobile or web chat app</li>
+<li>Customer service tool</li>
+<li>Hardware integrations</li>
+</ul>
+<h2 id='base-url'>Base URL</h2>
+<p>All the URLs referenced in the Messaging API have the following base:</p>
+
+<p><code>https://api.flow.ai/messaging/v1/</code></p>
+<h2 id='authentication'>Authentication</h2>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: MY_MANAGEMENT_API_KEY"</span>
+  -H <span class="s1">'Authorization: Bearer MY_MESSAGING_API_KEY'</span>
 </code></pre>
 <blockquote>
 <p>Make sure to replace <code>MY_MANAGEMENT_API_KEY</code> with your API key.</p>
@@ -367,13 +418,128 @@ curl <span class="s2">"api_endpoint_here"</span>
 <aside class="notice">
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
 </aside>
-<h1 id='management-api'>Management API</h1><h2 id='authentication-2'>Authentication</h2>
+<h2 id='send'>Send</h2>
+<blockquote>
+<p>Example <code>POST</code> <code>/query</code></p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># Text query</span>
+curl -X POST <span class="se">\</span>
+  https://api.flow.ai/messaging/v1/query <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer MY_MESSAGING_API_KEY'</span> <span class="se">\</span>
+  -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "query": {
+        "text": "Hello"
+    }
+}'</span>
+
+<span class="c"># Event query</span>
+curl -X POST <span class="se">\</span>
+  https://api.flow.ai/messaging/v1/query <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer MY_MESSAGING_API_KEY'</span>
+  -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "query": {
+        "event": "MY_EVENT"
+    }
+}'</span>
+<span class="c"># Location query</span>
+curl -X POST <span class="se">\</span>
+  https://api.flow.ai/messaging/v1/query <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer MY_MESSAGING_API_KEY'</span>
+  -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "query": {
+      "location": {
+        "lat": "1232122422",
+        "lng": "2433343343"
+      }
+    }
+}'</span>
+
+<span class="c"># Location query</span>
+curl -X POST <span class="se">\</span>
+  https://api.flow.ai/messaging/v1/query <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer MY_MESSAGING_API_KEY'</span>
+  -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "query": {
+        "image": "https://awesome.corp/nice_image.jpg"
+    }
+}'</span>
+</code></pre>
+<p>Many types of unstructured content can be sent to the Flow.ai platform, including text, audio, images, video, and files. Our powerful AI engine will process any query and send back replies using the provided webhook.</p>
+
+<table><thead>
+<tr>
+<th>Post body</th>
+<th>_</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>threadId</strong> <em>string</em></td>
+<td>Identifies thread of the user</td>
+</tr>
+<tr>
+<td><strong>query</strong> <em>object</em></td>
+<td>Object with query request</td>
+</tr>
+<tr>
+<td><strong>lang</strong> <em>object</em></td>
+<td>Language</td>
+</tr>
+<tr>
+<td><strong>timezone</strong> <em>integer</em></td>
+<td>UTF timezone offset in hours</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Query object</th>
+<th>-</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>text</strong> <em>string</em></td>
+<td>Classify text using natural language processing</td>
+</tr>
+<tr>
+<td><strong>event</strong> <em>string</em></td>
+<td>Trigger a named event</td>
+</tr>
+<tr>
+<td><strong>location</strong> <em>object</em></td>
+<td>Latitude and longitude coordinates</td>
+</tr>
+<tr>
+<td><strong>image</strong> <em>string</em></td>
+<td>URL to an image resource</td>
+</tr>
+<tr>
+<td><strong>file</strong> <em>string</em></td>
+<td>Group name</td>
+</tr>
+<tr>
+<td><strong>audio</strong> <em>string</em></td>
+<td>Date the flow was created</td>
+</tr>
+<tr>
+<td><strong>video</strong> <em>string</em></td>
+<td>Indicates if it should be ignored</td>
+</tr>
+<tr>
+<td><strong>params</strong> <em>object</em></td>
+<td>Optional parameters</td>
+</tr>
+</tbody></table>
+<h2 id='webhooks'>Webhooks</h2><h3 id='setting-up-your-webhook'>Setting Up Your Webhook</h3><h3 id='webhook-events'>Webhook Events</h3><h3 id='event-format'>Event Format</h3><h3 id='required-200-ok-response'>Required 200 OK Response</h3><h3 id='performance-requirements'>Performance Requirements</h3><h3 id='validating-webhook-events'>Validating Webhook Events</h3><h3 id='templates'>Templates</h3><h1 id='management-api'>Management API</h1><h2 id='authentication-2'>Authentication</h2>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: MY_MANAGEMENT_API_KEY"</span>
+  -H <span class="s1">'Authorization: Bearer MY_MANAGEMENT_API_KEY'</span>
 </code></pre>
 <blockquote>
 <p>Make sure to replace <code>MY_MANAGEMENT_API_KEY</code> with your API key.</p>
