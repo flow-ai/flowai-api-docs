@@ -30,7 +30,7 @@ Our messaging API supports [cross-origin resource sharing](http://en.wikipedia.o
 ```shell
 # With shell, you can just pass the correct header with each request
 curl "api_endpoint_here"
-  -H "Authorization: MY_MANAGEMENT_API_KEY"
+  -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
 ```
 
 > Make sure to replace `MY_MANAGEMENT_API_KEY` with your API key.
@@ -43,6 +43,86 @@ You can register a new Management API key within your [organisation settings](ht
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
 </aside>
 
+## Query
+
+> Example `POST` `/query`
+
+```shell
+# Text query
+curl -X POST \
+  https://api.flow.ai/messaging/query \
+  -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
+  -H 'Content-Type: application/json' \
+  -d '{
+	"text": "Hello"
+}'
+
+# Event query
+curl -X POST \
+  https://api.flow.ai/messaging/query \
+  -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
+  -H 'Content-Type: application/json' \
+  -d '{
+	"event": "MY_EVENT"
+}'
+
+# Location query
+curl -X POST \
+  https://api.flow.ai/messaging/query \
+  -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
+  -H 'Content-Type: application/json' \
+  -d '{
+	"location": {
+    "lat": "1232122422",
+    "lng": "2433343343"
+  }
+}'
+
+# Location query
+curl -X POST \
+  https://api.flow.ai/messaging/query \
+  -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
+  -H 'Content-Type: application/json' \
+  -d '{
+	"image": {
+    "name": "https://asdasasdasds"
+  }
+}'
+```
+
+
+We provide a REST endpoint that is used to send messages to Flow.ai.
+
+A query can have the form of text, where we'll process natural language, or other type of data like an image, location or event.
+
+#### Post body
+
+Property | Description
+--------- | -----------
+**text** *string* | Classify text using natural language processing
+**event** *string* | Trigger a named event
+**location** *object* | Latitude and longitude coordinates
+**image** *string* | URL to an image resource
+**file** *string* | Group name
+**audio** *string* | Date the flow was created
+**video** *string* | Indicates if it should be ignored
+
+##  Webhooks
+
+### Setting Up Your Webhook
+
+### Webhook Events
+
+### Event Format
+
+### Required 200 OK Response
+
+### Performance Requirements
+
+### Validating Webhook Events
+
+### Templates
+
 # Management API
 
 ## Authentication
@@ -52,7 +132,7 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 ```shell
 # With shell, you can just pass the correct header with each request
 curl "api_endpoint_here"
-  -H "Authorization: MY_MANAGEMENT_API_KEY"
+  -H 'Authorization: Bearer MY_MANAGEMENT_API_KEY'
 ```
 
 > Make sure to replace `MY_MANAGEMENT_API_KEY` with your API key.
