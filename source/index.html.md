@@ -65,6 +65,18 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 
 > Example `POST` `/query`
 
+```http
+POST /messaging/v1/query HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+{
+	"query": {
+  		"text": "Hello"
+  	}
+}
+```
+
 ```shell
 # Text query
 curl -X POST \
@@ -111,6 +123,31 @@ curl -X POST \
   		"image": "https://awesome.corp/nice_image.jpg"
   	}
 }'
+```
+
+```javascript
+const request = require("request");
+
+const options = {
+  method: 'POST',
+  url: 'https://api.flow.ai/messaging/v1/query',
+  headers: {
+    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {
+    query: {
+      text: 'Hello'
+    }
+  },
+  json: true
+};
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
 ```
 
 Many types of unstructured content can be sent to the Flow.ai platform, including text, audio, images, video, and files. Our powerful AI engine will process any query and send back replies using the provided webhook.
