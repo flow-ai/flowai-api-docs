@@ -69,10 +69,12 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 # Text query
 curl -X POST \
   https://api.flow.ai/messaging/v1/query \
-  -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
+  -H 'Authorization: Bearer MY_MESSAGING_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
-	"text": "Hello"
+  	"query": {
+  		"text": "Hello"
+  	}
 }'
 
 # Event query
@@ -81,7 +83,22 @@ curl -X POST \
   -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
   -H 'Content-Type: application/json' \
   -d '{
-	"event": "MY_EVENT"
+  	"query": {
+  		"event": "MY_EVENT"
+  	}
+}'
+# Location query
+curl -X POST \
+  https://api.flow.ai/messaging/v1/query \
+  -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
+  -H 'Content-Type: application/json' \
+  -d '{
+  	"query": {
+      "location": {
+        "lat": "1232122422",
+        "lng": "2433343343"
+      }
+  	}
 }'
 
 # Location query
@@ -90,21 +107,9 @@ curl -X POST \
   -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
   -H 'Content-Type: application/json' \
   -d '{
-	"location": {
-    "lat": "1232122422",
-    "lng": "2433343343"
-  }
-}'
-
-# Location query
-curl -X POST \
-  https://api.flow.ai/messaging/v1/query \
-  -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
-  -H 'Content-Type: application/json' \
-  -d '{
-	"image": {
-    "name": "https://asdasasdasds"
-  }
+    "query": {
+  		"image": "https://awesome.corp/nice_image.jpg"
+  	}
 }'
 ```
 
