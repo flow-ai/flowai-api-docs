@@ -372,8 +372,8 @@ html, body {
 
   h1 {
     @extend %header-font;
-    font-size: 26px;
-    padding-top: 32px;
+    font-size: 27px;
+    padding-top: 47px;
     padding-bottom: 8px;
     margin-bottom: $h1-margin-bottom;
     margin-top: 48px;
@@ -389,10 +389,10 @@ html, body {
   h2 {
     @extend %header-font;
     font-size: 21px;
-    margin-top: 32px;
+    margin-top: 48px;
     margin-bottom: 0;
     border-top: 1px solid $h2-border-color;
-    padding-top: 32px;
+    padding-top: 47px;
     padding-bottom: 24px;
   }
 
@@ -411,6 +411,7 @@ html, body {
   }
 
   h4, h5, h6 {
+    @extend %bold-font;
     text-transform: uppercase;
     font-size: 12px;
   }
@@ -464,6 +465,12 @@ html, body {
       font-weight: 400;
       padding: 8px 16px;
       vertical-align: bottom;
+
+      strong {
+        @extend %bold-font;
+        line-height: inherit;
+        width: auto;
+      }
     }
     th:first-child {
       padding-left: 0;

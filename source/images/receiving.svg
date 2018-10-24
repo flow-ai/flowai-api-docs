@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="540px" height="256px" viewBox="0 0 540 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>receiving</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="inbound-copy" transform="translate(0.000000, -350.000000)">
+            <g id="receiving" transform="translate(19.000000, 417.000000)">
+                <g id="Group" transform="translate(0.000000, 33.000000)">
+                    <g id="Dimmed">
+                        <rect id="Rectangle" fill="#4C4C54" fill-rule="evenodd" x="16" y="0" width="64" height="64" rx="18.4"></rect>
+                        <text id="Slack" font-family="Gilroy-Regular, Gilroy" font-size="14.4" font-weight="normal" fill="#000000">
+                            <tspan x="17.5368" y="90.6">Your app</tspan>
+                        </text>
+                    </g>
+                    <g id="Flow" transform="translate(395.000000, 0.000000)">
+                        <rect id="Rectangle" fill="#E50770" fill-rule="evenodd" x="21.5" y="0" width="64" height="64" rx="18.4"></rect>
+                        <text id="Flow.ai" font-family="Gilroy-Regular, Gilroy" font-size="14.4" font-weight="normal" fill="#000000">
+                            <tspan x="30.6832" y="90.6">Flow.ai </tspan>
+                            <tspan x="5.5192" y="106.6">Messaging API</tspan>
+                        </text>
+                    </g>
+                    <text id="HTTP-POST-/your-webh" font-family="Gilroy-Regular, Gilroy" font-size="14" font-weight="normal" fill="#000000">
+                        <tspan x="200" y="74">HTTP POST </tspan>
+                        <tspan x="200" y="90" font-family="Gilroy-Bold, Gilroy" font-weight="bold">/your-webhook</tspan>
+                        <tspan x="302.858" y="90"> </tspan>
+                    </text>
+                </g>
+                <text id="Receiving-replies-fr" font-family="Gilroy-Medium, Gilroy" font-size="15" font-weight="400" fill="#000000" fill-opacity="0.7">
+                    <tspan x="149" y="14">Receiving replies from Flow.ai</tspan>
+                </text>
+                <path d="M121.53828,77.5340829 L110.033296,69.9711568 L109.912865,71.7101427 L122.350536,65.8053261 C122.84945,65.5684653 123.061886,64.9720017 122.825025,64.4730875 C122.588164,63.9741733 121.991701,63.7617371 121.492787,63.9985979 L109.055116,69.9034146 C108.350676,70.2378494 108.283071,71.2140542 108.934686,71.6424005 L120.439669,79.2053266 C120.901171,79.5086995 121.521224,79.3805111 121.824596,78.9190099 C122.127969,78.4575087 121.999781,77.8374558 121.53828,77.5340829 Z M395.28737,69.8616132 C307.54625,76.69455 216.266198,76.9517682 121.447049,70.632869 L110.301287,69.860984 C109.750322,69.8228278 109.272744,70.2385416 109.234588,70.7895067 C109.196432,71.3404718 109.612146,71.818049 110.163111,71.8562051 L121.311467,72.6282664 C216.22744,78.9536214 307.603692,78.6961322 395.442652,71.855576 C395.99327,71.812696 396.404873,71.3315712 396.361993,70.7809535 C396.319113,70.2303359 395.837988,69.8187332 395.28737,69.8616132 Z" id="Path-12-Copy" fill="#000000" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>
