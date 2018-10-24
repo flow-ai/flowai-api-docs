@@ -23,6 +23,24 @@ Our messaging API supports [cross-origin resource sharing](http://en.wikipedia.o
 
 # Messaging API
 
+An API to built conversational interfaces (e.g., chatbots, voice-powered apps and devices).
+
+## Audience
+
+The API is specifically made for developers that want to use the Flow.ai engine within their own technology stack or solution.
+
+Some example use cases:
+
+- Mobile or web chat app
+- Customer service tool
+- Hardware integrations
+
+## Base URL
+
+All the URLs referenced in the Messaging API have the following base:
+
+`https://api.flow.ai/messaging/v1/`
+
 ## Authentication
 
 > To authorize, use this code:
@@ -43,14 +61,14 @@ You can register a new Management API key within your [organisation settings](ht
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
 </aside>
 
-## Query
+## Send
 
 > Example `POST` `/query`
 
 ```shell
 # Text query
 curl -X POST \
-  https://api.flow.ai/messaging/query \
+  https://api.flow.ai/messaging/v1/query \
   -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
   -H 'Content-Type: application/json' \
   -d '{
@@ -59,7 +77,7 @@ curl -X POST \
 
 # Event query
 curl -X POST \
-  https://api.flow.ai/messaging/query \
+  https://api.flow.ai/messaging/v1/query \
   -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
   -H 'Content-Type: application/json' \
   -d '{
@@ -68,7 +86,7 @@ curl -X POST \
 
 # Location query
 curl -X POST \
-  https://api.flow.ai/messaging/query \
+  https://api.flow.ai/messaging/v1/query \
   -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
   -H 'Content-Type: application/json' \
   -d '{
@@ -80,7 +98,7 @@ curl -X POST \
 
 # Location query
 curl -X POST \
-  https://api.flow.ai/messaging/query \
+  https://api.flow.ai/messaging/v1/query \
   -H 'Authorization: Bearer MY_MESSAGING_API_KEY'
   -H 'Content-Type: application/json' \
   -d '{
@@ -90,14 +108,17 @@ curl -X POST \
 }'
 ```
 
+Many types of unstructured content can be sent to the Flow.ai platform, including text, audio, images, video, and files. Our powerful AI engine will process any query and send back replies using the provided webhook.
 
-We provide a REST endpoint that is used to send messages to Flow.ai.
+Post body | _
+--------- | -----------
+**threadId** *string* | Identifies thread of the user
+**query** *object* | Object with query request
+**lang** *object* | Language
+**timezone** *integer* | UTF timezone offset in hours
 
-A query can have the form of text, where we'll process natural language, or other type of data like an image, location or event.
 
-#### Post body
-
-Property | Description
+Query object | -
 --------- | -----------
 **text** *string* | Classify text using natural language processing
 **event** *string* | Trigger a named event
@@ -106,6 +127,7 @@ Property | Description
 **file** *string* | Group name
 **audio** *string* | Date the flow was created
 **video** *string* | Indicates if it should be ignored
+**params** *object* | Optional parameters
 
 ##  Webhooks
 
