@@ -115,6 +115,7 @@ Get info on your apps [Flows](https://docs.flow.ai/docs/thinking-in-flows.html).
 		"actions": [{
 			"actionId": "3320ae20-cb09-484f-b8d4-c5eb8afeaab2",
 			"createdAt": "2018-10-24T06:45:19.472Z",
+			"type": "TEXT",
 			"payload": {
 				"texts": [
 					"Hi there! This is a customer service demo bot! ",
@@ -122,20 +123,7 @@ Get info on your apps [Flows](https://docs.flow.ai/docs/thinking-in-flows.html).
 				],
 				"quickReplies": [],
 				"delay": 0
-			},
-			"type": "TEXT"
-		}, {
-			"actionId": "2e226094-fc83-42c1-acab-421ea8786258",
-			"createdAt": "2018-10-24T06:45:19.477Z",
-			"payload": {
-				"delay": 1100,
-				"quickReplies": [],
-				"texts": [
-					"My name is Demo, what is your name?",
-					"I'm Demo. What can I call you?"
-				]
-			},
-			"type": "TEXT"
+			}
 		}]
 	}]
 }
@@ -175,7 +163,7 @@ Property | Description
 	"projectId": "db3e3895-fe06-4dcc-a7a0-35b0c0ec55c3",
 	"brainId": "86bc0fa0-25f7-4d3d-9dcf-eaa2a6f810b1",
 	"title": "Hello World",
-  "group": "Demo",
+	"group": "Demo",
 	"createdAt": "2018-10-24T06:45:19.541Z",
 	"disabled": false,
 	"steps": [{
@@ -210,6 +198,7 @@ Property | Description
 		"actions": [{
 			"actionId": "3320ae20-cb09-484f-b8d4-c5eb8afeaab2",
 			"createdAt": "2018-10-24T06:45:19.472Z",
+			"type": "TEXT",
 			"payload": {
 				"texts": [
 					"Hi there! This is a customer service demo bot! ",
@@ -217,20 +206,7 @@ Property | Description
 				],
 				"quickReplies": [],
 				"delay": 0
-			},
-			"type": "TEXT"
-		}, {
-			"actionId": "2e226094-fc83-42c1-acab-421ea8786258",
-			"createdAt": "2018-10-24T06:45:19.477Z",
-			"payload": {
-				"delay": 1100,
-				"quickReplies": [],
-				"texts": [
-					"My name is Demo, what is your name?",
-					"I'm Demo. What can I call you?"
-				]
-			},
-			"type": "TEXT"
+			}
 		}]
 	}]
 }
