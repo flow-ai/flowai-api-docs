@@ -34,10 +34,10 @@ $lang-select-border: #000 !default;
 $lang-select-bg: rgba(0,0,0,0.1) !default;
 $lang-select-active-bg: #33333A !default; // feel free to change this to blue or something
 $lang-select-pressed-bg: #33333A !default; // color of language tab bg when mouse is pressed
-$main-bg: #FFF !default;
-$inline-code-bg: rgba(0,0,0,0.05) !default;
+$main-bg: #FAFAFA !default;
+$inline-code-bg: #FFF !default;
 
-$aside-notice-bg: #F7F7f7 !default;
+$aside-notice-bg: #FFF !default;
 $aside-warning-bg: #FFBE29 !default;
 $aside-success-bg: #56C2F6 !default;
 $search-notice-bg: #FFBE29 !default;
@@ -46,9 +46,10 @@ $search-notice-bg: #FFBE29 !default;
 // TEXT COLORS
 ////////////////////
 $link-color: #E50770;
-$inline-code-text: #b93d6a !default; // inline code text color
-$header-color: rgba(0,0,0,1) !default; // header text color
-$main-text: rgba(0,0,0,0.8) !default; // main content text color
+$inline-code-text: #ae81ff !default; // inline code text color
+$inline-code-dark-text: #6f42c1 !default; // inline code text color
+$header-color: #28282E !default; // header text color
+$main-text: #4c555a !default; // main content text color
 $nav-text: rgba(255,255,255,0.7) !default;
 $nav-title-text: rgba(255,255,255,0.3) !default;
 $nav-active-text: #FFF !default;
@@ -78,7 +79,7 @@ $phone-width: $tablet-width - $nav-width !default; // min width before reverting
 // FONTS
 ////////////////////
 %default-font {
-  font-family: 'Gilroy-Regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: 'Gilroy-Medium', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
@@ -86,6 +87,7 @@ $phone-width: $tablet-width - $nav-width !default; // min width before reverting
 
 %header-font {
   @extend %default-font;
+  font-family: 'Gilroy-Medium', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: $header-color;
 }
 
@@ -101,7 +103,7 @@ $phone-width: $tablet-width - $nav-width !default; // min width before reverting
 }
 
 %bold-font {
-  font-family: 'Gilroy-Medium', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: 'Gilroy-SemiBold', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 

@@ -2,8 +2,8 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - javascript
-  - shell
+  - http
+  - javascript: Node.js
 
 toc_footers:
   - <a href='https://app.flow.ai/signup'>Sign Up for a free account</a>

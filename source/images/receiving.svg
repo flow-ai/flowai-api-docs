@@ -8,8 +8,8 @@
         <g id="inbound-copy" transform="translate(0.000000, -350.000000)">
             <g id="receiving" transform="translate(19.000000, 417.000000)">
                 <g id="Group" transform="translate(0.000000, 33.000000)">
-                    <g id="Dimmed">
-                        <rect id="Rectangle" fill="#4C4C54" fill-rule="evenodd" x="16" y="0" width="64" height="64" rx="18.4"></rect>
+                    <g id="Dimmed-open">
+                        <rect id="Rectangle" stroke="#4C4C54" stroke-width="2.4" x="17.2" y="1.2" width="61.6" height="61.6" rx="18.4"></rect>
                         <text id="Slack" font-family="Gilroy-Regular, Gilroy" font-size="14.4" font-weight="normal" fill="#000000">
                             <tspan x="17.5368" y="90.6">Your app</tspan>
                         </text>

@@ -378,6 +378,8 @@ html, body {
     margin-bottom: $h1-margin-bottom;
     margin-top: 48px;
     border-top: 1px solid $h1-border-color;
+    letter-spacing: -0.5px;
+    font-kerning: normal;
   }
 
   h1:first-child, div:first-child + h1 {
@@ -388,12 +390,14 @@ html, body {
 
   h2 {
     @extend %header-font;
-    font-size: 21px;
+    font-size: 23px;
     margin-top: 48px;
     margin-bottom: 0;
     border-top: 1px solid $h2-border-color;
     padding-top: 47px;
     padding-bottom: 24px;
+    letter-spacing: -0.5px;
+    font-kerning: normal;
   }
 
   // h2s right after h1s should bump right up
@@ -406,7 +410,7 @@ html, body {
   h3, h4, h5, h6 {
     @extend %header-font;
     @extend %bold-font;
-    font-size: 16px;
+    font-size: 18px;
     margin-top: 2.5em;
     margin-bottom: 0.8em;
   }
@@ -507,8 +511,9 @@ html, body {
   }
 
   code {
+    display: inline-block;
     background-color: $inline-code-bg;
-    color: $inline-code-text;
+    color: $inline-code-dark-text;
     padding: 4px;
     border-radius: 3px;
     @extend %break-words;
@@ -516,7 +521,14 @@ html, body {
   }
 
   pre>code {
-    padding: 0 2px;
+    padding: 0;
+    color: inherit;
+    background-color: transparent;
+  }
+
+  blockquote > p > code {
+    color: $inline-code-text;
+    background-color: transparent;
   }
 
   aside {
@@ -608,7 +620,7 @@ html, body {
   blockquote {
     &>p {
       background-color: $code-annotation-bg;
-      padding: $code-annotation-padding 0;
+      padding: 0 0 24px 0;
     }
   }
 }

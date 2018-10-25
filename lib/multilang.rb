@@ -1,5 +1,8 @@
 module Multilang
   def block_code(code, full_lang_name)
+    if full_lang_name == "request"
+      super("!#{code}!", full_lang_name)
+    end
     if full_lang_name
       parts = full_lang_name.split('--')
       rouge_lang_name = (parts) ? parts[0] : "" # just parts[0] here causes null ref exception when no language specified

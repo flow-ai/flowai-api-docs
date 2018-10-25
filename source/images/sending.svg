@@ -6,29 +6,29 @@
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="inbound-copy">
-            <g id="sending" transform="translate(19.000000, 1.000000)">
-                <g id="Group-2">
-                    <g id="Dimmed" transform="translate(0.000000, 99.000000)">
-                        <rect id="Rectangle" fill="#4C4C54" fill-rule="evenodd" x="16" y="0" width="64" height="64" rx="18.4"></rect>
+            <g id="sending" transform="translate(19.000000, 78.000000)">
+                <g id="Group-2" transform="translate(0.000000, 22.000000)">
+                    <g id="Dimmed">
+                        <rect id="Rectangle" stroke="#979797" stroke-width="0.8" fill="#4C4C54" fill-rule="evenodd" x="16.4" y="0.4" width="63.2" height="63.2" rx="18.4"></rect>
                         <text id="Slack" font-family="Gilroy-Regular, Gilroy" font-size="14.4" font-weight="normal" fill="#000000">
                             <tspan x="17.5368" y="90.6">Your app</tspan>
                         </text>
                     </g>
-                    <g id="Flow" transform="translate(395.000000, 99.000000)">
-                        <rect id="Rectangle" fill="#E50770" fill-rule="evenodd" x="21.5" y="0" width="64" height="64" rx="18.4"></rect>
+                    <g id="Flow-open" transform="translate(395.000000, 0.000000)">
+                        <rect id="Rectangle" stroke="#E50770" stroke-width="2.4" x="22.7" y="1.2" width="61.6" height="61.6" rx="18.4"></rect>
                         <text id="Flow.ai" font-family="Gilroy-Regular, Gilroy" font-size="14.4" font-weight="normal" fill="#000000">
                             <tspan x="30.6832" y="90.6">Flow.ai </tspan>
                             <tspan x="5.5192" y="106.6">Messaging API</tspan>
                         </text>
                     </g>
                     <text id="HTTP-POST-/messaging" font-family="Gilroy-Regular, Gilroy" font-size="14" font-weight="normal" fill="#000000">
-                        <tspan x="183" y="173">HTTP POST </tspan>
-                        <tspan x="183" y="189" font-family="Gilroy-Bold, Gilroy" font-weight="bold">/messaging/v1/send </tspan>
+                        <tspan x="183" y="74">HTTP POST </tspan>
+                        <tspan x="183" y="90" font-family="Gilroy-Bold, Gilroy" font-weight="bold">/messaging/v1/send </tspan>
                     </text>
-                    <path d="M383.014476,131.990357 L395.452146,137.895174 L395.331715,136.156188 L383.826732,143.719114 C383.36523,144.022487 383.237042,144.64254 383.540415,145.104041 C383.843788,145.565542 384.463841,145.69373 384.925342,145.390358 L396.430326,137.827431 C397.081941,137.399085 397.014335,136.42288 396.309895,136.088445 L383.872225,130.183629 C383.37331,129.946768 382.776847,130.159204 382.539986,130.658118 C382.303125,131.157033 382.515562,131.753496 383.014476,131.990357 Z M109.922359,138.040607 C197.761319,144.881163 289.137571,145.138652 384.05095,138.813474 L395.2019,138.041236 C395.752866,138.00308 396.168579,137.525503 396.130423,136.974538 C396.092267,136.423572 395.61469,136.007859 395.063725,136.046015 L383.915368,136.818076 C289.098813,143.136799 197.818761,142.879581 110.077641,136.046644 C109.527023,136.003764 109.045899,136.415367 109.003019,136.965984 C108.960139,137.516602 109.371741,137.997727 109.922359,138.040607 Z" id="Path-12" fill="#000000" fill-rule="nonzero"></path>
+                    <path d="M383.014476,32.990357 L395.452146,38.8951736 L395.331715,37.1561877 L383.826732,44.7191138 C383.36523,45.0224866 383.237042,45.6425396 383.540415,46.1040408 C383.843788,46.565542 384.463841,46.6937304 384.925342,46.3903575 L396.430326,38.8274314 C397.081941,38.3990851 397.014335,37.4228803 396.309895,37.0884454 L383.872225,31.1836288 C383.37331,30.946768 382.776847,31.1592042 382.539986,31.6581184 C382.303125,32.1570326 382.515562,32.7534961 383.014476,32.990357 Z M109.922359,39.0406068 C197.761319,45.881163 289.137571,46.1386523 384.05095,39.8134735 L395.2019,39.041236 C395.752866,39.0030798 396.168579,38.5255027 396.130423,37.9745376 C396.092267,37.4235725 395.61469,37.0078587 395.063725,37.0460149 L383.915368,37.8180761 C289.098813,44.1367991 197.818761,43.8795809 110.077641,37.0466441 C109.527023,37.0037641 109.045899,37.4153668 109.003019,37.9659844 C108.960139,38.516602 109.371741,38.9977269 109.922359,39.0406068 Z" id="Path-12" fill="#000000" fill-rule="nonzero"></path>
                 </g>
                 <text id="Sending-messages-to" font-family="Gilroy-Medium, Gilroy" font-size="15" font-weight="400" fill="#000000" fill-opacity="0.7">
-                    <tspan x="151" y="91">Sending messages to Flow.ai</tspan>
+                    <tspan x="151" y="14">Sending messages to Flow.ai</tspan>
                 </text>
             </g>
         </g>

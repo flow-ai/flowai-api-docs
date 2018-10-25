@@ -98,8 +98,26 @@
 /* @import must be at top of file, otherwise CSS will not work */
 @import url("//hello.myfonts.net/count/31bf8d");
 
-@font-face {font-family: 'Gilroy-Regular';src: url('https://flow.ai/assets/fonts/31BF8D_6_0.eot');src: url('https://flow.ai/assets/fonts/31BF8D_6_0.eot?#iefix') format('embedded-opentype'),url('https://flow.ai/assets/fonts/31BF8D_6_0.woff2') format('woff2'),url('https://flow.ai/assets/fonts/31BF8D_6_0.woff') format('woff'),url('https://flow.ai/assets/fonts/31BF8D_6_0.ttf') format('truetype');}
+@font-face {
+  font-family: 'Gilroy-Regular';
+  src: url('https://flow.ai/assets/fonts/31BF8D_6_0.eot');
+  src: url('https://flow.ai/assets/fonts/31BF8D_6_0.eot?#iefix') format('embedded-opentype'),url('https://flow.ai/assets/fonts/31BF8D_6_0.woff2') format('woff2'),url('https://flow.ai/assets/fonts/31BF8D_6_0.woff') format('woff'),url('https://flow.ai/assets/fonts/31BF8D_6_0.ttf') format('truetype');
+}
 
-@font-face {font-family: 'Gilroy-Medium';src: url('https://flow.ai/assets/fonts/31BF8D_9_0.eot');src: url('https://flow.ai/assets/fonts/31BF8D_9_0.eot?#iefix') format('embedded-opentype'),url('https://flow.ai/assets/fonts/31BF8D_9_0.woff2') format('woff2'),url('https://flow.ai/assets/fonts/31BF8D_9_0.woff') format('woff'),url('https://flow.ai/assets/fonts/31BF8D_9_0.ttf') format('truetype');}
+@font-face {
+  font-family: 'Gilroy-Medium';
+  src: url('https://flow.ai/assets/fonts/31BF8D_9_0.eot');
+  src: url('https://flow.ai/assets/fonts/31BF8D_9_0.eot?#iefix') format('embedded-opentype'),url('https://flow.ai/assets/fonts/31BF8D_9_0.woff2') format('woff2'),url('https://flow.ai/assets/fonts/31BF8D_9_0.woff') format('woff'),url('https://flow.ai/assets/fonts/31BF8D_9_0.ttf') format('truetype');
+}
 
-@font-face {font-family: 'Gilroy-Bold';src: url('https://flow.ai/assets/fonts/31BF8D_11_0.eot');src: url('https://flow.ai/assets/fonts/31BF8D_11_0.eot?#iefix') format('embedded-opentype'),url('https://flow.ai//assets/fonts/31BF8D_11_0.woff2') format('woff2'),url('https://flow.ai//assets/fonts/31BF8D_11_0.woff') format('woff'),url('https://flow.ai//assets/fonts/31BF8D_11_0.ttf') format('truetype');}
+@font-face {
+  font-family: 'Gilroy-Bold';
+  src: url('https://flow.ai/assets/fonts/31BF8D_11_0.eot');
+  src: url('https://flow.ai/assets/fonts/31BF8D_11_0.eot?#iefix') format('embedded-opentype'),url('https://flow.ai//assets/fonts/31BF8D_11_0.woff2') format('woff2'),url('https://flow.ai//assets/fonts/31BF8D_11_0.woff') format('woff'),url('https://flow.ai//assets/fonts/31BF8D_11_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Gilroy-SemiBold';
+  src: url('https://flow.ai/assets/fonts/31BF8D_4_0.eot');
+  src: url('https://flow.ai/assets/fonts/31BF8D_4_0.eot?#iefix') format('embedded-opentype'),url('https://flow.ai//assets/fonts/31BF8D_4_0.woff2') format('woff2'),url('https://flow.ai//assets/fonts/31BF8D_4_0.woff') format('woff'),url('https://flow.ai//assets/fonts/31BF8D_4_0.ttf') format('truetype');
+}

@@ -7,7 +7,7 @@
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
+curl "https://api.flow.ai/v1/management"
   -H 'Authorization: Bearer MY_MANAGEMENT_API_KEY'
 ```
 
@@ -97,7 +97,7 @@ Property | Description
 
 ### The Step object
 
-> Example INTENT Step:
+> Example `INTENT` Step:
 
 ```json
 {
@@ -133,7 +133,7 @@ Property | Description
 }
 ```
 
-> Example EVENT Step:
+> Example `EVENT` Step:
 
 ```json
 {
