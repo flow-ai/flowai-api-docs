@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;javascript&quot;,&quot;shell&quot;]">
+  <body class="index" data-languages="[&quot;http&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,8 +211,8 @@
     <div class="toc-wrapper">
       <img class="logo" src="images/logo.png" srcset="images/logo@2x.png 2x, images/logo@3x.png 3x" />
         <div class="lang-selector">
-              <a href="#" data-language-name="javascript">javascript</a>
-              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="http">http</a>
+              <a href="#" data-language-name="javascript">Node.js</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -226,48 +226,57 @@
             <a href="#messaging-api" class="toc-h1 toc-link" data-title="Messaging API">Messaging API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#audience" class="toc-h2 toc-link" data-title="Audience">Audience</a>
+                    <a href="#messaging-api-audience" class="toc-h2 toc-link" data-title="Audience">Audience</a>
                   </li>
                   <li>
-                    <a href="#you-call-us-we-39-ll-call-you" class="toc-h2 toc-link" data-title="You call us, we'll call you">You call us, we'll call you</a>
+                    <a href="#messaging-api-you-call-us-we-39-ll-call-you" class="toc-h2 toc-link" data-title="You call us, we'll call you">You call us, we'll call you</a>
                   </li>
                   <li>
-                    <a href="#sending-messages" class="toc-h2 toc-link" data-title="Sending messages">Sending messages</a>
+                    <a href="#messaging-api-sending-messages" class="toc-h2 toc-link" data-title="Sending messages">Sending messages</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#endpoint" class="toc-h3 toc-link" data-title="Endpoint">Endpoint</a>
+                            <a href="#messaging-api-sending-messages-endpoint" class="toc-h3 toc-link" data-title="Endpoint">Endpoint</a>
                           </li>
                           <li>
-                            <a href="#authentication" class="toc-h3 toc-link" data-title="Authentication">Authentication</a>
+                            <a href="#messaging-api-sending-messages-authentication" class="toc-h3 toc-link" data-title="Authentication">Authentication</a>
                           </li>
                           <li>
-                            <a href="#post-body" class="toc-h3 toc-link" data-title="Post body">Post body</a>
+                            <a href="#messaging-api-sending-messages-text-message" class="toc-h3 toc-link" data-title="Text message">Text message</a>
+                          </li>
+                          <li>
+                            <a href="#messaging-api-sending-messages-event-message" class="toc-h3 toc-link" data-title="Event message">Event message</a>
+                          </li>
+                          <li>
+                            <a href="#messaging-api-sending-messages-location-message" class="toc-h3 toc-link" data-title="Location message">Location message</a>
+                          </li>
+                          <li>
+                            <a href="#messaging-api-sending-messages-media-message" class="toc-h3 toc-link" data-title="Media message">Media message</a>
                           </li>
                       </ul>
                   </li>
                   <li>
-                    <a href="#webhooks" class="toc-h2 toc-link" data-title="Webhooks">Webhooks</a>
+                    <a href="#messaging-api-webhooks" class="toc-h2 toc-link" data-title="Webhooks">Webhooks</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#setting-up-your-webhook" class="toc-h3 toc-link" data-title="Setting Up Your Webhook">Setting Up Your Webhook</a>
+                            <a href="#messaging-api-webhooks-setting-up-your-webhook" class="toc-h3 toc-link" data-title="Setting Up Your Webhook">Setting Up Your Webhook</a>
                           </li>
                           <li>
-                            <a href="#webhook-events" class="toc-h3 toc-link" data-title="Webhook Events">Webhook Events</a>
+                            <a href="#messaging-api-webhooks-webhook-events" class="toc-h3 toc-link" data-title="Webhook Events">Webhook Events</a>
                           </li>
                           <li>
-                            <a href="#event-format" class="toc-h3 toc-link" data-title="Event Format">Event Format</a>
+                            <a href="#messaging-api-webhooks-event-format" class="toc-h3 toc-link" data-title="Event Format">Event Format</a>
                           </li>
                           <li>
-                            <a href="#required-200-ok-response" class="toc-h3 toc-link" data-title="Required 200 OK Response">Required 200 OK Response</a>
+                            <a href="#messaging-api-webhooks-required-200-ok-response" class="toc-h3 toc-link" data-title="Required 200 OK Response">Required 200 OK Response</a>
                           </li>
                           <li>
-                            <a href="#performance-requirements" class="toc-h3 toc-link" data-title="Performance Requirements">Performance Requirements</a>
+                            <a href="#messaging-api-webhooks-performance-requirements" class="toc-h3 toc-link" data-title="Performance Requirements">Performance Requirements</a>
                           </li>
                           <li>
-                            <a href="#validating-webhook-events" class="toc-h3 toc-link" data-title="Validating Webhook Events">Validating Webhook Events</a>
+                            <a href="#messaging-api-webhooks-validating-webhook-events" class="toc-h3 toc-link" data-title="Validating Webhook Events">Validating Webhook Events</a>
                           </li>
                           <li>
-                            <a href="#templates" class="toc-h3 toc-link" data-title="Templates">Templates</a>
+                            <a href="#messaging-api-webhooks-templates" class="toc-h3 toc-link" data-title="Templates">Templates</a>
                           </li>
                       </ul>
                   </li>
@@ -277,101 +286,150 @@
             <a href="#management-api" class="toc-h1 toc-link" data-title="Management API">Management API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                    <a href="#management-api-authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
                   </li>
                   <li>
-                    <a href="#flows" class="toc-h2 toc-link" data-title="Flows">Flows</a>
+                    <a href="#management-api-flows" class="toc-h2 toc-link" data-title="Flows">Flows</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#the-flow-object" class="toc-h3 toc-link" data-title="The Flow object">The Flow object</a>
+                            <a href="#management-api-flows-the-flow-object" class="toc-h3 toc-link" data-title="The Flow object">The Flow object</a>
                           </li>
                           <li>
-                            <a href="#the-step-object" class="toc-h3 toc-link" data-title="The Step object">The Step object</a>
+                            <a href="#management-api-flows-the-step-object" class="toc-h3 toc-link" data-title="The Step object">The Step object</a>
                           </li>
                           <li>
-                            <a href="#create-a-flow" class="toc-h3 toc-link" data-title="Create a Flow">Create a Flow</a>
+                            <a href="#management-api-flows-create-a-flow" class="toc-h3 toc-link" data-title="Create a Flow">Create a Flow</a>
                           </li>
                           <li>
-                            <a href="#retrieve-a-flow" class="toc-h3 toc-link" data-title="Retrieve a Flow">Retrieve a Flow</a>
+                            <a href="#management-api-flows-retrieve-a-flow" class="toc-h3 toc-link" data-title="Retrieve a Flow">Retrieve a Flow</a>
                           </li>
                           <li>
-                            <a href="#update-a-flow" class="toc-h3 toc-link" data-title="Update a Flow">Update a Flow</a>
+                            <a href="#management-api-flows-update-a-flow" class="toc-h3 toc-link" data-title="Update a Flow">Update a Flow</a>
                           </li>
                           <li>
-                            <a href="#list-all-flows" class="toc-h3 toc-link" data-title="List all Flows">List all Flows</a>
+                            <a href="#management-api-flows-list-all-flows" class="toc-h3 toc-link" data-title="List all Flows">List all Flows</a>
                           </li>
                       </ul>
                   </li>
                   <li>
-                    <a href="#intents" class="toc-h2 toc-link" data-title="Intents">Intents</a>
+                    <a href="#management-api-intents" class="toc-h2 toc-link" data-title="Intents">Intents</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#the-intent-object" class="toc-h3 toc-link" data-title="The Intent object">The Intent object</a>
+                            <a href="#management-api-intents-the-intent-object" class="toc-h3 toc-link" data-title="The Intent object">The Intent object</a>
                           </li>
                           <li>
-                            <a href="#create-an-intent" class="toc-h3 toc-link" data-title="Create an Intent">Create an Intent</a>
+                            <a href="#management-api-intents-create-an-intent" class="toc-h3 toc-link" data-title="Create an Intent">Create an Intent</a>
                           </li>
                           <li>
-                            <a href="#retrieve-an-intent" class="toc-h3 toc-link" data-title="Retrieve an Intent">Retrieve an Intent</a>
+                            <a href="#management-api-intents-retrieve-an-intent" class="toc-h3 toc-link" data-title="Retrieve an Intent">Retrieve an Intent</a>
                           </li>
                           <li>
-                            <a href="#update-an-intent" class="toc-h3 toc-link" data-title="Update an Intent">Update an Intent</a>
+                            <a href="#management-api-intents-update-an-intent" class="toc-h3 toc-link" data-title="Update an Intent">Update an Intent</a>
                           </li>
                           <li>
-                            <a href="#list-all-intents" class="toc-h3 toc-link" data-title="List all Intents">List all Intents</a>
+                            <a href="#management-api-intents-list-all-intents" class="toc-h3 toc-link" data-title="List all Intents">List all Intents</a>
                           </li>
                       </ul>
                   </li>
                   <li>
-                    <a href="#entity-types" class="toc-h2 toc-link" data-title="Entity types">Entity types</a>
+                    <a href="#management-api-entity-types" class="toc-h2 toc-link" data-title="Entity types">Entity types</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#the-entity-type-object" class="toc-h3 toc-link" data-title="The Entity type object">The Entity type object</a>
+                            <a href="#management-api-entity-types-the-entity-type-object" class="toc-h3 toc-link" data-title="The Entity type object">The Entity type object</a>
                           </li>
                           <li>
-                            <a href="#create-an-entity-type" class="toc-h3 toc-link" data-title="Create an Entity type">Create an Entity type</a>
+                            <a href="#management-api-entity-types-create-an-entity-type" class="toc-h3 toc-link" data-title="Create an Entity type">Create an Entity type</a>
                           </li>
                           <li>
-                            <a href="#retrieve-an-entity-type" class="toc-h3 toc-link" data-title="Retrieve an Entity type">Retrieve an Entity type</a>
+                            <a href="#management-api-entity-types-retrieve-an-entity-type" class="toc-h3 toc-link" data-title="Retrieve an Entity type">Retrieve an Entity type</a>
                           </li>
                           <li>
-                            <a href="#update-an-entity-type" class="toc-h3 toc-link" data-title="Update an Entity type">Update an Entity type</a>
+                            <a href="#management-api-entity-types-update-an-entity-type" class="toc-h3 toc-link" data-title="Update an Entity type">Update an Entity type</a>
                           </li>
                           <li>
-                            <a href="#list-all-entity-types" class="toc-h3 toc-link" data-title="List all Entity types">List all Entity types</a>
+                            <a href="#management-api-entity-types-list-all-entity-types" class="toc-h3 toc-link" data-title="List all Entity types">List all Entity types</a>
                           </li>
                       </ul>
                   </li>
                   <li>
-                    <a href="#projects" class="toc-h2 toc-link" data-title="Projects">Projects</a>
+                    <a href="#management-api-projects" class="toc-h2 toc-link" data-title="Projects">Projects</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#the-project-object" class="toc-h3 toc-link" data-title="The Project object">The Project object</a>
+                            <a href="#management-api-projects-the-project-object" class="toc-h3 toc-link" data-title="The Project object">The Project object</a>
                           </li>
                           <li>
-                            <a href="#create-a-project" class="toc-h3 toc-link" data-title="Create a Project">Create a Project</a>
+                            <a href="#management-api-projects-create-a-project" class="toc-h3 toc-link" data-title="Create a Project">Create a Project</a>
                           </li>
                           <li>
-                            <a href="#retrieve-a-project" class="toc-h3 toc-link" data-title="Retrieve a Project">Retrieve a Project</a>
+                            <a href="#management-api-projects-retrieve-a-project" class="toc-h3 toc-link" data-title="Retrieve a Project">Retrieve a Project</a>
                           </li>
                           <li>
-                            <a href="#update-a-project" class="toc-h3 toc-link" data-title="Update a Project">Update a Project</a>
+                            <a href="#management-api-projects-update-a-project" class="toc-h3 toc-link" data-title="Update a Project">Update a Project</a>
                           </li>
                           <li>
-                            <a href="#list-all-projects" class="toc-h3 toc-link" data-title="List all Projects">List all Projects</a>
+                            <a href="#management-api-projects-list-all-projects" class="toc-h3 toc-link" data-title="List all Projects">List all Projects</a>
                           </li>
                       </ul>
                   </li>
                   <li>
-                    <a href="#members" class="toc-h2 toc-link" data-title="Members">Members</a>
+                    <a href="#management-api-members" class="toc-h2 toc-link" data-title="Members">Members</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#the-member-object" class="toc-h3 toc-link" data-title="The Member object">The Member object</a>
+                            <a href="#management-api-members-the-member-object" class="toc-h3 toc-link" data-title="The Member object">The Member object</a>
                           </li>
                           <li>
-                            <a href="#list-all-members" class="toc-h3 toc-link" data-title="List all Members">List all Members</a>
+                            <a href="#management-api-members-list-all-members" class="toc-h3 toc-link" data-title="List all Members">List all Members</a>
                           </li>
                       </ul>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#web-socket-api" class="toc-h1 toc-link" data-title="Web socket API">Web socket API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#web-socket-api-audience" class="toc-h2 toc-link" data-title="Audience">Audience</a>
+                  </li>
+                  <li>
+                    <a href="#web-socket-api-getting-started" class="toc-h2 toc-link" data-title="Getting started">Getting started</a>
+                  </li>
+                  <li>
+                    <a href="#web-socket-api-request-an-endpoint" class="toc-h2 toc-link" data-title="Request an endpoint">Request an endpoint</a>
+                  </li>
+                  <li>
+                    <a href="#web-socket-api-open-a-connection" class="toc-h2 toc-link" data-title="Open a connection">Open a connection</a>
+                  </li>
+                  <li>
+                    <a href="#web-socket-api-common-format" class="toc-h2 toc-link" data-title="Common format">Common format</a>
+                  </li>
+                  <li>
+                    <a href="#web-socket-api-keep-alive" class="toc-h2 toc-link" data-title="Keep alive">Keep alive</a>
+                  </li>
+                  <li>
+                    <a href="#web-socket-api-sending-messages" class="toc-h2 toc-link" data-title="Sending Messages">Sending Messages</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#web-socket-api-sending-messages-payload" class="toc-h3 toc-link" data-title="Payload">Payload</a>
+                          </li>
+                          <li>
+                            <a href="#web-socket-api-sending-messages-message-attachment" class="toc-h3 toc-link" data-title="Message Attachment">Message Attachment</a>
+                          </li>
+                          <li>
+                            <a href="#web-socket-api-sending-messages-originator" class="toc-h3 toc-link" data-title="Originator">Originator</a>
+                          </li>
+                          <li>
+                            <a href="#web-socket-api-sending-messages-message-metadata" class="toc-h3 toc-link" data-title="Message Metadata">Message Metadata</a>
+                          </li>
+                          <li>
+                            <a href="#web-socket-api-sending-messages-responses" class="toc-h3 toc-link" data-title="Responses">Responses</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#web-socket-api-receiving-messages" class="toc-h2 toc-link" data-title="Receiving Messages">Receiving Messages</a>
+                  </li>
+                  <li>
+                    <a href="#web-socket-api-example" class="toc-h2 toc-link" data-title="Example">Example</a>
                   </li>
               </ul>
           </li>
@@ -390,7 +448,7 @@
 <p>Our messaging API supports <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">cross-origin resource sharing</a>, allowing you to interact securely with our API from a client-side web application (though you should never expose your secret API key in any public client-side code). <a href="http://www.json.org/">JSON</a> is returned by all API responses, including errors.</p>
 <h1 id='messaging-api'>Messaging API</h1>
 <p>An API to built conversational interfaces (e.g., chatbots, voice-powered apps and devices).</p>
-<h2 id='audience'>Audience</h2>
+<h2 id='messaging-api-audience'>Audience</h2>
 <p>The API is specifically made for developers that want to use the Flow.ai engine within their own technology stack or solution.</p>
 
 <p>Some example use cases:</p>
@@ -400,7 +458,7 @@
 <li>Use Flow.ai with any other backend service</li>
 <li>Hardware or other integrations</li>
 </ul>
-<h2 id='you-call-us-we-39-ll-call-you'>You call us, we&#39;ll call you</h2>
+<h2 id='messaging-api-you-call-us-we-39-ll-call-you'>You call us, we&#39;ll call you</h2>
 <p>The Messaging API works asynchronous. Unlike other NLP APIs, Flow.ai will not return any direct reply to a <a href="#sending-messages">Send</a> call.</p>
 
 <p><img src="images/sending.svg" title="Sending messages to Flow.ai" alt="Send messages using REST API" /></p>
@@ -408,101 +466,15 @@
 <p>Instead, the API will call your configured <a href="#webhooks">webhook</a> whenever a reply is being sent.</p>
 
 <p><img src="images/receiving.svg" title="Receiving replies from Flow.ai" alt="Receive replies using Webhooks" /></p>
-<h2 id='sending-messages'>Sending messages</h2>
-<blockquote>
-<p>Sending text or speech</p>
-</blockquote>
-<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
-<span class="s">{</span>
-<span class="s">    "query": {</span>
-<span class="s">        "text": "Hello"</span>
-<span class="s">    }</span>
-<span class="s">}</span>
-</code></pre>
-<blockquote>
-<p>Triggering an event</p>
-</blockquote>
-<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
-<span class="s">{</span>
-<span class="s">  "query": {</span>
-<span class="s">    "event": "MY_EVENT"</span>
-<span class="s">  }</span>
-<span class="s">}</span>
-</code></pre>
-<blockquote>
-<p>Sending a location</p>
-</blockquote>
-<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
-<span class="s">{</span>
-<span class="s">  "query": {</span>
-<span class="s">    "location": {</span>
-<span class="s">      "lat": "1232122422",</span>
-<span class="s">      "lng": "2433343343"</span>
-<span class="s">    }</span>
-<span class="s">  }</span>
-<span class="s">}</span>
-</code></pre>
-<blockquote>
-<p>Sending an image</p>
-</blockquote>
-<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
-<span class="s">{</span>
-<span class="s">  "query": {</span>
-<span class="s">    "image": "https://awesome.corp/nice_image.jpg"</span>
-<span class="s">  }</span>
-<span class="s">}</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.flow.ai/messaging/v1/query'</span><span class="p">,</span>
-  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Bearer MY_MESSAGING_API_KEY'</span><span class="p">,</span>
-    <span class="s1">'Content-Type'</span><span class="p">:</span> <span class="s1">'application/json'</span>
-  <span class="p">},</span>
-  <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">query</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">text</span><span class="p">:</span> <span class="s1">'Hello'</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
-<span class="p">};</span>
-
-<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre>
+<h2 id='messaging-api-sending-messages'>Sending messages</h2>
 <p>Many types of unstructured content can be sent to the Flow.ai platform, including text, audio, images, video, and files. Our powerful AI engine will process any query and send back replies using the provided webhook.</p>
-<h3 id='endpoint'>Endpoint</h3>
+
+<p>Any message that is send requires a <code>threadId</code> that relates the message to a specific user, chat or thread. Optionally you can provide a <code>traceId</code> that will help keep track of the message when you receive delivery events.</p>
+<h3 id='messaging-api-sending-messages-endpoint'>Endpoint</h3>
 <p>All the URLs referenced in the Messaging API have the following base:</p>
 
-<p><code>https://api.flow.ai/messaging/v1/</code></p>
-<h3 id='authentication'>Authentication</h3>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s1">'Authorization: Bearer MY_MESSAGING_API_KEY'</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>MY_MANAGEMENT_API_KEY</code> with your API key.</p>
-</blockquote>
-
+<p><code>https://api.flow.ai/v1/messaging/</code></p>
+<h3 id='messaging-api-sending-messages-authentication'>Authentication</h3>
 <p>Authenticate your API requests by providing a Messaging API key as a bearer token. All API requests expect this bearer token to be present.</p>
 
 <p>You can register a new Messaging API key within your <a href="https://app.flow.ai/settings/organisation">organisation settings</a>.</p>
@@ -510,73 +482,331 @@ curl <span class="s2">"api_endpoint_here"</span>
 <aside class="notice">
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
 </aside>
-<h3 id='post-body'>Post body</h3>
+<h3 id='messaging-api-sending-messages-text-message'>Text message</h3>
+<p>Sending a text message</p>
+
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
+<span class="s">{</span>
+<span class="s">    "threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",</span>
+<span class="s">    "type": "text",</span>
+<span class="s">    "text": "Hello"</span>
+<span class="s">}</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">request</span> <span class="nx">from</span> <span class="s2">"async-request"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">request</span><span class="p">({</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.flow.ai/v1/messaging/query'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Bearer MY_MESSAGING_API_KEY'</span><span class="p">,</span>
+    <span class="s1">'Content-Type'</span><span class="p">:</span> <span class="s1">'application/json'</span>
+  <span class="p">},</span>
+  <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">threadId</span><span class="p">:</span> <span class="s1">'6ecfd199-853a-448f-9f91-ef397588ff87'</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="s1">'text'</span><span class="p">,</span>
+    <span class="na">text</span><span class="p">:</span> <span class="s1">'Hello'</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='messaging-api-sending-messages-text-message-attributes'>Attributes</h4>
 <table><thead>
 <tr>
-<th><strong>Property</strong></th>
-<th>Description</th>
+<th style="text-align: right"></th>
+<th></th>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>threadId</strong> <em>string</em></td>
-<td>Identifies thread of the user</td>
+<td style="text-align: right"><strong>threadId</strong> <em>string</em></td>
+<td>Unique identifier for the target chat or user of the target channel</td>
 </tr>
 <tr>
-<td><strong>query</strong> <em>object</em></td>
-<td>Object with query request</td>
+<td style="text-align: right"><strong>traceId</strong> <em>number</em></td>
+<td>Optional unique number that is passed along to identify the message. Use this to verify message delivery.</td>
 </tr>
 <tr>
-<td><strong>lang</strong> <em>object</em></td>
-<td>Language</td>
+<td style="text-align: right"><strong>type</strong> <em>string</em></td>
+<td>Indicates the type of message. Should be <code>text</code></td>
 </tr>
 <tr>
-<td><strong>timezone</strong> <em>integer</em></td>
+<td style="text-align: right"><strong>text</strong> <em>string</em></td>
+<td>The text or speech message to process. The maximum length of a message is 255 characters.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>lang</strong> <em>string</em></td>
+<td>Language code in <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO format</a> (2 letters)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>timezone</strong> <em>integer</em></td>
 <td>UTF timezone offset in hours</td>
 </tr>
-</tbody></table>
-<h4 id='query-object'>Query object</h4>
-<p>The Query object represents the interaction that should be processed. Flow.ai can handle different types of information.</p>
-
-<table><thead>
 <tr>
-<th><strong>Property</strong></th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><strong>text</strong> <em>string</em></td>
-<td>Classify text using natural language processing</td>
-</tr>
-<tr>
-<td><strong>event</strong> <em>string</em></td>
-<td>Trigger a named event</td>
-</tr>
-<tr>
-<td><strong>location</strong> <em>object</em></td>
-<td>Latitude and longitude coordinates</td>
-</tr>
-<tr>
-<td><strong>image</strong> <em>string</em></td>
-<td>URL to an image resource</td>
-</tr>
-<tr>
-<td><strong>file</strong> <em>string</em></td>
-<td>Group name</td>
-</tr>
-<tr>
-<td><strong>audio</strong> <em>string</em></td>
-<td>Date the flow was created</td>
-</tr>
-<tr>
-<td><strong>video</strong> <em>string</em></td>
-<td>Indicates if it should be ignored</td>
-</tr>
-<tr>
-<td><strong>params</strong> <em>object</em></td>
+<td style="text-align: right"><strong>params</strong> <em>object</em></td>
 <td>Optional parameters</td>
 </tr>
 </tbody></table>
-<h2 id='webhooks'>Webhooks</h2>
+<h3 id='messaging-api-sending-messages-event-message'>Event message</h3>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
+<span class="s">{</span>
+<span class="s">    "threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",</span>
+<span class="s">    "type": "event",</span>
+<span class="s">  "eventName": "MY_EVENT"</span>
+<span class="s">}</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">request</span> <span class="nx">from</span> <span class="s2">"async-request"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">request</span><span class="p">({</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.flow.ai/v1/messaging/query'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Bearer MY_MESSAGING_API_KEY'</span><span class="p">,</span>
+    <span class="s1">'Content-Type'</span><span class="p">:</span> <span class="s1">'application/json'</span>
+  <span class="p">},</span>
+  <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">threadId</span><span class="p">:</span> <span class="s1">'6ecfd199-853a-448f-9f91-ef397588ff87'</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="s1">'event'</span><span class="p">,</span>
+    <span class="na">eventName</span><span class="p">:</span> <span class="s2">"MY_EVENT"</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Trigger events within Flow.ai by sending an event message.</p>
+<h4 id='messaging-api-sending-messages-event-message-attributes'>Attributes</h4>
+<table><thead>
+<tr>
+<th style="text-align: right"></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>threadId</strong> <em>string</em></td>
+<td>Unique identifier for the target chat or user of the target channel</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>traceId</strong> <em>number</em></td>
+<td>Optional unique number that is passed along to identify the message. Use this to verify message delivery.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>type</strong> <em>string</em></td>
+<td>Indicates the type of message. Should be <code>event</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>eventName</strong> <em>string</em></td>
+<td>The name of the event to trigger</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>lang</strong> <em>string</em></td>
+<td>Language code in <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO format</a> (2 letters)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>timezone</strong> <em>integer</em></td>
+<td>UTF timezone offset in hours</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>params</strong> <em>object</em></td>
+<td>Optional parameters</td>
+</tr>
+</tbody></table>
+<h3 id='messaging-api-sending-messages-location-message'>Location message</h3>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
+<span class="s">{</span>
+<span class="s">    "threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",</span>
+<span class="s">    "type": "location",</span>
+<span class="s">  "lat": "1232122422",</span>
+<span class="s">  "lng": "2433343343"</span>
+<span class="s">}</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">request</span> <span class="nx">from</span> <span class="s2">"async-request"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">request</span><span class="p">({</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.flow.ai/v1/messaging/query'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Bearer MY_MESSAGING_API_KEY'</span><span class="p">,</span>
+    <span class="s1">'Content-Type'</span><span class="p">:</span> <span class="s1">'application/json'</span>
+  <span class="p">},</span>
+  <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">threadId</span><span class="p">:</span> <span class="s1">'6ecfd199-853a-448f-9f91-ef397588ff87'</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="s1">'location'</span><span class="p">,</span>
+        <span class="na">lat</span><span class="p">:</span> <span class="s2">"1232122422"</span><span class="p">,</span>
+        <span class="na">lng</span><span class="p">:</span> <span class="s2">"2433343343"</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Send coordinates</p>
+<h4 id='messaging-api-sending-messages-location-message-attributes'>Attributes</h4>
+<table><thead>
+<tr>
+<th style="text-align: right"></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>threadId</strong> <em>string</em></td>
+<td>Unique identifier for the target chat or user of the target channel</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>traceId</strong> <em>number</em></td>
+<td>Optional unique number that is passed along to identify the message. Use this to verify message delivery.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>type</strong> <em>string</em></td>
+<td>Indicates the type of message. Should be <code>location</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>lat</strong> <em>string</em></td>
+<td>Latitude</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>lng</strong> <em>string</em></td>
+<td>Longitude</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>lang</strong> <em>string</em></td>
+<td>Language code in <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO format</a> (2 letters)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>timezone</strong> <em>integer</em></td>
+<td>UTF timezone offset in hours</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>params</strong> <em>object</em></td>
+<td>Optional parameters</td>
+</tr>
+</tbody></table>
+<h3 id='messaging-api-sending-messages-media-message'>Media message</h3>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
+<span class="s">------WebKitFormBoundaryDJX0xmK2m2F6Mvka</span>
+<span class="na">Content-Disposition</span><span class="p">:</span> <span class="s">form-data; name="file"; filename="image.png"</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">image/png</span>
+
+------WebKitFormBoundaryDJX0xmK2m2F6Mvka
+Content-Disposition: form-data; name="query"
+{
+    "threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",
+    "type": "location",
+    "mediaType": "image",
+    "mimetype": "image/png"
+}
+------WebKitFormBoundaryDJX0xmK2m2F6Mvka--
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">request</span> <span class="nx">from</span> <span class="s2">"async-request"</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">createReadStream</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'fs'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">FormData</span> <span class="nx">from</span> <span class="s1">'form-data'</span><span class="p">;</span>
+
+<span class="c1">// Stream the binary file</span>
+<span class="kr">const</span> <span class="nx">stream</span> <span class="o">=</span> <span class="nx">createReadStream</span><span class="p">(</span><span class="s1">'./test.png'</span><span class="p">)</span>
+
+<span class="c1">// Create a formData and append the file and query (JSON)</span>
+<span class="kr">const</span> <span class="nx">formData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">()</span>
+<span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'file'</span><span class="p">,</span> <span class="nx">stream</span><span class="p">)</span>
+<span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'query'</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">query</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">threadId</span><span class="p">:</span> <span class="s1">'6ecfd199-853a-448f-9f91-ef397588ff87'</span><span class="p">,</span>
+    <span class="nx">type</span><span class="p">:</span> <span class="s1">'media'</span><span class="p">,</span>
+    <span class="nx">mediaType</span><span class="p">:</span> <span class="s1">'image'</span><span class="p">,</span>
+    <span class="nx">mimeType</span><span class="p">:</span> <span class="s2">"image/png"</span>
+<span class="p">}))</span>
+
+<span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">request</span><span class="p">({</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.flow.ai/v1/messaging/query'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Bearer MY_MESSAGING_API_KEY'</span>
+  <span class="p">},</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">formData</span>
+<span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The API allows you to send images, files and other media files.</p>
+
+<p>For media you&#39;ll need to make a <code>POST</code> call that is <code>multipart/form-data</code>. The maximum file size you can upload is 250MB.</p>
+<h4 id='messaging-api-sending-messages-media-message-attributes'>Attributes</h4>
+<table><thead>
+<tr>
+<th style="text-align: right"></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>threadId</strong> <em>string</em></td>
+<td>Unique identifier for the target chat or user of the target channel</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>traceId</strong> <em>number</em></td>
+<td>Optional unique number that is passed along to identify the message. Use this to verify message delivery.</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>type</strong> <em>string</em></td>
+<td>Indicates the type of message. Should be <code>media</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>mediaType</strong> <em>string</em></td>
+<td>Type of media, <code>image</code>, <code>file</code>, <code>audio</code>, or <code>video</code></td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>mimeType</strong> <em>string</em></td>
+<td>Optionally specify the mime-type of the uploaded file</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>lang</strong> <em>string</em></td>
+<td>Language code in <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO format</a> (2 letters)</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>timezone</strong> <em>integer</em></td>
+<td>UTF timezone offset in hours</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>params</strong> <em>object</em></td>
+<td>Optional parameters</td>
+</tr>
+</tbody></table>
+<h2 id='messaging-api-webhooks'>Webhooks</h2>
 <p>Webhooks are the way Flow.ai will deliver replies.</p>
 <pre class="highlight plaintext"><code>POST /management/v1/webhooks HTTP/1.1
 Host: api.flow.ai
@@ -588,20 +818,20 @@ Authorization: Bearer MY_MANAGEMENT_API_KEY
     "thread.handover"
   ]
 }
-</code></pre><h3 id='setting-up-your-webhook'>Setting Up Your Webhook</h3>
+</code></pre><h3 id='messaging-api-webhooks-setting-up-your-webhook'>Setting Up Your Webhook</h3>
 <p>You can add a webhook subscription using the Management API</p>
-<h4 id='requirements'>Requirements</h4>
+<h4 id='messaging-api-webhooks-setting-up-your-webhook-requirements'>Requirements</h4>
 <ul>
 <li>HTTPS support</li>
 <li>A valid SSL certificate</li>
 <li>An open port that accepts <code>GET</code> and <code>POST</code> requests</li>
 </ul>
-<h3 id='webhook-events'>Webhook Events</h3><h3 id='event-format'>Event Format</h3><h3 id='required-200-ok-response'>Required 200 OK Response</h3><h3 id='performance-requirements'>Performance Requirements</h3><h3 id='validating-webhook-events'>Validating Webhook Events</h3><h3 id='templates'>Templates</h3><h1 id='management-api'>Management API</h1><h2 id='authentication'>Authentication</h2>
+<h3 id='messaging-api-webhooks-webhook-events'>Webhook Events</h3><h3 id='messaging-api-webhooks-event-format'>Event Format</h3><h3 id='messaging-api-webhooks-required-200-ok-response'>Required 200 OK Response</h3><h3 id='messaging-api-webhooks-performance-requirements'>Performance Requirements</h3><h3 id='messaging-api-webhooks-validating-webhook-events'>Validating Webhook Events</h3><h3 id='messaging-api-webhooks-templates'>Templates</h3><h1 id='management-api'>Management API</h1><h2 id='management-api-authentication'>Authentication</h2>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
+curl <span class="s2">"https://api.flow.ai/v1/management"</span>
   -H <span class="s1">'Authorization: Bearer MY_MANAGEMENT_API_KEY'</span>
 </code></pre>
 <blockquote>
@@ -615,7 +845,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 <aside class="notice">
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
 </aside>
-<h2 id='flows'>Flows</h2>
+<h2 id='management-api-flows'>Flows</h2>
 <blockquote>
 <p>Example Flow object:</p>
 </blockquote>
@@ -671,7 +901,7 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>A Flow represents a <a href="https://docs.flow.ai/docs/thinking-in-flows.html">conversation topic</a>. It&#39;s combines a series of <a href="#the-step-object">Step objects</a> that the AI engine uses to determine what actions to perform.</p>
-<h3 id='the-flow-object'>The Flow object</h3>
+<h3 id='management-api-flows-the-flow-object'>The Flow object</h3>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -711,9 +941,9 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 <td>Collection of Step objects</td>
 </tr>
 </tbody></table>
-<h3 id='the-step-object'>The Step object</h3>
+<h3 id='management-api-flows-the-step-object'>The Step object</h3>
 <blockquote>
-<p>Example INTENT Step:</p>
+<p>Example <code>INTENT</code> Step:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"stepId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31aef3cf-8c96-442b-9871-7fc9be322da1"</span><span class="p">,</span><span class="w">
@@ -748,7 +978,7 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Example EVENT Step:</p>
+<p>Example <code>EVENT</code> Step:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"stepId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c7512efe-9c2e-4cd4-9fdc-11fc1d31dfb8"</span><span class="p">,</span><span class="w">
@@ -802,7 +1032,7 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 <td>Collection of Reply actions</td>
 </tr>
 </tbody></table>
-<h3 id='create-a-flow'>Create a Flow</h3><h3 id='retrieve-a-flow'>Retrieve a Flow</h3>
+<h3 id='management-api-flows-create-a-flow'>Create a Flow</h3><h3 id='management-api-flows-retrieve-a-flow'>Retrieve a Flow</h3>
 <blockquote>
 <p>GET /flows/info</p>
 </blockquote>
@@ -858,7 +1088,7 @@ Treat API keys with care. Never share keys with other users or applications. Do 
         </span><span class="p">}]</span><span class="w">
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='update-a-flow'>Update a Flow</h3><h3 id='list-all-flows'>List all Flows</h3>
+</span></code></pre><h3 id='management-api-flows-update-a-flow'>Update a Flow</h3><h3 id='management-api-flows-list-all-flows'>List all Flows</h3>
 <p>This endpoint retrieves all Flows.</p>
 
 <blockquote>
@@ -907,20 +1137,761 @@ Treat API keys with care. Never share keys with other users or applications. Do 
         </span><span class="p">}</span><span class="w">
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}]</span><span class="w">
-</span></code></pre><h2 id='intents'>Intents</h2><h3 id='the-intent-object'>The Intent object</h3><h3 id='create-an-intent'>Create an Intent</h3><h3 id='retrieve-an-intent'>Retrieve an Intent</h3><h3 id='update-an-intent'>Update an Intent</h3><h3 id='list-all-intents'>List all Intents</h3>
+</span></code></pre><h2 id='management-api-intents'>Intents</h2><h3 id='management-api-intents-the-intent-object'>The Intent object</h3><h3 id='management-api-intents-create-an-intent'>Create an Intent</h3><h3 id='management-api-intents-retrieve-an-intent'>Retrieve an Intent</h3><h3 id='management-api-intents-update-an-intent'>Update an Intent</h3><h3 id='management-api-intents-list-all-intents'>List all Intents</h3>
 <p>This endpoint retrieves all Intents.</p>
-<h2 id='entity-types'>Entity types</h2><h3 id='the-entity-type-object'>The Entity type object</h3><h3 id='create-an-entity-type'>Create an Entity type</h3><h3 id='retrieve-an-entity-type'>Retrieve an Entity type</h3><h3 id='update-an-entity-type'>Update an Entity type</h3><h3 id='list-all-entity-types'>List all Entity types</h3>
+<h2 id='management-api-entity-types'>Entity types</h2><h3 id='management-api-entity-types-the-entity-type-object'>The Entity type object</h3><h3 id='management-api-entity-types-create-an-entity-type'>Create an Entity type</h3><h3 id='management-api-entity-types-retrieve-an-entity-type'>Retrieve an Entity type</h3><h3 id='management-api-entity-types-update-an-entity-type'>Update an Entity type</h3><h3 id='management-api-entity-types-list-all-entity-types'>List all Entity types</h3>
 <p>This endpoint retrieves all Entity types.</p>
-<h2 id='projects'>Projects</h2><h3 id='the-project-object'>The Project object</h3><h3 id='create-a-project'>Create a Project</h3><h3 id='retrieve-a-project'>Retrieve a Project</h3><h3 id='update-a-project'>Update a Project</h3><h3 id='list-all-projects'>List all Projects</h3>
+<h2 id='management-api-projects'>Projects</h2><h3 id='management-api-projects-the-project-object'>The Project object</h3><h3 id='management-api-projects-create-a-project'>Create a Project</h3><h3 id='management-api-projects-retrieve-a-project'>Retrieve a Project</h3><h3 id='management-api-projects-update-a-project'>Update a Project</h3><h3 id='management-api-projects-list-all-projects'>List all Projects</h3>
 <p>This endpoint retrieves all Flows.</p>
-<h2 id='members'>Members</h2><h3 id='the-member-object'>The Member object</h3><h3 id='list-all-members'>List all Members</h3>
+<h2 id='management-api-members'>Members</h2><h3 id='management-api-members-the-member-object'>The Member object</h3><h3 id='management-api-members-list-all-members'>List all Members</h3>
 <p>This endpoint retrieves all organisation members.</p>
+<h1 id='web-socket-api'>Web socket API</h1>
+<p>A real time messaging API that allows you to send and receive messages from Flow.ai in real-time.</p>
+<h2 id='web-socket-api-audience'>Audience</h2>
+<p>This API is specifically intended for developers looking to interate Flow.ai in a client facing ap. For example:</p>
 
+<ul>
+<li>Building a custom web chat widget</li>
+<li>Integrating Flow.ai inside a mobile app</li>
+</ul>
+
+<aside class="notice">
+ We provide a <a href="https://github.com/flow-ai/flowai-js">JavaScript SDK</a>, and for iOS a <a href="https://github.com/flow-ai/flowai-swift">Swift SDK</a>.
+</aside>
+
+<p>For server or backend integrations we advice you to take a look at our Messaging API.</p>
+<h2 id='web-socket-api-getting-started'>Getting started</h2>
+<p>An overview how the API works:</p>
+
+<ol>
+<li>Request (GET) a WebSocket endpoint</li>
+<li>Open a WebSocket connection (WSS)</li>
+<li>Send and receive messages</li>
+<li><a href="/api/keep-alive.md">Keep the connection alive</a></li>
+</ol>
+<h2 id='web-socket-api-request-an-endpoint'>Request an endpoint</h2>
+<blockquote>
+<p>Example calls</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://api.flow.ai/socket.info?clientId=YOUR_CLIENT_ID&amp;sessionId=123432"</span>
+</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span> <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.flow.ai/socket.info/?clientId=YOUR_CLIENT_ID&amp;sessionId=1234'</span> <span class="p">};</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight csharp tab-csharp"><code><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestClient</span><span class="p">(</span><span class="s">"https://api.flow.ai/socket.info?clientId=YOUR_CLIENT_ID&amp;sessionId=1234"</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">RestRequest</span><span class="p">(</span><span class="n">Method</span><span class="p">.</span><span class="n">GET</span><span class="p">);</span>
+<span class="n">IRestResponse</span> <span class="n">response</span> <span class="p">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</code></pre><pre class="highlight swift tab-swift"><code><span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.flow.ai/socket.info/?clientId=YOUR_CLIENT_ID&amp;sessionId=1234"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wss://api.flow.ai/ws/8c3b7d7ea9400..."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>To start a connection you&#39;ll need to make a <code>GET</code> call to the <code>socket.info</code> API method to the API endpoint at <code>https://api.flow.ai</code>. This provides a temporary WebSocket URL.</p>
+
+<p>The <code>socket.info</code> method requires a <code>sessionId</code> and a <code>clientId</code>.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left"><strong>Query param</strong></th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>sessionId</strong></td>
+<td style="text-align: left">The sessionId is something unique you need to create for every call. This can be something like a <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UIUID</a>. Each connection is partly identified on our end using this key</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>clientId</strong></td>
+<td style="text-align: left">Check the <a href="https://app.flow.ai/channels">Channels</a> app of the <a href="https://app.flow.ai">dashboard</a> to find your unique clientId.</td>
+</tr>
+</tbody></table>
+<h2 id='web-socket-api-open-a-connection'>Open a connection</h2>
+<p>The Websocket URL provided by <code>socket.info</code> are single-use and are only valid for 60 seconds, so make sure to connect directly.</p>
+<h2 id='web-socket-api-common-format'>Common format</h2>
+<p>Any message or other kind of event you send or receive has the same JSON format.</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><strong>Fields</strong></p>
+
+<table><thead>
+<tr>
+<th><strong>Property</strong></th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>type</strong> <em>string</em></td>
+<td>The message type for example: <code>message.send</code></td>
+</tr>
+<tr>
+<td><strong>payload</strong> <em>object</em></td>
+<td>The body of the message</td>
+</tr>
+</tbody></table>
+<h2 id='web-socket-api-keep-alive'>Keep alive</h2>
+<blockquote>
+<p>Send a ping to keep the connection alive</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ping"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>We will respond with a pong</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pong"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>When a connection is made we will automatically disconnect if we do not receive any messages within 50 seconds.</p>
+
+<p>In order to keep the connection live we support a ping message.</p>
+<h2 id='web-socket-api-sending-messages'>Sending Messages</h2>
+<blockquote>
+<p>The following example shows sending a simple text message</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58ca9e327348ed3bd1439e7b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1519091841664</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"speech"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hi there!"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='web-socket-api-sending-messages-payload'>Payload</h3>
+<table><thead>
+<tr>
+<th><strong>Property</strong></th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>threadId</strong> <em>string</em></td>
+<td>Required. Unique key identifying a user or channel</td>
+</tr>
+<tr>
+<td><strong>traceId</strong> <em>integer</em></td>
+<td>Optional number used to track message delivery</td>
+</tr>
+<tr>
+<td><strong>speech</strong> <em>string</em></td>
+<td>Required. Text of message</td>
+</tr>
+</tbody></table>
+<h3 id='web-socket-api-sending-messages-message-attachment'>Message Attachment</h3>
+<blockquote>
+<p>Event example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58ca9e327348ed3bd1439e7b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1519091841665</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"speech"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event attachment"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attachment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTRO"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Instead of text we also support sending attachments.</p>
+
+<aside class="notice">
+Note: we currently only support sending event attachments. Image and file attachments will follow soon.
+</aside>
+<h5 id='web-socket-api-sending-messages-message-attachment-requirements-attachment-fields'>Attachment fields</h5>
+<table><thead>
+<tr>
+<th style="text-align: left">Property</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>type</strong> <em>string</em></td>
+<td style="text-align: left">Attachment type. Currently this has to be <code>event</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>payload</strong> <em>attachment</em></td>
+<td style="text-align: left">Attachment</td>
+</tr>
+</tbody></table>
+<h5 id='web-socket-api-sending-messages-message-attachment-requirements-attachment-fields'>Attachment fields</h5>
+<table><thead>
+<tr>
+<th style="text-align: left">Property</th>
+<th style="text-align: left">Description</th>
+<th style="text-align: left">Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">name</td>
+<td style="text-align: left">Name of the event to trigger</td>
+<td style="text-align: left">string</td>
+</tr>
+</tbody></table>
+<h3 id='web-socket-api-sending-messages-originator'>Originator</h3>
+<blockquote>
+<p>Sending originator info</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58ca9e327348ed3bd1439e7b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1519091841666</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"speech"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turn off the lights in the Living room"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"originator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Sending additional profile information</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58ca9e327348ed3bd1439e7b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1519091841667</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"speech"</span><span class="p">:</span><span class="w"> </span><span class="s2">"has my milk expired?"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"originator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en-US"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="mi">-5</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"us"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoe@dmail.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://..."</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="err">Sending</span><span class="w"> </span><span class="err">originator</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">metadata</span><span class="w">
+
+</span><span class="err">```json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58ca9e327348ed3bd1439e7b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"speech"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I want to book a flight between Amsterdam and Toronto"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"originator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"clientNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asddaasq333ee332"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A,B,G"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>With each message you can customise information regarding the sender, user or as we call it the originator of the message.</p>
+<h4 id='web-socket-api-sending-messages-originator-originator-fields'>Originator fields</h4>
+<table><thead>
+<tr>
+<th style="text-align: left">Property</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>name</strong></td>
+<td style="text-align: left">Name representing the originator</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>role</strong> <em>string</em></td>
+<td style="text-align: left">Either <code>external</code>, or <code>moderator</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>profile</strong> <em>profile</em></td>
+<td style="text-align: left">Additional profile information</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>metadata</strong> <em>object</em></td>
+<td style="text-align: left">Key value pairs with additional info</td>
+</tr>
+</tbody></table>
+<h4 id='web-socket-api-sending-messages-originator-profile-fields'>Profile fields</h4>
+<table><thead>
+<tr>
+<th style="text-align: left">Property</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>fullName</strong></td>
+<td style="text-align: left">Complete name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>firstName</strong> <em>string</em></td>
+<td style="text-align: left">First name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>lastName</strong> <em>string</em></td>
+<td style="text-align: left">Family name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>gender</strong> <em>string</em></td>
+<td style="text-align: left">Gender, M, F or U</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>locale</strong> <em>string</em></td>
+<td style="text-align: left">Locale code (ISO)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>timezone</strong> <em>number</em></td>
+<td style="text-align: left">Number of hours of UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>country</strong> <em>string</em></td>
+<td style="text-align: left">Two letter country code</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>email</strong> <em>string</em></td>
+<td style="text-align: left">Email address</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>picture</strong> <em>string</em></td>
+<td style="text-align: left">URL to profile picture</td>
+</tr>
+</tbody></table>
+<h3 id='web-socket-api-sending-messages-message-metadata'>Message Metadata</h3>
+<p>Along with every message you can send additional metadata. Some of this metadata is also used by the AI engine to determine the response.</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58ca9e327348ed3bd1439e7b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"speech"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I want to book a flight between Amsterdam and Toronto"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"originator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"external"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en-US"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="mi">-6</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"seats"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Business class"</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h5 id='web-socket-api-sending-messages-message-metadata-profile-fields-metadata-fields'>Metadata fields</h5>
+<table><thead>
+<tr>
+<th style="text-align: left">Property</th>
+<th style="text-align: left">Description</th>
+<th style="text-align: left">Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">language</td>
+<td style="text-align: left">Language code (ISO) of the message, not the user</td>
+<td style="text-align: left">string</td>
+</tr>
+<tr>
+<td style="text-align: left">timezone</td>
+<td style="text-align: left">Timezone of the message (where it was sent). Number of hours from UTC</td>
+<td style="text-align: left">number</td>
+</tr>
+<tr>
+<td style="text-align: left">params</td>
+<td style="text-align: left">Bag of parameters to use within the AI</td>
+<td style="text-align: left">object</td>
+</tr>
+</tbody></table>
+<h3 id='web-socket-api-sending-messages-responses'>Responses</h3>
+<blockquote>
+<p>A reply is sent (almost) instantly. The following is replied if the message is successfully delivered.</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.delivered"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"31ea9df73ca74dfe9329bf68c09b61ce"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1489399519321</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"speech"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hi"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>If there is an error processing a message the server will reply with an error. For example:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid message format ..."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h2 id='web-socket-api-receiving-messages'>Receiving Messages</h2>
+<p>Messages that are replied are in almost the same format as the ones that are sent.</p>
+
+<blockquote>
+<p>Example or reply</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.received"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57a8a2a8917250d54bcbb596"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"fallback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hallo"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"responses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hallo"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"originator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7250d54bcbb59657a8a2a891"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gijs van de Nieuwegiessen"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gijs van de Nieuwegiessen"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gijs"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"van de Nieuwegiessen"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nl"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://flowai.s3.eu-central-1.amazonaws.com/identities/profile/5959ca45-318a-4d58-b5e1-b430934b8e23"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example of advanced reply  </p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.received"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58ca9e327348ed3bd1439e7b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"messages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"fallback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hi, how can we help?"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"silent"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"replyTo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event attachment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"originator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flowai|system"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bot"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://flow.ai/img/brains/flowai.svg"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"responses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hi, how can we help?"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"quickReplies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chat with flow.ai"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chat with someone from flow.ai"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Call flow.ai"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is your phone number?"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ask a question"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I want to ask a question"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"delay"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"flow"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"flowId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2afcb930-9335-4e74-abb3-5745d26707f7"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Intro"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"step"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"stepId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d3d46698-e526-4252-b70c-e6e5af3338e0"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTRO"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EVENT"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTRO"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"originator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flowai|system"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bot"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://flow.ai/img/brains/flowai.svg"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h5 id='web-socket-api-receiving-messages-responses-profile-fields-payload-fields'>Payload fields</h5>
+<table><thead>
+<tr>
+<th style="text-align: left">Property</th>
+<th style="text-align: left">Description</th>
+<th style="text-align: left">Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">threadId</td>
+<td style="text-align: left">Required. Unique key identifying a user or channel</td>
+<td style="text-align: left">string</td>
+</tr>
+<tr>
+<td style="text-align: left">messages</td>
+<td style="text-align: left">List of Message templates</td>
+<td style="text-align: left">array</td>
+</tr>
+<tr>
+<td style="text-align: left">originator</td>
+<td style="text-align: left">Similar to the originator when sending messages</td>
+<td style="text-align: left">object</td>
+</tr>
+</tbody></table>
+<h5 id='web-socket-api-receiving-messages-responses-profile-fields-message-fields'>Message fields</h5>
+<table><thead>
+<tr>
+<th style="text-align: left">Property</th>
+<th style="text-align: left">Description</th>
+<th style="text-align: left">Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">fallback</td>
+<td style="text-align: left">Speech representation of the message</td>
+<td style="text-align: left">string</td>
+</tr>
+<tr>
+<td style="text-align: left">silent</td>
+<td style="text-align: left">True if message does not have any output for a user</td>
+<td style="text-align: left">bool</td>
+</tr>
+<tr>
+<td style="text-align: left">replyTo</td>
+<td style="text-align: left">Optionally contains the text the message is a direct reply to</td>
+<td style="text-align: left">string</td>
+</tr>
+<tr>
+<td style="text-align: left">originator</td>
+<td style="text-align: left">Originator specific to this message</td>
+<td style="text-align: left">object</td>
+</tr>
+<tr>
+<td style="text-align: left">actions</td>
+<td style="text-align: left">Optional action names being called</td>
+<td style="text-align: left">array</td>
+</tr>
+<tr>
+<td style="text-align: left">responses</td>
+<td style="text-align: left">Collection of Response templates</td>
+<td style="text-align: left">array</td>
+</tr>
+<tr>
+<td style="text-align: left">flow</td>
+<td style="text-align: left">Information about the flow being matched</td>
+<td style="text-align: left">object</td>
+</tr>
+<tr>
+<td style="text-align: left">step</td>
+<td style="text-align: left">Information about the step being matched</td>
+<td style="text-align: left">object</td>
+</tr>
+<tr>
+<td style="text-align: left">params</td>
+<td style="text-align: left">Hash table with Parameters</td>
+<td style="text-align: left">object</td>
+</tr>
+</tbody></table>
+<h5 id='web-socket-api-receiving-messages-responses-profile-fields-response-fields'>Response fields</h5>
+<p>We have a complete<a href="https://github.com/flow-ai/flowai-js-templates/blob/master/JSON.md"> reference of the JSON responses</a> available</p>
+<h2 id='web-socket-api-example'>Example</h2>
+<p>We provide a <a href="https://github.com/flow-ai/flowai-js">JavaScript SDK</a>, but the following example demonstrates opening a connection and sending a test message using vanilla JavaScript in the browser.</p>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+
+    <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// Vanilla JS example</span>
+      <span class="c1">// When executing this script. Check your development console for any messages</span>
+
+      <span class="c1">// This identifies the channel we want to connect with</span>
+      <span class="kd">var</span> <span class="nx">clientId</span> <span class="o">=</span> <span class="s1">'YOUR CLIENTID'</span>
+
+      <span class="c1">// Global references to our WebSocket and interval</span>
+      <span class="kd">var</span> <span class="nx">ws</span>
+      <span class="kd">var</span> <span class="nx">keepalive</span>
+
+      <span class="c1">// This methos is where we send test messages</span>
+      <span class="kd">function</span> <span class="nx">runTestMessages</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">'runTestMessages'</span><span class="p">)</span>
+        <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"message.send"</span><span class="p">,</span>
+          <span class="s2">"payload"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"threadId"</span><span class="p">:</span> <span class="s2">"jane.doe"</span><span class="p">,</span>
+            <span class="s2">"speech"</span><span class="p">:</span> <span class="s2">"event attachment"</span><span class="p">,</span>
+            <span class="s2">"attachment"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"event"</span><span class="p">,</span>
+              <span class="s2">"payload"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"MY EVENT"</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s2">"originator"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Jane Doe"</span><span class="p">,</span>
+              <span class="s2">"role"</span><span class="p">:</span> <span class="s2">"external"</span><span class="p">,</span>
+              <span class="s2">"profile"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"fullName"</span><span class="p">:</span> <span class="s2">"Jane Doe"</span><span class="p">,</span>
+                <span class="s2">"firstName"</span><span class="p">:</span> <span class="s2">"Jane"</span><span class="p">,</span>
+                <span class="s2">"lastName"</span><span class="p">:</span> <span class="s2">"Doe"</span><span class="p">,</span>
+                <span class="s2">"gender"</span><span class="p">:</span> <span class="s2">"F"</span><span class="p">,</span>
+                <span class="s2">"locale"</span><span class="p">:</span> <span class="s2">"en-US"</span><span class="p">,</span>
+                <span class="s2">"timezone"</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span>
+                <span class="s2">"country"</span><span class="p">:</span> <span class="s2">"us"</span><span class="p">,</span>
+                <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"janedoe@gmail.com"</span><span class="p">,</span>
+                <span class="s2">"picture"</span><span class="p">:</span> <span class="s2">"https://en.wikipedia.org/wiki/File:YellowLabradorLooking_new.jpg"</span>
+              <span class="p">},</span>
+              <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"clientNumber"</span><span class="p">:</span> <span class="s2">"12345"</span><span class="p">,</span>
+                <span class="s2">"preference"</span><span class="p">:</span> <span class="s2">"A,B,G"</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="nx">wsSendMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Get a new wss endpoint</span>
+      <span class="kd">function</span> <span class="nx">getWsEndpoint</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">'Request endpoint'</span><span class="p">)</span>
+        <span class="c1">// socket.info endpoint</span>
+        <span class="kd">var</span> <span class="nx">socketInfoUrl</span> <span class="o">=</span> <span class="s1">'https://api.flow.ai/socket.info?clientId='</span> <span class="o">+</span> <span class="nx">clientId</span> <span class="o">+</span> <span class="s1">'&amp;sessionId='</span> <span class="o">+</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+
+        <span class="c1">// Create a GET request</span>
+        <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">wsEndpointResponse</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="s1">'json'</span><span class="p">;</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">,</span> <span class="nx">socketInfoUrl</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Called when we get a response from socket.info</span>
+      <span class="c1">// validate the response and open a websocket connection</span>
+      <span class="kd">function</span> <span class="nx">wsEndpointResponse</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">'Received endpoint'</span><span class="p">)</span>
+
+        <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">!==</span> <span class="s1">'ok'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// This is not OK..</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Error while fetching wss url'</span><span class="p">,</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">)</span>
+          <span class="k">return</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Get the endpoint from the response</span>
+        <span class="kd">var</span> <span class="nx">endpoint</span> <span class="o">=</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">endpoint</span>
+
+        <span class="nx">startWebsocket</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">)</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Open a new websocket connection</span>
+      <span class="kd">function</span> <span class="nx">startWebsocket</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">'Websocket start connection with endpoint'</span><span class="p">,</span> <span class="nx">endpoint</span><span class="p">)</span>
+        <span class="c1">// Create a new socket</span>
+        <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">);</span>
+        <span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="nx">wsOnOpen</span><span class="p">;</span>
+        <span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="nx">wsOnMessage</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Handler called when the socket makes a connection</span>
+      <span class="kd">function</span> <span class="nx">wsOnOpen</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">'Websocket connection open'</span><span class="p">)</span>
+
+        <span class="c1">// Start the keepalive</span>
+        <span class="nx">wsStartKeepalive</span><span class="p">()</span>
+
+        <span class="c1">// Run our test messages</span>
+        <span class="nx">runTestMessages</span><span class="p">()</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Handler called when the socket receives a message</span>
+      <span class="kd">function</span> <span class="nx">wsOnMessage</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">'Websocket received json'</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Simple keep alive method (sending pings)</span>
+      <span class="kd">function</span> <span class="nx">wsStartKeepalive</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">keepalive</span><span class="p">)</span>
+
+        <span class="c1">// Send a ping 30 seconds</span>
+        <span class="nx">keepalive</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">wsSendMessage</span><span class="p">({</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ping"</span>
+          <span class="p">})</span>
+        <span class="p">},</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Helper method for sending messages</span>
+      <span class="kd">function</span> <span class="nx">wsSendMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">message</span><span class="p">))</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Start with sending a GET request for a WSS endpoint</span>
+      <span class="nx">getWsEndpoint</span><span class="p">()</span>
+    <span class="p">}());</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="javascript">javascript</a>
-                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="http">http</a>
+                <a href="#" data-language-name="javascript">Node.js</a>
           </div>
       </div>
     </div>
