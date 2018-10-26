@@ -49,10 +49,12 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 
 Sending a text message
 
-> Request:
+> POST /v1/messaging/message
+
+> Example Request:
 
 ```http
-POST /messaging/v1/query HTTP/1.1
+POST /v1/messaging/message HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
@@ -82,7 +84,11 @@ const result = await request({
 })
 ```
 
-> Response:
+> Example Response:
+
+```
+200 OK
+```
 
 ```json
 {
@@ -90,7 +96,7 @@ const result = await request({
 }
 ```
 
-#### Attributes
+#### Arguments
 
 | | |
 |----:|---|
@@ -104,17 +110,19 @@ const result = await request({
 
 ### Event message
 
-> Request:
+> POST /v1/messaging/message
+
+> Example Request:
 
 ```http
-POST /messaging/v1/query HTTP/1.1
+POST /v1/messaging/message HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
 	"threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",
 	"type": "event",
-  "eventName": "MY_EVENT"
+	"eventName": "MY_EVENT"
 }
 ```
 
@@ -137,7 +145,11 @@ const result = await request({
 })
 ```
 
-> Response:
+> Example Response:
+
+```
+200 OK
+```
 
 ```json
 {
@@ -147,7 +159,7 @@ const result = await request({
 
 Trigger events within Flow.ai by sending an event message.
 
-#### Attributes
+#### Arguments
 
 | | |
 |----:|---|
@@ -161,18 +173,20 @@ Trigger events within Flow.ai by sending an event message.
 
 ### Location message
 
-> Request:
+> POST /v1/messaging/message
+
+> Example Request:
 
 ```http
-POST /messaging/v1/query HTTP/1.1
+POST /v1/messaging/message HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
 	"threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",
 	"type": "location",
-  "lat": "1232122422",
-  "lng": "2433343343"
+	"lat": "1232122422",
+	"lng": "2433343343"
 }
 ```
 
@@ -196,7 +210,11 @@ const result = await request({
 })
 ```
 
-> Response:
+> Example Response:
+
+```
+200 OK
+```
 
 ```json
 {
@@ -206,7 +224,7 @@ const result = await request({
 
 Send coordinates
 
-#### Attributes
+#### Arguments
 
 | | |
 |----:|---|
@@ -222,10 +240,12 @@ Send coordinates
 
 ### Media message
 
-> Request:
+> POST /v1/messaging/message
+
+> Example Request:
 
 ```http
-POST /messaging/v1/query HTTP/1.1
+POST /v1/messaging/message HTTP/1.1
 Host: api.flow.ai
 ------WebKitFormBoundaryDJX0xmK2m2F6Mvka
 Content-Disposition: form-data; name="file"; filename="image.png"
@@ -271,7 +291,11 @@ const result = await request({
 })
 ```
 
-> Response:
+> Example Response:
+
+```
+200 OK
+```
 
 ```json
 {
@@ -283,7 +307,7 @@ The API allows you to send images, files and other media files.
 
 For media you'll need to make a `POST` call that is `multipart/form-data`. The maximum file size you can upload is 250MB.
 
-#### Attributes
+#### Arguments
 
 | | |
 |----:|---|
@@ -298,32 +322,190 @@ For media you'll need to make a `POST` call that is `multipart/form-data`. The m
 
 ##  Webhooks
 
-Webhooks are the way Flow.ai will deliver replies.
+Webhooks are the way Flow.ai will deliver replies and notify your app of other type of events.
 
-```HTTP
-POST /management/v1/webhooks HTTP/1.1
-Host: api.flow.ai
-Content-Type: application/json
-Authorization: Bearer MY_MANAGEMENT_API_KEY
-{
-	"events": [
-    "thread.reply",
-    "thread.handover"
-  ]
-}
-```
-
-### Setting Up Your Webhook
-
-You can add a webhook subscription using the Management API
-
-#### Requirements
+Your webhook must meet with the following requirements:
 
 - HTTPS support
 - A valid SSL certificate
 - An open port that accepts `GET` and `POST` requests
 
+### The Webhook object
+
+> Example Response:
+
+```json
+{
+	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
+	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
+	"url": "https://myawesomeapp.com/webhook",
+	"verifyKey": "1233421",
+	"events": [
+		"message.delivered",
+		"message.reply",
+		"control.handover"
+	]
+}
+```
+
+Each webhook object represents a webhook subscription Flow.ai will attempt to call whenever a subscribed event takes place.
+
+#### Attributes
+
+| | |
+|----:|---|
+| **webhookId** *string* | Unique ID of the webhook |
+| **organisationId** *string* | ID of the organisation this webhook will receive calls from |
+| **url** *string* | The url your app lives that Flow.ai shall call |
+| **verifyKey** *string* | Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai |
+| **events** *array* | The list of events to subscribe to. You'll need to have at least one subscribed event |
+
+### Create a webhook
+
+> POST /v1/messaging/webhooks
+
+> Example Request:
+
+```http
+POST /messages/v1/webhooks HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+{
+	"url": "https://myawesomeapp.com/webhook",
+	"verifyKey": "1233421",
+	"events": [
+		"message.delivered",
+		"message.reply",
+		"control.handover"
+	]
+}
+```
+
+> Example Response:
+
+```
+201 Created
+Location: /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199
+```
+
+```json
+{
+	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
+	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
+	"url": "https://myawesomeapp.com/webhook",
+	"verifyKey": "1233421",
+	"events": [
+		"message.delivered",
+		"message.reply",
+		"control.handover"
+	]
+}
+```
+
+Create a new webhook subscription by making a `POST` request.
+
+#### Arguments
+
+| | |
+|----:|---|
+| **url** *string* | The url your app lives that Flow.ai shall call |
+| **verifyKey** *string* | Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai |
+| **events** *array* | The list of events to subscribe to. You'll need to have at least one subscribed event |
+
+### Update a Webhook
+
+> POST /v1/messaging/webhooks/{WEBHOOK_ID}
+
+> Example Request:
+
+```http
+PUT /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+{
+	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
+	"url": "https://myawesomeapp.com/webhook",
+	"verifyKey": "1233421",
+	"events": [
+		"message.reply",
+		"control.handover"
+	]
+}
+```
+
+> Example Response:
+
+```json
+{
+	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
+	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
+	"url": "https://myawesomeapp.com/webhook",
+	"verifyKey": "1233421",
+	"events": [
+		"message.delivered",
+		"message.reply",
+		"control.handover"
+	]
+}
+```
+
+Updates the specified webhook by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
+#### Arguments
+
+| | |
+|----:|---|
+| **url** *string* | The url your app lives that Flow.ai shall call |
+| **verifyKey** *string* | Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai |
+| **events** *array* | The list of events to subscribe to. You'll need to have at least one subscribed event |
+
+
+> Example Request:
+
+```http
+DELETE /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+{
+	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
+	"url": "https://myawesomeapp.com/webhook",
+	"verifyKey": "1233421",
+	"events": [
+		"message.reply",
+		"control.handover"
+	]
+}
+```
+
+> Example Response:
+
+```json
+{
+	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
+	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
+	"url": "https://myawesomeapp.com/webhook",
+	"verifyKey": "1233421",
+	"events": [
+		"message.delivered",
+		"message.reply",
+		"control.handover"
+	]
+}
+```
+
 ### Webhook Events
+
+You can subscribe to various events
+
+| | |
+|----:|---|
+| `message.reply` | Called whenever Flow.ai is sending a reply message |
+| `message.delivered` | Called when your message that you send has been successfully received |
+| `control.handover` | Called when the AI engine is handing off to your solution and pausing operations |
+
 
 ### Event Format
 
