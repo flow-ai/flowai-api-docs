@@ -324,11 +324,35 @@ For media you'll need to make a `POST` call that is `multipart/form-data`. The m
 
 Webhooks are the way Flow.ai will deliver replies and notify your app of other type of events.
 
+### Receiving a notification
+
+Creating a webhook endpoint on your server is no different from creating any page on your website.
+
+Webhook data is sent as [JSON](https://www.json.org/) in the `POST` request body. The full event details are included and can be used directly, after parsing the JSON into an Event object.
+
 Your webhook must meet with the following requirements:
 
 - HTTPS support
 - A valid SSL certificate
 - An open port that accepts `GET` and `POST` requests
+
+### Responding to a webhook
+
+To acknowledge receipt of a webhook, your endpoint should return a 2xx HTTP status code. All response codes outside this range, including 3xx codes, will indicate to Flow.ai that you did not receive the webhook. This does mean that a URL redirection or a "Not Modified" response will be treated as a failure. Flow.ai will ignore any other information returned in the request headers or request body.
+
+We will attempt to deliver your webhooks for up to two 4 hours with an exponential back off. Webhooks cannot be manually retried after this time.
+
+### Type of Events
+
+This is a list of all the types of events we currently send. We may add more at any time, so in developing and maintaining your code, you should not assume that only these types exist.
+
+#### message.reply
+
+| | |
+|----:|---|
+| `message.reply` | Called whenever Flow.ai is sending a reply message |
+| `message.delivered` | Called when your message that you send has been successfully received |
+| `control.handover` | Called when the AI engine is handing off to your solution and pausing operations |
 
 ### The Webhook object
 
@@ -339,7 +363,7 @@ Your webhook must meet with the following requirements:
 	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
 	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
 	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1233421",
+	"verifyKey": "1234567",
 	"events": [
 		"message.delivered",
 		"message.reply",
@@ -373,7 +397,7 @@ Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
 	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1233421",
+	"verifyKey": "1234567",
 	"events": [
 		"message.delivered",
 		"message.reply",
@@ -394,7 +418,7 @@ Location: /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199
 	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
 	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
 	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1233421",
+	"verifyKey": "1234567",
 	"events": [
 		"message.delivered",
 		"message.reply",
@@ -403,15 +427,53 @@ Location: /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199
 }
 ```
 
-Create a new webhook subscription by making a `POST` request.
+Creates a new webhook subscription.
+
+Whenever you add a webhook we'll make a `GET` request to verify the endpoint. This call should receive a `2xx` response code of your server.
 
 #### Arguments
 
 | | |
 |----:|---|
-| **url** *string* | The url your app lives that Flow.ai shall call |
-| **verifyKey** *string* | Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai |
-| **events** *array* | The list of events to subscribe to. You'll need to have at least one subscribed event |
+| **url** **required** | The url your app lives that Flow.ai shall call |
+| **verifyKey** **required** | Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai |
+| **events** **required** | A list of events to subscribe to. You'll need to have at least one subscribed event |
+
+
+### Retrieve a Webhook
+
+> GET /v1/messaging/webhooks/{WEBHOOK_ID}
+
+> Example Request:
+
+```http
+GET /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
+	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
+	"url": "https://myawesomeapp.com/webhook",
+	"verifyKey": "1234567",
+	"events": [
+		"message.delivered",
+		"message.reply",
+		"control.handover"
+	]
+}
+```
+
+Retrieves the details of an existing webhook subscription. Supply the unique webhook ID from either a webhook creation request or the webhook list, and Flow.ai will return the corresponding webhook information.
 
 ### Update a Webhook
 
@@ -427,7 +489,7 @@ Authorization: Bearer MY_MESSAGING_API_KEY
 {
 	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
 	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1233421",
+	"verifyKey": "1234567",
 	"events": [
 		"message.reply",
 		"control.handover"
@@ -437,12 +499,16 @@ Authorization: Bearer MY_MESSAGING_API_KEY
 
 > Example Response:
 
+```
+200 OK
+```
+
 ```json
 {
 	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
 	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
 	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1233421",
+	"verifyKey": "1234567",
 	"events": [
 		"message.delivered",
 		"message.reply",
@@ -457,10 +523,59 @@ Updates the specified webhook by setting the values of the parameters passed. An
 
 | | |
 |----:|---|
-| **url** *string* | The url your app lives that Flow.ai shall call |
-| **verifyKey** *string* | Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai |
-| **events** *array* | The list of events to subscribe to. You'll need to have at least one subscribed event |
+| **url** *optional* | The url your app lives that Flow.ai shall call |
+| **verifyKey** *optional* | Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai |
+| **events** *optional* | The list of events to subscribe to. You'll need to have at least one subscribed event |
 
+
+### List all Webhooks
+
+> GET /v1/messaging/webhooks
+
+> Example Request:
+
+```http
+GET /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"items": [{
+		"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
+		"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
+		"url": "https://myawesomeapp.com/webhook",
+		"verifyKey": "1234567",
+		"events": [
+			"message.delivered",
+			"message.reply",
+			"control.handover"
+		]
+	}, {
+		"webhookId": "448f-9f91853a-6ecfd199-ef397588ff87",
+		"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
+		"url": "https://otherawesomeapp.com/webhook",
+		"verifyKey": "7654321",
+		"events": [
+			"message.reply"
+		]
+	}]
+}
+```
+
+Returns a list of your webhook subscriptions. The webhooks are returned sorted by creation date, with the most recently created webhooks appearing first.
+
+### Delete a Webhook
+
+> DELETE /v1/messaging/webhooks/{WEBHOOK_ID}
 
 > Example Request:
 
@@ -469,15 +584,10 @@ DELETE /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
-{
-	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
-	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1233421",
-	"events": [
-		"message.reply",
-		"control.handover"
-	]
-}
+```
+
+```
+204 No Content
 ```
 
 > Example Response:
@@ -487,7 +597,7 @@ Authorization: Bearer MY_MESSAGING_API_KEY
 	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
 	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
 	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1233421",
+	"verifyKey": "1234567",
 	"events": [
 		"message.delivered",
 		"message.reply",
@@ -496,23 +606,4 @@ Authorization: Bearer MY_MESSAGING_API_KEY
 }
 ```
 
-### Webhook Events
-
-You can subscribe to various events
-
-| | |
-|----:|---|
-| `message.reply` | Called whenever Flow.ai is sending a reply message |
-| `message.delivered` | Called when your message that you send has been successfully received |
-| `control.handover` | Called when the AI engine is handing off to your solution and pausing operations |
-
-
-### Event Format
-
-### Required 200 OK Response
-
-### Performance Requirements
-
-### Validating Webhook Events
-
-### Templates
+Permanently deletes a webhook subscription. It cannot be undone.

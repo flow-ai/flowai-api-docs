@@ -59,7 +59,8 @@ $lang-select-text: rgba(255,255,255,0.8) !default; // color of unselected langua
 $lang-select-active-text: #FFF !default; // color of selected language tab text
 $lang-select-pressed-text: #fff !default; // color of language tab text when mouse is pressed
 $method-item-label-text: rgba(0,0,0,0.9) !default;
-$method-item-validation-text: rgba(0,0,0,0.5) !default;
+$validation-text: rgba(0,0,0,0.5) !default;
+$validation-required-text: #6f42c1 !default;
 
 // SIZES
 ////////////////////
@@ -100,6 +101,10 @@ $phone-width: $tablet-width - $nav-width !default; // min width before reverting
 %menu-font {
   font-family: 'Gilroy-Medium', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
+}
+
+%regular-font {
+  font-family: 'Gilroy-Medium', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 %bold-font {

@@ -454,13 +454,22 @@ html, body {
         text-align: right;
         color: $method-item-label-text;
         font-weight: 400;
+        & + strong {
+          @extend %regular-font;
+          line-height: 16px;
+          display: block;
+          text-align: right;
+          font-style: normal;
+          color: $validation-required-text;
+          font-size: 11px;
+        }
       }
       em {
         line-height: 16px;
         display: block;
         text-align: right;
         font-style: normal;
-        color: $method-item-validation-text;
+        color: $validation-text;
         font-size: 11px;
       }
     }
