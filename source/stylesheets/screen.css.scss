@@ -484,6 +484,7 @@ html, body {
         @extend %bold-font;
         line-height: inherit;
         width: auto;
+        color: inherit;
       }
     }
     th:first-child {
@@ -523,10 +524,11 @@ html, body {
     display: inline-block;
     background-color: $inline-code-bg;
     color: $inline-code-dark-text;
-    padding: 4px;
+    padding: 2px 4px;
     border-radius: 3px;
     @extend %break-words;
     @extend %code-font;
+    font-weight: 400;
   }
 
   pre>code {

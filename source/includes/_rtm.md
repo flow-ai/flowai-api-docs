@@ -1,8 +1,8 @@
 # Web socket API
-A real time messaging API that allows you to send and receive messages from Flow.ai in real-time.
+A real time messaging API that allows you to send and receive messages from Flow.ai using websockets.
 
 ## Audience
-This API is specifically intended for developers looking to interate Flow.ai in a client facing ap. For example:
+The Websocket API is specifically intended for developers looking to integrate Flow.ai in a client facing app. For example:
 
 - Building a custom web chat widget
 - Integrating Flow.ai inside a mobile app
@@ -11,20 +11,20 @@ This API is specifically intended for developers looking to interate Flow.ai in 
  We provide a <a href="https://github.com/flow-ai/flowai-js">JavaScript SDK</a>, and for iOS a <a href="https://github.com/flow-ai/flowai-swift">Swift SDK</a>.
 </aside>
 
-For server or backend integrations we advice you to take a look at our Messaging API.
+For server integrations we advice you to take a look at our [Messaging API](#messaging-api).
 
 ## Getting started
 
 An overview how the API works:
 
-1. Request \(GET\) a WebSocket endpoint
-2. Open a WebSocket connection \(WSS\)
-3. Send and receive messages
-4. [Keep the connection alive](/api/keep-alive.md)
+1. [Request](#web-socket-api-request-an-endpoint) \(GET\) a WebSocket endpoint
+2. [Open](#web-socket-api-open-a-connection) a WebSocket connection \(WSS\)
+3. [Send](#web-socket-api-sending-messages) and [receive](#web-socket-api-receiving-messages) messages
+4. [Keep the connection alive](#web-socket-api-keep-alive)
 
 ## Request an endpoint
 
-> Example calls
+> Example Request:
 
 ```shell
 curl -X GET -H "Content-Type: application/json" "https://api.flow.ai/socket.info?clientId=YOUR_CLIENT_ID&sessionId=123432"
@@ -54,7 +54,11 @@ var request = NSMutableURLRequest(URL: NSURL(string: "https://api.flow.ai/socket
                                     timeoutInterval: 10.0)
 ```
 
-> Example response
+> Example response:
+
+```
+200 OK
+```
 
 ```json
 {
@@ -74,14 +78,11 @@ The `socket.info` method requires a `sessionId` and a `clientId`.
 | **sessionId** | The sessionId is something unique you need to create for every call. This can be something like a [UIUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Each connection is partly identified on our end using this key |
 | **clientId** | Check the [Channels](https://app.flow.ai/channels) app of the [dashboard](https://app.flow.ai) to find your unique clientId. |
 
-
 ## Open a connection
 
 The Websocket URL provided by `socket.info` are single-use and are only valid for 60 seconds, so make sure to connect directly.
 
 ## Common format
-
-Any message or other kind of event you send or receive has the same JSON format.
 
 ```json
 {
@@ -92,16 +93,18 @@ Any message or other kind of event you send or receive has the same JSON format.
 }
 ```
 
-**Fields**
+Any message or other kind of event you send or receive has the same JSON format.
+
+#### Attributes
 
 | **Property** | Description |
 | --- | --- |
-| **type** *string* | The message type for example: `message.send` |
-| **payload** *object* | The body of the message |
+| **type** **required** | The message type for example: `message.send` |
+| **payload** **required** | The body of the message |
 
 ## Keep alive
 
-> Send a ping to keep the connection alive
+> Example Message:
 
 ```json
 {
@@ -109,7 +112,7 @@ Any message or other kind of event you send or receive has the same JSON format.
 }
 ```
 
-> We will respond with a pong
+> Example Reply:
 
 ```json
 {
@@ -124,7 +127,7 @@ In order to keep the connection live we support a ping message.
 
 ## Sending Messages
 
-> The following example shows sending a simple text message
+> Example Message:
 
 ```json
 {
@@ -137,57 +140,19 @@ In order to keep the connection live we support a ping message.
 }
 ```
 
-### Payload
+The easiest way to send a simple text message in real time
+
+#### Attributes
 
 | **Property** | Description |
 | --- | --- |
-| **threadId** *string* | Required. Unique key identifying a user or channel |
-| **traceId** *integer* | Optional number used to track message delivery |
-| **speech** *string* | Required. Text of message |
+| **threadId** **required** | Unique key identifying a user or channel |
+| **traceId** *optional* | Optional number used to track message delivery |
+| **speech** **required** | Text of message |
 
-### Message Attachment
+### Originator object
 
-> Event example
-
-```json
-{
-  "type": "message.send",
-  "payload": {
-    "threadId": "58ca9e327348ed3bd1439e7b",
-    "traceId": 1519091841665,
-    "speech": "event attachment",
-    "attachment": {
-      "type": "event",
-      "payload": {
-        "name": "INTRO"
-      }
-    }
-  }
-}
-```
-
-Instead of text we also support sending attachments.
-
-<aside class="notice">
-Note: we currently only support sending event attachments. Image and file attachments will follow soon.
-</aside>
-
-##### Attachment fields
-
-| Property | Description |
-| :--- | :--- |
-| **type** *string* | Attachment type. Currently this has to be `event` |
-| **payload** *attachment* | Attachment |
-
-##### Attachment fields
-
-| Property | Description | Type |
-| :--- | :--- | :--- |
-| name | Name of the event to trigger | string |
-
-### Originator
-
-> Sending originator info
+> Example Message:
 
 ```json
 {
@@ -204,7 +169,7 @@ Note: we currently only support sending event attachments. Image and file attach
 }
 ```
 
-> Sending additional profile information
+> Example Message:
 
 ```json
 {
@@ -230,8 +195,9 @@ Note: we currently only support sending event attachments. Image and file attach
     }
   }
 }
+```
 
-> Sending originator with metadata
+> Example Message:
 
 ```json
 {
@@ -251,22 +217,24 @@ Note: we currently only support sending event attachments. Image and file attach
 }
 ```
 
-With each message you can customise information regarding the sender, user or as we call it the originator of the message.
+With each message you can customize information regarding the sender, user or as Flow.ai calls it, the originator of the message.
 
-#### Originator fields
+#### Attributes
 
-| Property | Description |
+| **Property** | Description |
 | :--- | :--- |
-| **name** | Name representing the originator |
+| **name** *string*| Name representing the originator |
 | **role** *string* | Either `external`, or `moderator` |
-| **profile** *profile* | Additional profile information |
+| **profile** *Profile object* | Optional Profile object |
 | **metadata** *object* | Key value pairs with additional info |
 
-#### Profile fields
+#### Profile object
 
-| Property | Description |
+An originator can contain additional profile information using the profile object
+
+| **Property** | Description |
 | :--- | :--- |
-| **fullName** | Complete name |
+| **fullName** *string* | Complete name |
 | **firstName** *string* | First name |
 | **lastName** *string* | Family name |
 | **gender** *string* | Gender, M, F or U |
@@ -277,10 +245,9 @@ With each message you can customise information regarding the sender, user or as
 | **picture** *string* | URL to profile picture |
 
 
+### Metadata
 
-### Message Metadata
-
-Along with every message you can send additional metadata. Some of this metadata is also used by the AI engine to determine the response.
+> Example Message:
 
 ```json
 {
@@ -305,17 +272,90 @@ Along with every message you can send additional metadata. Some of this metadata
 }
 ```
 
-##### Metadata fields
+Along with every message you can send additional metadata. Some of this metadata is also used by the AI engine to determine the response.
+
+##### Attributes
+
+| **Property** | Description |
+| :--- | :--- |
+| **language** *string* | Language code \(ISO\) of the message, not the user |
+| **timezone** *number* | Timezone of the message \(where it was sent\). Number of hours from UTC |
+| **params** *Params object* | Bag of parameters to use within the AI |
+
+#### Params object
+
+> Example Params
+
+```json
+{
+  "passengerCount": [{
+    "value": "2"
+  }]
+}
+```
+
+```json
+{
+  "food": [{
+    "value": "food-item-22332",
+    "match": "Pizza Hawaii"
+  }, {
+    "value": "food-item-44525",
+    "match": "Pizza Calzone"
+  }]
+}
+```
+
+The params object resembles the matched result created by the AI engine using entity classification. Each param itself is a list of `[{ value }]` objects.
+
+| **Property** | Description |
+| :--- | :--- |
+| **value** **required** | The value of the param |
+| **match** *optional* | Represents a human value |
+
+### Attachment
+
+> Example Message:
+
+```json
+{
+  "type": "message.send",
+  "payload": {
+    "threadId": "58ca9e327348ed3bd1439e7b",
+    "traceId": 1519091841665,
+    "speech": "event attachment",
+    "attachment": {
+      "type": "event",
+      "payload": {
+        "name": "INTRO"
+      }
+    }
+  }
+}
+```
+
+Instead of simple text messages, Flow.ai also supports sending attachments like files or events.
+
+<aside class="notice">
+Note: we currently only support sending event attachments. Image and file attachments will follow soon.
+</aside>
+
+##### Attachment attributes
+
+| Property | Description |
+| :--- | :--- |
+| **type** **required** | Attachment type. Currently this has to be `event` |
+| **payload** **required** | Attachment object |
+
+##### Attachment object
 
 | Property | Description | Type |
 | :--- | :--- | :--- |
-| language | Language code \(ISO\) of the message, not the user | string |
-| timezone | Timezone of the message \(where it was sent\). Number of hours from UTC | number |
-| params | Bag of parameters to use within the AI | object |
+| **name** **required** | Name of the event to trigger |
 
 ### Responses
 
-> A reply is sent \(almost\) instantly. The following is replied if the message is successfully delivered.
+> Example Reply:
 
 ```json
 {
@@ -337,6 +377,8 @@ Along with every message you can send additional metadata. Some of this metadata
   "message": "Invalid message format ..."
 }
 ```
+
+A reply is sent \(almost\) instantly. The following is replied if the message is successfully delivered.
 
 ## Receiving Messages
 

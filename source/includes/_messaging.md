@@ -324,7 +324,7 @@ For media you'll need to make a `POST` call that is `multipart/form-data`. The m
 
 Webhooks are the way Flow.ai will deliver replies and notify your app of other type of events.
 
-### Receiving a notification
+### Receiving calls
 
 Creating a webhook endpoint on your server is no different from creating any page on your website.
 
@@ -336,9 +336,9 @@ Your webhook must meet with the following requirements:
 - A valid SSL certificate
 - An open port that accepts `GET` and `POST` requests
 
-### Responding to a webhook
+### Responding to a call
 
-To acknowledge receipt of a webhook, your endpoint should return a 2xx HTTP status code. All response codes outside this range, including 3xx codes, will indicate to Flow.ai that you did not receive the webhook. This does mean that a URL redirection or a "Not Modified" response will be treated as a failure. Flow.ai will ignore any other information returned in the request headers or request body.
+To acknowledge receipt of a webhook call, your endpoint should return a 2xx HTTP status code. All response codes outside this range, including 3xx codes, will indicate to Flow.ai that you did not receive the webhook. This does mean that a URL redirection or a "Not Modified" response will be treated as a failure. Flow.ai will ignore any other information returned in the request headers or request body.
 
 We will attempt to deliver your webhooks for up to two 4 hours with an exponential back off. Webhooks cannot be manually retried after this time.
 
