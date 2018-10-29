@@ -258,25 +258,31 @@
                     <a href="#messaging-api-webhooks" class="toc-h2 toc-link" data-title="Webhooks">Webhooks</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#messaging-api-webhooks-setting-up-your-webhook" class="toc-h3 toc-link" data-title="Setting Up Your Webhook">Setting Up Your Webhook</a>
+                            <a href="#messaging-api-webhooks-receiving-calls" class="toc-h3 toc-link" data-title="Receiving calls">Receiving calls</a>
                           </li>
                           <li>
-                            <a href="#messaging-api-webhooks-webhook-events" class="toc-h3 toc-link" data-title="Webhook Events">Webhook Events</a>
+                            <a href="#messaging-api-webhooks-responding-to-a-call" class="toc-h3 toc-link" data-title="Responding to a call">Responding to a call</a>
                           </li>
                           <li>
-                            <a href="#messaging-api-webhooks-event-format" class="toc-h3 toc-link" data-title="Event Format">Event Format</a>
+                            <a href="#messaging-api-webhooks-type-of-events" class="toc-h3 toc-link" data-title="Type of Events">Type of Events</a>
                           </li>
                           <li>
-                            <a href="#messaging-api-webhooks-required-200-ok-response" class="toc-h3 toc-link" data-title="Required 200 OK Response">Required 200 OK Response</a>
+                            <a href="#messaging-api-webhooks-the-webhook-object" class="toc-h3 toc-link" data-title="The Webhook object">The Webhook object</a>
                           </li>
                           <li>
-                            <a href="#messaging-api-webhooks-performance-requirements" class="toc-h3 toc-link" data-title="Performance Requirements">Performance Requirements</a>
+                            <a href="#messaging-api-webhooks-create-a-webhook" class="toc-h3 toc-link" data-title="Create a webhook">Create a webhook</a>
                           </li>
                           <li>
-                            <a href="#messaging-api-webhooks-validating-webhook-events" class="toc-h3 toc-link" data-title="Validating Webhook Events">Validating Webhook Events</a>
+                            <a href="#messaging-api-webhooks-retrieve-a-webhook" class="toc-h3 toc-link" data-title="Retrieve a Webhook">Retrieve a Webhook</a>
                           </li>
                           <li>
-                            <a href="#messaging-api-webhooks-templates" class="toc-h3 toc-link" data-title="Templates">Templates</a>
+                            <a href="#messaging-api-webhooks-update-a-webhook" class="toc-h3 toc-link" data-title="Update a Webhook">Update a Webhook</a>
+                          </li>
+                          <li>
+                            <a href="#messaging-api-webhooks-list-all-webhooks" class="toc-h3 toc-link" data-title="List all Webhooks">List all Webhooks</a>
+                          </li>
+                          <li>
+                            <a href="#messaging-api-webhooks-delete-a-webhook" class="toc-h3 toc-link" data-title="Delete a Webhook">Delete a Webhook</a>
                           </li>
                       </ul>
                   </li>
@@ -409,16 +415,13 @@
                     <a href="#web-socket-api-sending-messages" class="toc-h2 toc-link" data-title="Sending Messages">Sending Messages</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#web-socket-api-sending-messages-payload" class="toc-h3 toc-link" data-title="Payload">Payload</a>
+                            <a href="#web-socket-api-sending-messages-originator-object" class="toc-h3 toc-link" data-title="Originator object">Originator object</a>
                           </li>
                           <li>
-                            <a href="#web-socket-api-sending-messages-message-attachment" class="toc-h3 toc-link" data-title="Message Attachment">Message Attachment</a>
+                            <a href="#web-socket-api-sending-messages-metadata" class="toc-h3 toc-link" data-title="Metadata">Metadata</a>
                           </li>
                           <li>
-                            <a href="#web-socket-api-sending-messages-originator" class="toc-h3 toc-link" data-title="Originator">Originator</a>
-                          </li>
-                          <li>
-                            <a href="#web-socket-api-sending-messages-message-metadata" class="toc-h3 toc-link" data-title="Message Metadata">Message Metadata</a>
+                            <a href="#web-socket-api-sending-messages-attachment" class="toc-h3 toc-link" data-title="Attachment">Attachment</a>
                           </li>
                           <li>
                             <a href="#web-socket-api-sending-messages-responses" class="toc-h3 toc-link" data-title="Responses">Responses</a>
@@ -486,9 +489,11 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 <p>Sending a text message</p>
 
 <blockquote>
-<p>Request:</p>
+<p>POST /v1/messaging/message</p>
+
+<p>Example Request:</p>
 </blockquote>
-<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/v1/messaging/message</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
@@ -515,12 +520,13 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 <span class="p">})</span>
 </code></pre>
 <blockquote>
-<p>Response:</p>
+<p>Example Response:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<pre class="highlight plaintext"><code>200 OK
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h4 id='messaging-api-sending-messages-text-message-attributes'>Attributes</h4>
+</span></code></pre><h4 id='messaging-api-sending-messages-text-message-arguments'>Arguments</h4>
 <table><thead>
 <tr>
 <th style="text-align: right"></th>
@@ -558,16 +564,18 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 </tbody></table>
 <h3 id='messaging-api-sending-messages-event-message'>Event message</h3>
 <blockquote>
-<p>Request:</p>
+<p>POST /v1/messaging/message</p>
+
+<p>Example Request:</p>
 </blockquote>
-<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/v1/messaging/message</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
 <span class="s">{</span>
 <span class="s">    "threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",</span>
 <span class="s">    "type": "event",</span>
-<span class="s">  "eventName": "MY_EVENT"</span>
+<span class="s">    "eventName": "MY_EVENT"</span>
 <span class="s">}</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">request</span> <span class="nx">from</span> <span class="s2">"async-request"</span><span class="p">;</span>
 
@@ -587,14 +595,15 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 <span class="p">})</span>
 </code></pre>
 <blockquote>
-<p>Response:</p>
+<p>Example Response:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<pre class="highlight plaintext"><code>200 OK
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Trigger events within Flow.ai by sending an event message.</p>
-<h4 id='messaging-api-sending-messages-event-message-attributes'>Attributes</h4>
+<h4 id='messaging-api-sending-messages-event-message-arguments'>Arguments</h4>
 <table><thead>
 <tr>
 <th style="text-align: right"></th>
@@ -632,17 +641,19 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 </tbody></table>
 <h3 id='messaging-api-sending-messages-location-message'>Location message</h3>
 <blockquote>
-<p>Request:</p>
+<p>POST /v1/messaging/message</p>
+
+<p>Example Request:</p>
 </blockquote>
-<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/v1/messaging/message</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
 <span class="s">{</span>
 <span class="s">    "threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",</span>
 <span class="s">    "type": "location",</span>
-<span class="s">  "lat": "1232122422",</span>
-<span class="s">  "lng": "2433343343"</span>
+<span class="s">    "lat": "1232122422",</span>
+<span class="s">    "lng": "2433343343"</span>
 <span class="s">}</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">request</span> <span class="nx">from</span> <span class="s2">"async-request"</span><span class="p">;</span>
 
@@ -663,14 +674,15 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 <span class="p">})</span>
 </code></pre>
 <blockquote>
-<p>Response:</p>
+<p>Example Response:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<pre class="highlight plaintext"><code>200 OK
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Send coordinates</p>
-<h4 id='messaging-api-sending-messages-location-message-attributes'>Attributes</h4>
+<h4 id='messaging-api-sending-messages-location-message-arguments'>Arguments</h4>
 <table><thead>
 <tr>
 <th style="text-align: right"></th>
@@ -712,9 +724,11 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 </tbody></table>
 <h3 id='messaging-api-sending-messages-media-message'>Media message</h3>
 <blockquote>
-<p>Request:</p>
+<p>POST /v1/messaging/message</p>
+
+<p>Example Request:</p>
 </blockquote>
-<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messaging/v1/query</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/v1/messaging/message</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
 <span class="s">------WebKitFormBoundaryDJX0xmK2m2F6Mvka</span>
 <span class="na">Content-Disposition</span><span class="p">:</span> <span class="s">form-data; name="file"; filename="image.png"</span>
@@ -757,16 +771,17 @@ Content-Disposition: form-data; name="query"
 <span class="p">})</span>
 </code></pre>
 <blockquote>
-<p>Response:</p>
+<p>Example Response:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<pre class="highlight plaintext"><code>200 OK
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>The API allows you to send images, files and other media files.</p>
 
 <p>For media you&#39;ll need to make a <code>POST</code> call that is <code>multipart/form-data</code>. The maximum file size you can upload is 250MB.</p>
-<h4 id='messaging-api-sending-messages-media-message-attributes'>Attributes</h4>
+<h4 id='messaging-api-sending-messages-media-message-arguments'>Arguments</h4>
 <table><thead>
 <tr>
 <th style="text-align: right"></th>
@@ -807,26 +822,302 @@ Content-Disposition: form-data; name="query"
 </tr>
 </tbody></table>
 <h2 id='messaging-api-webhooks'>Webhooks</h2>
-<p>Webhooks are the way Flow.ai will deliver replies.</p>
-<pre class="highlight plaintext"><code>POST /management/v1/webhooks HTTP/1.1
-Host: api.flow.ai
-Content-Type: application/json
-Authorization: Bearer MY_MANAGEMENT_API_KEY
-{
-    "events": [
-    "thread.reply",
-    "thread.handover"
-  ]
-}
-</code></pre><h3 id='messaging-api-webhooks-setting-up-your-webhook'>Setting Up Your Webhook</h3>
-<p>You can add a webhook subscription using the Management API</p>
-<h4 id='messaging-api-webhooks-setting-up-your-webhook-requirements'>Requirements</h4>
+<p>Webhooks are the way Flow.ai will deliver replies and notify your app of other type of events.</p>
+<h3 id='messaging-api-webhooks-receiving-calls'>Receiving calls</h3>
+<p>Creating a webhook endpoint on your server is no different from creating any page on your website.</p>
+
+<p>Webhook data is sent as <a href="https://www.json.org/">JSON</a> in the <code>POST</code> request body. The full event details are included and can be used directly, after parsing the JSON into an Event object.</p>
+
+<p>Your webhook must meet with the following requirements:</p>
+
 <ul>
 <li>HTTPS support</li>
 <li>A valid SSL certificate</li>
 <li>An open port that accepts <code>GET</code> and <code>POST</code> requests</li>
 </ul>
-<h3 id='messaging-api-webhooks-webhook-events'>Webhook Events</h3><h3 id='messaging-api-webhooks-event-format'>Event Format</h3><h3 id='messaging-api-webhooks-required-200-ok-response'>Required 200 OK Response</h3><h3 id='messaging-api-webhooks-performance-requirements'>Performance Requirements</h3><h3 id='messaging-api-webhooks-validating-webhook-events'>Validating Webhook Events</h3><h3 id='messaging-api-webhooks-templates'>Templates</h3><h1 id='management-api'>Management API</h1><h2 id='management-api-authentication'>Authentication</h2>
+<h3 id='messaging-api-webhooks-responding-to-a-call'>Responding to a call</h3>
+<p>To acknowledge receipt of a webhook call, your endpoint should return a 2xx HTTP status code. All response codes outside this range, including 3xx codes, will indicate to Flow.ai that you did not receive the webhook. This does mean that a URL redirection or a &quot;Not Modified&quot; response will be treated as a failure. Flow.ai will ignore any other information returned in the request headers or request body.</p>
+
+<p>We will attempt to deliver your webhooks for up to two 4 hours with an exponential back off. Webhooks cannot be manually retried after this time.</p>
+<h3 id='messaging-api-webhooks-type-of-events'>Type of Events</h3>
+<p>This is a list of all the types of events we currently send. We may add more at any time, so in developing and maintaining your code, you should not assume that only these types exist.</p>
+<h4 id='messaging-api-webhooks-type-of-events-message-reply'>message.reply</h4>
+<table><thead>
+<tr>
+<th style="text-align: right"></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><code>message.reply</code></td>
+<td>Called whenever Flow.ai is sending a reply message</td>
+</tr>
+<tr>
+<td style="text-align: right"><code>message.delivered</code></td>
+<td>Called when your message that you send has been successfully received</td>
+</tr>
+<tr>
+<td style="text-align: right"><code>control.handover</code></td>
+<td>Called when the AI engine is handing off to your solution and pausing operations</td>
+</tr>
+</tbody></table>
+<h3 id='messaging-api-webhooks-the-webhook-object'>The Webhook object</h3>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"webhookId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9f91853a-448f-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"organisationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"853a-448f-9f91-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://myawesomeapp.com/webhook"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"verifyKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"message.delivered"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message.reply"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"control.handover"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Each webhook object represents a webhook subscription Flow.ai will attempt to call whenever a subscribed event takes place.</p>
+<h4 id='messaging-api-webhooks-the-webhook-object-attributes'>Attributes</h4>
+<table><thead>
+<tr>
+<th style="text-align: right"></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>webhookId</strong> <em>string</em></td>
+<td>Unique ID of the webhook</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>organisationId</strong> <em>string</em></td>
+<td>ID of the organisation this webhook will receive calls from</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>url</strong> <em>string</em></td>
+<td>The url your app lives that Flow.ai shall call</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>verifyKey</strong> <em>string</em></td>
+<td>Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>events</strong> <em>array</em></td>
+<td>The list of events to subscribe to. You&#39;ll need to have at least one subscribed event</td>
+</tr>
+</tbody></table>
+<h3 id='messaging-api-webhooks-create-a-webhook'>Create a webhook</h3>
+<blockquote>
+<p>POST /v1/messaging/webhooks</p>
+
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">/messages/v1/webhooks</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
+<span class="s">{</span>
+<span class="s">    "url": "https://myawesomeapp.com/webhook",</span>
+<span class="s">    "verifyKey": "1234567",</span>
+<span class="s">    "events": [</span>
+<span class="s">        "message.delivered",</span>
+<span class="s">        "message.reply",</span>
+<span class="s">        "control.handover"</span>
+<span class="s">    ]</span>
+<span class="s">}</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>201 Created
+Location: /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"webhookId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9f91853a-448f-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"organisationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"853a-448f-9f91-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://myawesomeapp.com/webhook"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"verifyKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"message.delivered"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message.reply"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"control.handover"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Creates a new webhook subscription.</p>
+
+<p>Whenever you add a webhook we&#39;ll make a <code>GET</code> request to verify the endpoint. This call should receive a <code>2xx</code> response code of your server.</p>
+<h4 id='messaging-api-webhooks-create-a-webhook-arguments'>Arguments</h4>
+<table><thead>
+<tr>
+<th style="text-align: right"></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>url</strong> <strong>required</strong></td>
+<td>The url your app lives that Flow.ai shall call</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>verifyKey</strong> <strong>required</strong></td>
+<td>Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>events</strong> <strong>required</strong></td>
+<td>A list of events to subscribe to. You&#39;ll need to have at least one subscribed event</td>
+</tr>
+</tbody></table>
+<h3 id='messaging-api-webhooks-retrieve-a-webhook'>Retrieve a Webhook</h3>
+<blockquote>
+<p>GET /v1/messaging/webhooks/{WEBHOOK_ID}</p>
+
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>200 OK
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"webhookId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9f91853a-448f-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"organisationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"853a-448f-9f91-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://myawesomeapp.com/webhook"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"verifyKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"message.delivered"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message.reply"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"control.handover"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Retrieves the details of an existing webhook subscription. Supply the unique webhook ID from either a webhook creation request or the webhook list, and Flow.ai will return the corresponding webhook information.</p>
+<h3 id='messaging-api-webhooks-update-a-webhook'>Update a Webhook</h3>
+<blockquote>
+<p>POST /v1/messaging/webhooks/{WEBHOOK_ID}</p>
+
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="nf">PUT</span> <span class="nn">/messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
+<span class="s">{</span>
+<span class="s">    "organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",</span>
+<span class="s">    "url": "https://myawesomeapp.com/webhook",</span>
+<span class="s">    "verifyKey": "1234567",</span>
+<span class="s">    "events": [</span>
+<span class="s">        "message.reply",</span>
+<span class="s">        "control.handover"</span>
+<span class="s">    ]</span>
+<span class="s">}</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>200 OK
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"webhookId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9f91853a-448f-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"organisationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"853a-448f-9f91-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://myawesomeapp.com/webhook"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"verifyKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"message.delivered"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message.reply"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"control.handover"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Updates the specified webhook by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+<h4 id='messaging-api-webhooks-update-a-webhook-arguments'>Arguments</h4>
+<table><thead>
+<tr>
+<th style="text-align: right"></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: right"><strong>url</strong> <em>optional</em></td>
+<td>The url your app lives that Flow.ai shall call</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>verifyKey</strong> <em>optional</em></td>
+<td>Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai</td>
+</tr>
+<tr>
+<td style="text-align: right"><strong>events</strong> <em>optional</em></td>
+<td>The list of events to subscribe to. You&#39;ll need to have at least one subscribed event</td>
+</tr>
+</tbody></table>
+<h3 id='messaging-api-webhooks-list-all-webhooks'>List all Webhooks</h3>
+<blockquote>
+<p>GET /v1/messaging/webhooks</p>
+
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>200 OK
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="s2">"webhookId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9f91853a-448f-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"organisationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"853a-448f-9f91-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://myawesomeapp.com/webhook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"verifyKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"message.delivered"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"message.reply"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"control.handover"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"webhookId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"448f-9f91853a-6ecfd199-ef397588ff87"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"organisationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"853a-448f-9f91-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://otherawesomeapp.com/webhook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"verifyKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7654321"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"message.reply"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Returns a list of your webhook subscriptions. The webhooks are returned sorted by creation date, with the most recently created webhooks appearing first.</p>
+<h3 id='messaging-api-webhooks-delete-a-webhook'>Delete a Webhook</h3>
+<blockquote>
+<p>DELETE /v1/messaging/webhooks/{WEBHOOK_ID}</p>
+
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">/messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.flow.ai</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Bearer MY_MESSAGING_API_KEY</span>
+</code></pre><pre class="highlight plaintext"><code>204 No Content
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"webhookId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9f91853a-448f-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"organisationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"853a-448f-9f91-ef397588ff87-6ecfd199"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://myawesomeapp.com/webhook"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"verifyKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"message.delivered"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message.reply"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"control.handover"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Permanently deletes a webhook subscription. It cannot be undone.</p>
+<h1 id='management-api'>Management API</h1><h2 id='management-api-authentication'>Authentication</h2>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
@@ -1146,9 +1437,9 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 <h2 id='management-api-members'>Members</h2><h3 id='management-api-members-the-member-object'>The Member object</h3><h3 id='management-api-members-list-all-members'>List all Members</h3>
 <p>This endpoint retrieves all organisation members.</p>
 <h1 id='web-socket-api'>Web socket API</h1>
-<p>A real time messaging API that allows you to send and receive messages from Flow.ai in real-time.</p>
+<p>A real time messaging API that allows you to send and receive messages from Flow.ai using websockets.</p>
 <h2 id='web-socket-api-audience'>Audience</h2>
-<p>This API is specifically intended for developers looking to interate Flow.ai in a client facing ap. For example:</p>
+<p>The Websocket API is specifically intended for developers looking to integrate Flow.ai in a client facing app. For example:</p>
 
 <ul>
 <li>Building a custom web chat widget</li>
@@ -1159,19 +1450,19 @@ Treat API keys with care. Never share keys with other users or applications. Do 
  We provide a <a href="https://github.com/flow-ai/flowai-js">JavaScript SDK</a>, and for iOS a <a href="https://github.com/flow-ai/flowai-swift">Swift SDK</a>.
 </aside>
 
-<p>For server or backend integrations we advice you to take a look at our Messaging API.</p>
+<p>For server integrations we advice you to take a look at our <a href="#messaging-api">Messaging API</a>.</p>
 <h2 id='web-socket-api-getting-started'>Getting started</h2>
 <p>An overview how the API works:</p>
 
 <ol>
-<li>Request (GET) a WebSocket endpoint</li>
-<li>Open a WebSocket connection (WSS)</li>
-<li>Send and receive messages</li>
-<li><a href="/api/keep-alive.md">Keep the connection alive</a></li>
+<li><a href="#web-socket-api-request-an-endpoint">Request</a> (GET) a WebSocket endpoint</li>
+<li><a href="#web-socket-api-open-a-connection">Open</a> a WebSocket connection (WSS)</li>
+<li><a href="#web-socket-api-sending-messages">Send</a> and <a href="#web-socket-api-receiving-messages">receive</a> messages</li>
+<li><a href="#web-socket-api-keep-alive">Keep the connection alive</a></li>
 </ol>
 <h2 id='web-socket-api-request-an-endpoint'>Request an endpoint</h2>
 <blockquote>
-<p>Example calls</p>
+<p>Example Request:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X GET -H <span class="s2">"Content-Type: application/json"</span> <span class="s2">"https://api.flow.ai/socket.info?clientId=YOUR_CLIENT_ID&amp;sessionId=123432"</span>
 </code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
@@ -1191,9 +1482,10 @@ Treat API keys with care. Never share keys with other users or applications. Do 
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 </code></pre>
 <blockquote>
-<p>Example response</p>
+<p>Example response:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<pre class="highlight plaintext"><code>200 OK
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wss://api.flow.ai/ws/8c3b7d7ea9400..."</span><span class="w">
@@ -1221,17 +1513,15 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 </tbody></table>
 <h2 id='web-socket-api-open-a-connection'>Open a connection</h2>
 <p>The Websocket URL provided by <code>socket.info</code> are single-use and are only valid for 60 seconds, so make sure to connect directly.</p>
-<h2 id='web-socket-api-common-format'>Common format</h2>
-<p>Any message or other kind of event you send or receive has the same JSON format.</p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h2 id='web-socket-api-common-format'>Common format</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
   </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="err">...</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p><strong>Fields</strong></p>
-
+<p>Any message or other kind of event you send or receive has the same JSON format.</p>
+<h4 id='web-socket-api-common-format-list-all-members-attributes'>Attributes</h4>
 <table><thead>
 <tr>
 <th><strong>Property</strong></th>
@@ -1239,24 +1529,24 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>type</strong> <em>string</em></td>
+<td><strong>type</strong> <strong>required</strong></td>
 <td>The message type for example: <code>message.send</code></td>
 </tr>
 <tr>
-<td><strong>payload</strong> <em>object</em></td>
+<td><strong>payload</strong> <strong>required</strong></td>
 <td>The body of the message</td>
 </tr>
 </tbody></table>
 <h2 id='web-socket-api-keep-alive'>Keep alive</h2>
 <blockquote>
-<p>Send a ping to keep the connection alive</p>
+<p>Example Message:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ping"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>We will respond with a pong</p>
+<p>Example Reply:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pong"</span><span class="w">
@@ -1267,7 +1557,7 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 <p>In order to keep the connection live we support a ping message.</p>
 <h2 id='web-socket-api-sending-messages'>Sending Messages</h2>
 <blockquote>
-<p>The following example shows sending a simple text message</p>
+<p>Example Message:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
@@ -1277,7 +1567,9 @@ Treat API keys with care. Never share keys with other users or applications. Do 
     </span><span class="s2">"speech"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hi there!"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='web-socket-api-sending-messages-payload'>Payload</h3>
+</span></code></pre>
+<p>The easiest way to send a simple text message in real time</p>
+<h4 id='web-socket-api-sending-messages-list-all-members-attributes'>Attributes</h4>
 <table><thead>
 <tr>
 <th><strong>Property</strong></th>
@@ -1285,75 +1577,21 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>threadId</strong> <em>string</em></td>
-<td>Required. Unique key identifying a user or channel</td>
+<td><strong>threadId</strong> <strong>required</strong></td>
+<td>Unique key identifying a user or channel</td>
 </tr>
 <tr>
-<td><strong>traceId</strong> <em>integer</em></td>
+<td><strong>traceId</strong> <em>optional</em></td>
 <td>Optional number used to track message delivery</td>
 </tr>
 <tr>
-<td><strong>speech</strong> <em>string</em></td>
-<td>Required. Text of message</td>
+<td><strong>speech</strong> <strong>required</strong></td>
+<td>Text of message</td>
 </tr>
 </tbody></table>
-<h3 id='web-socket-api-sending-messages-message-attachment'>Message Attachment</h3>
+<h3 id='web-socket-api-sending-messages-originator-object'>Originator object</h3>
 <blockquote>
-<p>Event example</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58ca9e327348ed3bd1439e7b"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1519091841665</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"speech"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event attachment"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"attachment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTRO"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Instead of text we also support sending attachments.</p>
-
-<aside class="notice">
-Note: we currently only support sending event attachments. Image and file attachments will follow soon.
-</aside>
-<h5 id='web-socket-api-sending-messages-message-attachment-requirements-attachment-fields'>Attachment fields</h5>
-<table><thead>
-<tr>
-<th style="text-align: left">Property</th>
-<th style="text-align: left">Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><strong>type</strong> <em>string</em></td>
-<td style="text-align: left">Attachment type. Currently this has to be <code>event</code></td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>payload</strong> <em>attachment</em></td>
-<td style="text-align: left">Attachment</td>
-</tr>
-</tbody></table>
-<h5 id='web-socket-api-sending-messages-message-attachment-requirements-attachment-fields'>Attachment fields</h5>
-<table><thead>
-<tr>
-<th style="text-align: left">Property</th>
-<th style="text-align: left">Description</th>
-<th style="text-align: left">Type</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">name</td>
-<td style="text-align: left">Name of the event to trigger</td>
-<td style="text-align: left">string</td>
-</tr>
-</tbody></table>
-<h3 id='web-socket-api-sending-messages-originator'>Originator</h3>
-<blockquote>
-<p>Sending originator info</p>
+<p>Example Message:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
@@ -1369,7 +1607,7 @@ Note: we currently only support sending event attachments. Image and file attach
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Sending additional profile information</p>
+<p>Example Message:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
@@ -1394,11 +1632,11 @@ Note: we currently only support sending event attachments. Image and file attach
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
-</span><span class="err">&gt;</span><span class="w"> </span><span class="err">Sending</span><span class="w"> </span><span class="err">originator</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">metadata</span><span class="w">
-
-</span><span class="err">```json</span><span class="w">
-</span><span class="p">{</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example Message:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58ca9e327348ed3bd1439e7b"</span><span class="p">,</span><span class="w">
@@ -1414,16 +1652,16 @@ Note: we currently only support sending event attachments. Image and file attach
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>With each message you can customise information regarding the sender, user or as we call it the originator of the message.</p>
-<h4 id='web-socket-api-sending-messages-originator-originator-fields'>Originator fields</h4>
+<p>With each message you can customize information regarding the sender, user or as Flow.ai calls it, the originator of the message.</p>
+<h4 id='web-socket-api-sending-messages-originator-object-attributes'>Attributes</h4>
 <table><thead>
 <tr>
-<th style="text-align: left">Property</th>
+<th style="text-align: left"><strong>Property</strong></th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><strong>name</strong></td>
+<td style="text-align: left"><strong>name</strong> <em>string</em></td>
 <td style="text-align: left">Name representing the originator</td>
 </tr>
 <tr>
@@ -1431,23 +1669,25 @@ Note: we currently only support sending event attachments. Image and file attach
 <td style="text-align: left">Either <code>external</code>, or <code>moderator</code></td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>profile</strong> <em>profile</em></td>
-<td style="text-align: left">Additional profile information</td>
+<td style="text-align: left"><strong>profile</strong> <em>Profile object</em></td>
+<td style="text-align: left">Optional Profile object</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>metadata</strong> <em>object</em></td>
 <td style="text-align: left">Key value pairs with additional info</td>
 </tr>
 </tbody></table>
-<h4 id='web-socket-api-sending-messages-originator-profile-fields'>Profile fields</h4>
+<h4 id='web-socket-api-sending-messages-originator-object-profile-object'>Profile object</h4>
+<p>An originator can contain additional profile information using the profile object</p>
+
 <table><thead>
 <tr>
-<th style="text-align: left">Property</th>
+<th style="text-align: left"><strong>Property</strong></th>
 <th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><strong>fullName</strong></td>
+<td style="text-align: left"><strong>fullName</strong> <em>string</em></td>
 <td style="text-align: left">Complete name</td>
 </tr>
 <tr>
@@ -1483,8 +1723,10 @@ Note: we currently only support sending event attachments. Image and file attach
 <td style="text-align: left">URL to profile picture</td>
 </tr>
 </tbody></table>
-<h3 id='web-socket-api-sending-messages-message-metadata'>Message Metadata</h3>
-<p>Along with every message you can send additional metadata. Some of this metadata is also used by the AI engine to determine the response.</p>
+<h3 id='web-socket-api-sending-messages-metadata'>Metadata</h3>
+<blockquote>
+<p>Example Message:</p>
+</blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1505,7 +1747,105 @@ Note: we currently only support sending event attachments. Image and file attach
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h5 id='web-socket-api-sending-messages-message-metadata-profile-fields-metadata-fields'>Metadata fields</h5>
+</span></code></pre>
+<p>Along with every message you can send additional metadata. Some of this metadata is also used by the AI engine to determine the response.</p>
+<h5 id='web-socket-api-sending-messages-metadata-profile-object-attributes'>Attributes</h5>
+<table><thead>
+<tr>
+<th style="text-align: left"><strong>Property</strong></th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>language</strong> <em>string</em></td>
+<td style="text-align: left">Language code (ISO) of the message, not the user</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>timezone</strong> <em>number</em></td>
+<td style="text-align: left">Timezone of the message (where it was sent). Number of hours from UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>params</strong> <em>Params object</em></td>
+<td style="text-align: left">Bag of parameters to use within the AI</td>
+</tr>
+</tbody></table>
+<h4 id='web-socket-api-sending-messages-metadata-params-object'>Params object</h4>
+<blockquote>
+<p>Example Params</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"passengerCount"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"food"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"food-item-22332"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"match"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pizza Hawaii"</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"food-item-44525"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"match"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pizza Calzone"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The params object resembles the matched result created by the AI engine using entity classification. Each param itself is a list of <code>[{ value }]</code> objects.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left"><strong>Property</strong></th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>value</strong> <strong>required</strong></td>
+<td style="text-align: left">The value of the param</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>match</strong> <em>optional</em></td>
+<td style="text-align: left">Represents a human value</td>
+</tr>
+</tbody></table>
+<h3 id='web-socket-api-sending-messages-attachment'>Attachment</h3>
+<blockquote>
+<p>Example Message:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.send"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"58ca9e327348ed3bd1439e7b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"traceId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1519091841665</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"speech"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event attachment"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attachment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INTRO"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Instead of simple text messages, Flow.ai also supports sending attachments like files or events.</p>
+
+<aside class="notice">
+Note: we currently only support sending event attachments. Image and file attachments will follow soon.
+</aside>
+<h5 id='web-socket-api-sending-messages-attachment-params-object-attachment-attributes'>Attachment attributes</h5>
+<table><thead>
+<tr>
+<th style="text-align: left">Property</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>type</strong> <strong>required</strong></td>
+<td style="text-align: left">Attachment type. Currently this has to be <code>event</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>payload</strong> <strong>required</strong></td>
+<td style="text-align: left">Attachment object</td>
+</tr>
+</tbody></table>
+<h5 id='web-socket-api-sending-messages-attachment-params-object-attachment-object'>Attachment object</h5>
 <table><thead>
 <tr>
 <th style="text-align: left">Property</th>
@@ -1514,24 +1854,14 @@ Note: we currently only support sending event attachments. Image and file attach
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left">language</td>
-<td style="text-align: left">Language code (ISO) of the message, not the user</td>
-<td style="text-align: left">string</td>
-</tr>
-<tr>
-<td style="text-align: left">timezone</td>
-<td style="text-align: left">Timezone of the message (where it was sent). Number of hours from UTC</td>
-<td style="text-align: left">number</td>
-</tr>
-<tr>
-<td style="text-align: left">params</td>
-<td style="text-align: left">Bag of parameters to use within the AI</td>
-<td style="text-align: left">object</td>
+<td style="text-align: left"><strong>name</strong> <strong>required</strong></td>
+<td style="text-align: left">Name of the event to trigger</td>
+<td style="text-align: left"></td>
 </tr>
 </tbody></table>
 <h3 id='web-socket-api-sending-messages-responses'>Responses</h3>
 <blockquote>
-<p>A reply is sent (almost) instantly. The following is replied if the message is successfully delivered.</p>
+<p>Example Reply:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message.delivered"</span><span class="p">,</span><span class="w">
@@ -1550,7 +1880,9 @@ Note: we currently only support sending event attachments. Image and file attach
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid message format ..."</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h2 id='web-socket-api-receiving-messages'>Receiving Messages</h2>
+</span></code></pre>
+<p>A reply is sent (almost) instantly. The following is replied if the message is successfully delivered.</p>
+<h2 id='web-socket-api-receiving-messages'>Receiving Messages</h2>
 <p>Messages that are replied are in almost the same format as the ones that are sent.</p>
 
 <blockquote>
@@ -1667,7 +1999,7 @@ Note: we currently only support sending event attachments. Image and file attach
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h5 id='web-socket-api-receiving-messages-responses-profile-fields-payload-fields'>Payload fields</h5>
+</span></code></pre><h5 id='web-socket-api-receiving-messages-responses-params-object-payload-fields'>Payload fields</h5>
 <table><thead>
 <tr>
 <th style="text-align: left">Property</th>
@@ -1691,7 +2023,7 @@ Note: we currently only support sending event attachments. Image and file attach
 <td style="text-align: left">object</td>
 </tr>
 </tbody></table>
-<h5 id='web-socket-api-receiving-messages-responses-profile-fields-message-fields'>Message fields</h5>
+<h5 id='web-socket-api-receiving-messages-responses-params-object-message-fields'>Message fields</h5>
 <table><thead>
 <tr>
 <th style="text-align: left">Property</th>
@@ -1745,7 +2077,7 @@ Note: we currently only support sending event attachments. Image and file attach
 <td style="text-align: left">object</td>
 </tr>
 </tbody></table>
-<h5 id='web-socket-api-receiving-messages-responses-profile-fields-response-fields'>Response fields</h5>
+<h5 id='web-socket-api-receiving-messages-responses-params-object-response-fields'>Response fields</h5>
 <p>We have a complete<a href="https://github.com/flow-ai/flowai-js-templates/blob/master/JSON.md"> reference of the JSON responses</a> available</p>
 <h2 id='web-socket-api-example'>Example</h2>
 <p>We provide a <a href="https://github.com/flow-ai/flowai-js">JavaScript SDK</a>, but the following example demonstrates opening a connection and sending a test message using vanilla JavaScript in the browser.</p>
