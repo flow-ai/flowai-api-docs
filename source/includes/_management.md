@@ -7,7 +7,7 @@
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "https://api.flow.ai/v1/management"
+curl "https://api.flow.ai/v1/projects/:projectId/flows"
   -H 'Authorization: Bearer MY_MANAGEMENT_API_KEY'
 ```
 
