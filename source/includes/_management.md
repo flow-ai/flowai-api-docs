@@ -24,6 +24,7 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 
 ## Flows
 
+
 > Example Flow object:
 
 ```json
@@ -167,74 +168,39 @@ Property | Description
 **intent** *object* | Intent object, required if type is `INTENT`
 **actions** *array* | Collection of Reply actions
 
-### Create a Flow
-
-### Retrieve a Flow
-
-> GET /flows/info
-
-```json
-{
-	"flowId": "c48b0a06-9727-4735-8886-49286fae78e3",
-	"projectId": "db3e3895-fe06-4dcc-a7a0-35b0c0ec55c3",
-	"brainId": "86bc0fa0-25f7-4d3d-9dcf-eaa2a6f810b1",
-	"title": "Hello World",
-	"group": "Demo",
-	"createdAt": "2018-10-24T06:45:19.541Z",
-	"disabled": false,
-	"steps": [{
-		"stepId": "31aef3cf-8c96-442b-9871-7fc9be322da1",
-		"title": "Hello!",
-		"type": "INTENT",
-		"contexts": [],
-		"intent": {
-			"intentId": "67841005-31b1-45b3-b939-3879dfd377de",
-			"title": "Hello_World_Greeting",
-			"createdAt": "2018-10-24T06:45:19.484Z",
-			"examples": [{
-				"entities": [],
-				"query": "Hello"
-			}, {
-				"entities": [],
-				"query": "Good day"
-			}, {
-				"entities": [],
-				"query": "Good afternoon"
-			}, {
-				"entities": [],
-				"query": "good morning"
-			}, {
-				"entities": [],
-				"query": "hi"
-			}, {
-				"entities": [],
-				"query": "Hey"
-			}]
-		},
-		"actions": [{
-			"actionId": "3320ae20-cb09-484f-b8d4-c5eb8afeaab2",
-			"createdAt": "2018-10-24T06:45:19.472Z",
-			"type": "TEXT",
-			"payload": {
-				"texts": [
-					"Hi there! This is a customer service demo bot! ",
-					"Hello! I am a customer service demo bot!"
-				],
-				"quickReplies": [],
-				"delay": 0
-			}
-		}]
-	}]
-}
-```
-
-### Update a Flow
-
 ### List all Flows
 
 This endpoint retrieves all Flows.
 
 > GET /flows/list
+
+```javascript
+var request = require("request");
+var options = { method: 'GET',
+  url: 'https://api.flow.ai/v1/projects/:projectId/flows',
+  qs: { limit: '5', skip: '0' },
+  headers: 
+   { 
+     Authorization: 'MY_MANAGEMENT_API_KEY',
+   } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+```
+
+```shell
+curl "https://api.flow.ai/v1/projects/:projectId/flows"
+  -H 'Authorization: Bearer MY_MANAGEMENT_API_KEY'
+```
+
+Property | Description
+--------- | -----------
+**projectId** *required* | Project ID the Flow belongs to
+**limit** *optional* | Pagination option. Number of items per response
+**skip** *optional* | Pagination option. Number of items to skip
 
 ```json
 [{
@@ -281,53 +247,3 @@ This endpoint retrieves all Flows.
 	}]
 }]
 ```
-
-## Intents
-
-### The Intent object
-
-### Create an Intent
-
-### Retrieve an Intent
-
-### Update an Intent
-
-### List all Intents
-
-This endpoint retrieves all Intents.
-
-## Entity types
-
-### The Entity type object
-
-### Create an Entity type
-
-### Retrieve an Entity type
-
-### Update an Entity type
-
-### List all Entity types
-
-This endpoint retrieves all Entity types.
-
-## Projects
-
-### The Project object
-
-### Create a Project
-
-### Retrieve a Project
-
-### Update a Project
-
-### List all Projects
-
-This endpoint retrieves all Flows.
-
-## Members
-
-### The Member object
-
-### List all Members
-
-This endpoint retrieves all organisation members.
