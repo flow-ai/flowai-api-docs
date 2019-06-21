@@ -1,0 +1,43 @@
+
+env:
+  PORT: 80
+
+   #created due to https://jira.flow.ai/browse/FLOW-249 remove after solve!
+initalReadinessDelay: 25
+
+replicaCount: 1
+
+image:
+  repository: gcr.io/env-flowai/github-flow-ai-api-docs-web
+  tag: 1ceaabb6daecf88b867e677deb5891853db2eb5e
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  annotations: 
+    kubernetes.io/ingress.class: "web"
+    nginx.ingress.kubernetes.io/ssl-redirect: false
+    nginx.ingress.kubernetes.io/rewrite-target: "/docs/api/"
+  path: /docs/api/
+  host: web-dev.flow.ai
+  
+
+#settings for legacy ip enabled urls
+
+nginx-ingress:
+  name: lb-docs
+  controller:
+    ingressClass: web
+lb:
+  enabled: false
+  annotations: 
+    kubernetes.io/ingress.class: "web"
+    nginx.ingress.kubernetes.io/ssl-redirect: false
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+  path: /
+  host: web-dev.flow.ai
+
+healthzPath: /docs/healthz

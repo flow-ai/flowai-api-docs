@@ -1,0 +1,21 @@
+steps:
+- name: 'busybox'
+  args: ['mkdir', './charts']    
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', '-r', 'gs://flowai-chart-${_ENV}/$_HELM_CHART_WEB', './charts']    
+- name: 'gcr.io/$PROJECT_ID/helm'
+  args: ['upgrade','--install', '$_APP-$_HELM_CHART_WEB',
+  './charts/$_HELM_CHART_WEB','--set',
+  'image.repository=gcr.io/$_GCR_PROJECT_ID/${_REPO_BASE}${_APP}-web,image.tag=v$TAG_NAME',
+  '-f','./helm/$_HELM_CHART_WEB/values.yaml',
+  '-f','./helm/$_HELM_CHART_WEB/values-$_ENV.yaml']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=flow-env-${_ENV}'  
+substitutions:
+    _ENV: prod
+    _APP: api-docs
+    _HELM_CHART_WEB: nodejs-lb
+    _HELM_CHART_WORKER: nodejs
+    _GCR_PROJECT_ID: env-flowai
+    _REPO_BASE: github-flow-ai-

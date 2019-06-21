@@ -1,0 +1,28 @@
+steps:
+  # this step builds the Dockerfile and push it to gcr repo
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build','-f', 'Dockerfile', '--tag=gcr.io/$PROJECT_ID/${_REPO_BASE}${_APP}-web:$COMMIT_SHA',
+  '--tag=gcr.io/$PROJECT_ID/${_REPO_BASE}${_APP}-web:v$TAG_NAME', '.']
+  env:
+  - 'VERSION=$TAG_NAME$COMMIT_SHA' 
+- name: 'busybox'
+  args: ['mkdir', './charts']
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', '-r', 'gs://flowai-chart/$_HELM_CHART_WEB', './charts']
+- name: 'gcr.io/$PROJECT_ID/helm'
+  args: ['upgrade','--install', '$_APP-$_HELM_CHART_WEB',
+  './charts/$_HELM_CHART_WEB','--set',
+  'image.tag=$COMMIT_SHA','-f','./helm/$_HELM_CHART_WEB/values.yaml',
+  '-f','./helm/$_HELM_CHART_WEB/values-$_ENV.yaml']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-b'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=flow-env-$_ENV'
+substitutions:
+    _ENV: dev
+    _APP: api-docs
+    _HELM_CHART_WEB: nodejs-lb
+    _REPO_BASE: github-flow-ai-
+timeout: 1800s    
+options:
+images: 
+- 'gcr.io/$PROJECT_ID/${_REPO_BASE}${_APP}-web'

@@ -1,0 +1,1 @@
+helm install --name=gateway-nodejs -f ./services/gateway/helm/nodejs/values.yaml -f ./services/gateway/helm/nodejs/values-dev.yaml  ./helm/nodejs --set ingress.hosts={app.devenv.flow.ai}
