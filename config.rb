@@ -52,7 +52,7 @@ end
 
 # Deploy Configuration
 # If you want Middleman to listen on a different port, you can set that below
-set :port, 4567
+set :port, 80
 
 helpers do
   require './lib/toc_data.rb'
