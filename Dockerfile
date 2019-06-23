@@ -11,4 +11,4 @@ RUN cd /slate/source_orig && bundle install
 VOLUME /slate/source
 VOLUME /slate/build
 
-CMD cd /slate && cp -nr source_orig/* source && cd source && exec bundle exec middleman server -p 80 --watcher-force-polling
+CMD touch /tmp/healthy && cd /slate && touch /tmp/healthy && cp -nr source_orig/* source && cd source && exec bundle exec middleman server -p 80 --watcher-force-polling
