@@ -41,5 +41,5 @@ lb:
   host: web-dev.flow.ai
 
 healthzPath: /docs/healthz
-
+#use wise please
 noHealthCheck: true
