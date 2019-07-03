@@ -8,7 +8,7 @@ RUN git clone https://github.com/flow-ai/flowai-api-docs /slate/source_orig
 
 RUN cd /slate/source_orig && bundle install
 
-#RUN cd /slate/source_orig && exec middleman build
+RUN cd /slate/source_orig && exec middleman build
 
 VOLUME /slate/source
 VOLUME /slate/build
