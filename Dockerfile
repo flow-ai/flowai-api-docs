@@ -21,4 +21,4 @@ VOLUME /slate/build
 FROM nginx:alpine
 
 COPY --from=0 /slate/source_orig/build /usr/share/nginx/html
-RUN touch /tmp/healthy && cd /slate && touch
+RUN touch /tmp/healthy 
