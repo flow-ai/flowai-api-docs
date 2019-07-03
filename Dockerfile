@@ -11,7 +11,7 @@ RUN cd /slate/source_orig && bundle install
 VOLUME /slate/source
 VOLUME /slate/build
 #touch for healthcheck 
-WORKDIR /slate/source 
+WORKDIR /slate/
 RUN middleman build
 CMD touch /tmp/healthy && cd /slate && touch /tmp/healthy && cp -nr source_orig/* source && middleman build && cd source && exec bundle exec middleman server -p 80 --watcher-force-polling
 
