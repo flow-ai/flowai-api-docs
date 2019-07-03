@@ -12,3 +12,7 @@ VOLUME /slate/source
 VOLUME /slate/build
 #touch for healthcheck 
 CMD touch /tmp/healthy && cd /slate && touch /tmp/healthy && cp -nr source_orig/* source && middleman build && cd source && exec bundle exec middleman server -p 80 --watcher-force-polling
+
+FROM nginx:alpine
+
+COPY --from=0 /slate/build .
