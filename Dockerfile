@@ -20,4 +20,4 @@ CMD touch /tmp/healthy && cd /slate && touch /tmp/healthy && cp -nr source_orig/
 
 FROM nginx:alpine
 
-COPY --from=0 /slate/source/build .
+COPY --from=0 /slate/source_orig/build .
