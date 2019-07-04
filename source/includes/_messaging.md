@@ -1,4 +1,4 @@
-# Messaging API
+# REST API (Alpha)
 
 An API to built conversational interfaces (e.g., chatbots, voice-powered apps and devices).
 
@@ -14,52 +14,133 @@ Some example use cases:
 
 ## You call us, we'll call you
 
-The Messaging API works asynchronous. Unlike other NLP APIs, Flow.ai will not return any direct reply to a [Send](#sending-messages) call.
+The REST API works asynchronous. Unlike other NLP APIs, Flow.ai will not return any direct reply to a [Send](#sending-messages) call.
 
 ![Send messages using REST API](/images/sending.svg "Sending messages to Flow.ai")
 
-Instead, the API will call your configured [webhook](#webhooks) whenever a reply is being sent.
+Instead, the API will send a POST request to your configured [webhook](#webhooks) whenever a reply is being sent.
 
 ![Receive replies using Webhooks](/images/receiving.svg "Receiving replies from Flow.ai")
 
-
 ## Sending messages
 
-Many types of unstructured content can be sent to the Flow.ai platform, including text, audio, images, video, and files. Our powerful AI engine will process any query and send back replies using the provided webhook.
+Many types of unstructured content can be sent to the Flow.ai platform, including text, audio, images, video, and files. Our powerful AI engine will process any query and send back replies using the provided [webhook](#webhooks).
 
-Any message that is send requires a `threadId` that relates the message to a specific user, chat or thread. Optionally you can provide a `traceId` that will help keep track of the message when you receive delivery events.
+Any message that is sent requires a `threadId` that relates the message to a specific user, chat or thread. Optionally you can provide a `traceId` that will help keep track of the message when you receive delivery events.
 
 ### Endpoint
 
-All the URLs referenced in the Messaging API have the following base:
+All the URLs referenced in the REST API have the following base:
 
-`https://api.flow.ai/v1/messaging/`
+`https://api.flow.ai/v1/messages/`
 
 ### Authentication
 
-Authenticate your API requests by providing a Messaging API key as a bearer token. All API requests expect this bearer token to be present.
+Authenticate your API requests by providing a REST API key as a bearer token. All API requests expect this bearer token to be present.
 
-You can register a new Messaging API key within your [organisation settings](https://app.flow.ai/settings/organisation).
+You can get a new REST API key within the [integrations](https://app.flow.ai/default/integrations) section by adding a new REST API integration.
 
 <aside class="notice">
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
 </aside>
 
+### Originator
+
+> Example Message:
+
+```json
+{
+	"type": "text",
+	"text": "hello",
+	"originator": {
+		"name": "John Doe",
+		"role": "external"
+	}
+}
+```
+
+> Example Message:
+
+```json
+{
+	"type": "text",
+	"text": "hello",
+	"originator": {
+		"name": "John Doe",
+		"role": "external",
+		"profile": {
+			"fullName": "John Doe",
+			"firstName": "John",
+			"lastName": "Doe",
+			"gender": "M",
+			"locale": "en-US",
+			"timezone": -5,
+			"country": "us",
+			"email": "johndoe@dmail.com",
+			"picture": "https://..."
+		}
+	}
+}
+```
+
+> Example Message:
+
+```json
+{
+	...
+	"originator": {
+		"name": "John Doe",
+		"role": "external",
+		"metadata": {
+			"clientNumber": "asddaasq333ee332",
+			"preference": "A,B,G"
+		}
+	}
+	...
+}
+```
+
+With each message you can need to provide some information regarding the sender, user or as Flow.ai calls it, the originator of the message.
+
+#### Attributes
+
+| **Property** | Description |
+| :--- | :--- |
+| **name** *string*| Name representing the originator |
+| **role** *string* | Either `external`, or `moderator` |
+| **profile** *Profile object* | Optional Profile object |
+| **metadata** *object* | Key value pairs with additional info |
+
+#### Profile object
+
+An originator can contain additional profile information using the profile object
+
+| **Property** | Description |
+| :--- | :--- |
+| **fullName** *string* | Complete name |
+| **firstName** *string* | First name |
+| **lastName** *string* | Family name |
+| **gender** *string* | Gender, M, F or U |
+| **locale** *string* | Locale code \(ISO\)
+| **timezone** *number* | Number of hours of UTC |
+| **country** *string* | Two letter country code |
+| **email** *string* | Email address |
+| **picture** *string* | URL to profile picture |
+
 ### Text message
 
 Sending a text message
 
-> POST /v1/messaging/message
+> POST /v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST /v1/messaging/message HTTP/1.1
+POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
-	"threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",
 	"type": "text",
 	"text": "Hello"
 }
@@ -70,13 +151,12 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://api.flow.ai/v1/messaging/query',
+  url: 'https://api.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {
-    threadId: '6ecfd199-853a-448f-9f91-ef397588ff87',
 		type: 'text',
     text: 'Hello'
   },
@@ -96,11 +176,16 @@ const result = await request({
 }
 ```
 
-#### Arguments
+#### Parameters
 
 | | |
 |----:|---|
 | **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+
+#### Arguments
+
+| | |
+|----:|---|
 | **traceId** *number* | Optional unique number that is passed along to identify the message. Use this to verify message delivery. |
 | **type** *string* | Indicates the type of message. Should be `text` |
 | **text** *string* | The text or speech message to process. The maximum length of a message is 255 characters. |
@@ -110,17 +195,16 @@ const result = await request({
 
 ### Event message
 
-> POST /v1/messaging/message
+> POST /v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST /v1/messaging/message HTTP/1.1
+POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
-	"threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",
 	"type": "event",
 	"eventName": "MY_EVENT"
 }
@@ -131,13 +215,12 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://api.flow.ai/v1/messaging/query',
+  url: 'https://api.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {
-		threadId: '6ecfd199-853a-448f-9f91-ef397588ff87',
 		type: 'event',
     eventName: "MY_EVENT"
   },
@@ -159,11 +242,16 @@ const result = await request({
 
 Trigger events within Flow.ai by sending an event message.
 
-#### Arguments
+#### Parameters
 
 | | |
 |----:|---|
 | **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+
+#### Arguments
+
+| | |
+|----:|---|
 | **traceId** *number* | Optional unique number that is passed along to identify the message. Use this to verify message delivery. |
 | **type** *string* | Indicates the type of message. Should be `event` |
 | **eventName** *string* | The name of the event to trigger |
@@ -173,17 +261,16 @@ Trigger events within Flow.ai by sending an event message.
 
 ### Location message
 
-> POST /v1/messaging/message
+> POST /v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST /v1/messaging/message HTTP/1.1
+POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
-	"threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",
 	"type": "location",
 	"lat": "1232122422",
 	"lng": "2433343343"
@@ -195,13 +282,12 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://api.flow.ai/v1/messaging/query',
+  url: 'https://api.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {
-		threadId: '6ecfd199-853a-448f-9f91-ef397588ff87',
 		type: 'location',
 		lat: "1232122422",
 		lng: "2433343343"
@@ -224,11 +310,16 @@ const result = await request({
 
 Send coordinates
 
-#### Arguments
+#### Parameters
 
 | | |
 |----:|---|
 | **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+
+#### Arguments
+
+| | |
+|----:|---|
 | **traceId** *number* | Optional unique number that is passed along to identify the message. Use this to verify message delivery. |
 | **type** *string* | Indicates the type of message. Should be `location` |
 | **lat** *string* | Latitude |
@@ -240,12 +331,12 @@ Send coordinates
 
 ### Media message
 
-> POST /v1/messaging/message
+> POST /v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST /v1/messaging/message HTTP/1.1
+POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 ------WebKitFormBoundaryDJX0xmK2m2F6Mvka
 Content-Disposition: form-data; name="file"; filename="image.png"
@@ -254,7 +345,6 @@ Content-Type: image/png
 ------WebKitFormBoundaryDJX0xmK2m2F6Mvka
 Content-Disposition: form-data; name="query"
 {
-	"threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",
 	"type": "location",
 	"mediaType": "image",
 	"mimetype": "image/png"
@@ -275,7 +365,6 @@ const stream = createReadStream('./test.png')
 const formData = new FormData()
 formData.append('file', stream)
 formData.append('query', JSON.stringify(query: {
-	threadId: '6ecfd199-853a-448f-9f91-ef397588ff87',
 	type: 'media',
 	mediaType: 'image',
 	mimeType: "image/png"
@@ -283,7 +372,7 @@ formData.append('query', JSON.stringify(query: {
 
 const result = await request({
   method: 'POST',
-  url: 'https://api.flow.ai/v1/messaging/query',
+  url: 'https://api.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY'
   },
@@ -307,11 +396,16 @@ The API allows you to send images, files and other media files.
 
 For media you'll need to make a `POST` call that is `multipart/form-data`. The maximum file size you can upload is 250MB.
 
-#### Arguments
+#### Parameters
 
 | | |
 |----:|---|
 | **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+
+#### Arguments
+
+| | |
+|----:|---|
 | **traceId** *number* | Optional unique number that is passed along to identify the message. Use this to verify message delivery. |
 | **type** *string* | Indicates the type of message. Should be `media` |
 | **mediaType** *string* | Type of media, `image`, `file`, `audio`, or `video`  |
@@ -351,259 +445,7 @@ This is a list of all the types of events we currently send. We may add more at 
 | | |
 |----:|---|
 | `message.reply` | Called whenever Flow.ai is sending a reply message |
-| `message.delivered` | Called when your message that you send has been successfully received |
-| `control.handover` | Called when the AI engine is handing off to your solution and pausing operations |
-
-### The Webhook object
-
-> Example Response:
-
-```json
-{
-	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
-	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
-	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1234567",
-	"events": [
-		"message.delivered",
-		"message.reply",
-		"control.handover"
-	]
-}
-```
-
-Each webhook object represents a webhook subscription Flow.ai will attempt to call whenever a subscribed event takes place.
-
-#### Attributes
-
-| | |
-|----:|---|
-| **webhookId** *string* | Unique ID of the webhook |
-| **organisationId** *string* | ID of the organisation this webhook will receive calls from |
-| **url** *string* | The url your app lives that Flow.ai shall call |
-| **verifyKey** *string* | Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai |
-| **events** *array* | The list of events to subscribe to. You'll need to have at least one subscribed event |
-
-### Create a webhook
-
-> POST /v1/messaging/webhooks
-
-> Example Request:
-
-```http
-POST /messages/v1/webhooks HTTP/1.1
-Host: api.flow.ai
-Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
-{
-	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1234567",
-	"events": [
-		"message.delivered",
-		"message.reply",
-		"control.handover"
-	]
-}
-```
-
-> Example Response:
-
-```
-201 Created
-Location: /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199
-```
-
-```json
-{
-	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
-	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
-	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1234567",
-	"events": [
-		"message.delivered",
-		"message.reply",
-		"control.handover"
-	]
-}
-```
-
-Creates a new webhook subscription.
-
-Whenever you add a webhook we'll make a `GET` request to verify the endpoint. This call should receive a `2xx` response code of your server.
-
-#### Arguments
-
-| | |
-|----:|---|
-| **url** **required** | The url your app lives that Flow.ai shall call |
-| **verifyKey** **required** | Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai |
-| **events** **required** | A list of events to subscribe to. You'll need to have at least one subscribed event |
-
-
-### Retrieve a Webhook
-
-> GET /v1/messaging/webhooks/{WEBHOOK_ID}
-
-> Example Request:
-
-```http
-GET /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199 HTTP/1.1
-Host: api.flow.ai
-Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
-```
-
-> Example Response:
-
-```
-200 OK
-```
-
-```json
-{
-	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
-	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
-	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1234567",
-	"events": [
-		"message.delivered",
-		"message.reply",
-		"control.handover"
-	]
-}
-```
-
-Retrieves the details of an existing webhook subscription. Supply the unique webhook ID from either a webhook creation request or the webhook list, and Flow.ai will return the corresponding webhook information.
-
-### Update a Webhook
-
-> POST /v1/messaging/webhooks/{WEBHOOK_ID}
-
-> Example Request:
-
-```http
-PUT /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199 HTTP/1.1
-Host: api.flow.ai
-Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
-{
-	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
-	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1234567",
-	"events": [
-		"message.reply",
-		"control.handover"
-	]
-}
-```
-
-> Example Response:
-
-```
-200 OK
-```
-
-```json
-{
-	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
-	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
-	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1234567",
-	"events": [
-		"message.delivered",
-		"message.reply",
-		"control.handover"
-	]
-}
-```
-
-Updates the specified webhook by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
-
-#### Arguments
-
-| | |
-|----:|---|
-| **url** *optional* | The url your app lives that Flow.ai shall call |
-| **verifyKey** *optional* | Along with each call Flow.ai will send you this verify key. It enables you to verify that the call was made by Flow.ai |
-| **events** *optional* | The list of events to subscribe to. You'll need to have at least one subscribed event |
-
-
-### List all Webhooks
-
-> GET /v1/messaging/webhooks
-
-> Example Request:
-
-```http
-GET /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199 HTTP/1.1
-Host: api.flow.ai
-Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
-```
-
-> Example Response:
-
-```
-200 OK
-```
-
-```json
-{
-	"items": [{
-		"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
-		"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
-		"url": "https://myawesomeapp.com/webhook",
-		"verifyKey": "1234567",
-		"events": [
-			"message.delivered",
-			"message.reply",
-			"control.handover"
-		]
-	}, {
-		"webhookId": "448f-9f91853a-6ecfd199-ef397588ff87",
-		"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
-		"url": "https://otherawesomeapp.com/webhook",
-		"verifyKey": "7654321",
-		"events": [
-			"message.reply"
-		]
-	}]
-}
-```
-
-Returns a list of your webhook subscriptions. The webhooks are returned sorted by creation date, with the most recently created webhooks appearing first.
-
-### Delete a Webhook
-
-> DELETE /v1/messaging/webhooks/{WEBHOOK_ID}
-
-> Example Request:
-
-```http
-DELETE /messages/v1/webhooks/9f91853a-448f-ef397588ff87-6ecfd199 HTTP/1.1
-Host: api.flow.ai
-Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
-```
-
-```
-204 No Content
-```
-
-> Example Response:
-
-```json
-{
-	"webhookId": "9f91853a-448f-ef397588ff87-6ecfd199",
-	"organisationId": "853a-448f-9f91-ef397588ff87-6ecfd199",
-	"url": "https://myawesomeapp.com/webhook",
-	"verifyKey": "1234567",
-	"events": [
-		"message.delivered",
-		"message.reply",
-		"control.handover"
-	]
-}
-```
-
-Permanently deletes a webhook subscription. It cannot be undone.
+| `message.delivered` | Called when your message that you sent has been successfully received |
+| `control.handover` | Called when the AI engine is handing off a specific threadId to your solution |
+| `control.pause` | Called when the AI engine has paused operation for a specific threadId |
+| `control.resume` | Called when the AI engine has resumed operation for a specific threadId |
