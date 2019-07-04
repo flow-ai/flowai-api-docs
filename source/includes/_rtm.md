@@ -1,8 +1,10 @@
-# Web socket API
-A real time messaging API that allows you to send and receive messages from Flow.ai using websockets.
+# Socket API
+
+A real time messaging API that allows you to send and receive messages from Flow.ai using web sockets.
 
 ## Audience
-The Websocket API is specifically intended for developers looking to integrate Flow.ai in a client facing app. For example:
+
+The Socket API is specifically intended for developers looking to integrate Flow.ai in a client facing app. For example:
 
 - Building a custom web chat widget
 - Integrating Flow.ai inside a mobile app
@@ -80,7 +82,7 @@ The `socket.info` method requires a `sessionId` and a `clientId`.
 
 ## Open a connection
 
-The Websocket URL provided by `socket.info` are single-use and are only valid for 60 seconds, so make sure to connect directly.
+The socket URL provided by `socket.info` are single-use and are only valid for 60 seconds, so make sure to connect directly.
 
 ## Common format
 
