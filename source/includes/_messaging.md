@@ -32,7 +32,7 @@ Any message that is sent requires a `threadId` that relates the message to a spe
 
 All the URLs referenced in the REST API have the following base:
 
-`https://api.flow.ai/v1/messages/`
+`https://app.flow.ai/v1/messages/`
 
 ### Authentication
 
@@ -50,11 +50,12 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 
 ```json
 {
-	"type": "text",
-	"text": "hello",
-	"originator": {
-		"name": "John Doe",
-		"role": "external"
+	"payload": {
+		"speech": "hello",
+		"originator": {
+			"name": "John Doe",
+			"role": "external"
+		}
 	}
 }
 ```
@@ -63,21 +64,22 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 
 ```json
 {
-	"type": "text",
-	"text": "hello",
-	"originator": {
-		"name": "John Doe",
-		"role": "external",
-		"profile": {
-			"fullName": "John Doe",
-			"firstName": "John",
-			"lastName": "Doe",
-			"gender": "M",
-			"locale": "en-US",
-			"timezone": -5,
-			"country": "us",
-			"email": "johndoe@dmail.com",
-			"picture": "https://..."
+	"payload": {
+		"speech": "hello",
+		"originator": {
+			"name": "John Doe",
+			"role": "external",
+			"profile": {
+				"fullName": "John Doe",
+				"firstName": "John",
+				"lastName": "Doe",
+				"gender": "M",
+				"locale": "en-US",
+				"timezone": -5,
+				"country": "us",
+				"email": "johndoe@dmail.com",
+				"picture": "https://..."
+			}	
 		}
 	}
 }
@@ -137,12 +139,13 @@ Sending a text message
 
 ```http
 POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: api.flow.ai
+Host: app.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
-	"type": "text",
-	"text": "Hello"
+	"payload": {
+		"speech": "Hello"
+	}
 }
 ```
 
@@ -151,14 +154,15 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://api.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://app.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {
-		type: 'text',
-    text: 'Hello'
+		payload: {
+			speech: 'Hello'
+		}
   },
   json: true
 })
@@ -201,12 +205,14 @@ const result = await request({
 
 ```http
 POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: api.flow.ai
+Host: app.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
-	"type": "event",
-	"eventName": "MY_EVENT"
+	"payload": {
+		"type": "event",
+		"eventName": "MY_EVENT"
+	}
 }
 ```
 
@@ -215,14 +221,16 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://api.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://app.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {
-		type: 'event',
-    eventName: "MY_EVENT"
+		payload: {
+			type: 'event',
+			eventName: "MY_EVENT"
+		}
   },
   json: true
 })
@@ -267,13 +275,15 @@ Trigger events within Flow.ai by sending an event message.
 
 ```http
 POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: api.flow.ai
+Host: app.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
-	"type": "location",
-	"lat": "1232122422",
-	"lng": "2433343343"
+	"payload": {
+		"type": "location",
+		"lat": "1232122422",
+		"lng": "2433343343"
+	}
 }
 ```
 
@@ -282,15 +292,17 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://api.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://app.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {
-		type: 'location',
-		lat: "1232122422",
-		lng: "2433343343"
+		payload: {
+			type: 'location',
+			lat: "1232122422",
+			lng: "2433343343"
+		}
   },
   json: true
 })
@@ -337,7 +349,7 @@ Send coordinates
 
 ```http
 POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: api.flow.ai
+Host: app.flow.ai
 ------WebKitFormBoundaryDJX0xmK2m2F6Mvka
 Content-Disposition: form-data; name="file"; filename="image.png"
 Content-Type: image/png
@@ -345,9 +357,11 @@ Content-Type: image/png
 ------WebKitFormBoundaryDJX0xmK2m2F6Mvka
 Content-Disposition: form-data; name="query"
 {
-	"type": "location",
-	"mediaType": "image",
-	"mimetype": "image/png"
+	"payload": {
+		"type": "location",
+		"mediaType": "image",
+		"mimetype": "image/png"
+	}
 }
 ------WebKitFormBoundaryDJX0xmK2m2F6Mvka--
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
@@ -365,14 +379,16 @@ const stream = createReadStream('./test.png')
 const formData = new FormData()
 formData.append('file', stream)
 formData.append('query', JSON.stringify(query: {
-	type: 'media',
-	mediaType: 'image',
-	mimeType: "image/png"
+	payload: {
+		type: 'media',
+		mediaType: 'image',
+		mimeType: "image/png"
+	}
 }))
 
 const result = await request({
   method: 'POST',
-  url: 'https://api.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://app.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY'
   },
@@ -449,3 +465,137 @@ This is a list of all the types of events we currently send. We may add more at 
 | `control.handover` | Called when the AI engine is handing off a specific threadId to your solution |
 | `control.pause` | Called when the AI engine has paused operation for a specific threadId |
 | `control.resume` | Called when the AI engine has resumed operation for a specific threadId |
+
+## Example
+
+We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the following example demonstrates opening a connection and sending a test message using vanilla JavaScript in the browser.
+
+```html
+<html>
+	<body>
+		<script>
+			(function () {
+				// Vanilla JS example
+				// When executing this script. Check your development console for any messages
+
+				// This identifies specific user's message
+				var threadId = 'USER_THREAD_ID'
+
+				// Can be found in 'Outgoing' section of your REST integration in Flow.ai dashboard
+				var token = 'YOUR_BEARER_TOKEN'
+
+				function sendTextMessage() {
+					console.info('sendTextMessage')
+
+					var message = {
+						"payload": {
+							"speech": "test",
+							"originator": {
+								"name": "John Doe",
+								"role": "external",
+								"profile": {
+									"fullName": "John Doe",
+									"firstName": "John",
+									"lastName": "Doe",
+									"gender": "M",
+									"locale": "en-US",
+									"timezone": -5,
+									"country": "us",
+									"email": "notloving@spam.com",
+									"picture": "https://randompicture.org"
+								}
+							}
+						}
+					}
+
+					// Messaging/history endpoint
+					var messageUrl = 'https://app.flow.ai/channel-rest/v1/messages/' + threadId
+
+					// Create a POST request
+					var req = new XMLHttpRequest()
+					req.onload = restEndpointResponse
+					req.responseType = 'json'
+					req.open('POST', messageUrl, true)
+					req.setRequestHeader('Authorization', token)
+					req.setRequestHeader("Content-type", "application/json")
+					req.send(JSON.stringify(message))
+				}
+
+				function getMessagingHistory() {
+					console.info('getMessagingHistory')
+
+					// Messaging/history endpoint        
+					var historyUrl = 'https://app.flow.ai/channel-rest/v1/messages/' + threadId
+
+					//Create a GET request
+					var req = new XMLHttpRequest()
+					req.onload = restEndpointResponse
+					req.responseType = 'json'
+					req.open('GET', historyUrl, true)
+					req.setRequestHeader('Authorization', token)
+					req.send()
+				}
+
+				function pauseBotForUser() {
+					console.info('pauseBotForUser')
+
+					// Pause/resume endpoint
+					var pauseUrl = 'https://app.flow.ai/channel-rest/v1/pause/' + threadId
+
+					// Create a POST request
+					var req = new XMLHttpRequest()
+					req.onload = restEndpointResponse
+					req.responseType = 'json'
+					req.open('POST', pauseUrl, true)
+					req.setRequestHeader('Authorization', token)
+					req.setRequestHeader("Content-type", "application/json")
+					req.send()
+				}
+
+				function resumeBotForUser() {
+					console.info('pauseBotForUser')
+
+					// Pause/resume endpoint
+					var resumeUrl = 'https://app.flow.ai/channel-rest/v1/pause' + threadId
+
+					// Create a DELETE request
+					var req = new XMLHttpRequest()
+					req.onload = restEndpointResponse
+					req.responseType = 'json'
+					req.open('DELETE', resumeUrl, true)
+					req.setRequestHeader('Authorization', token)
+					req.setRequestHeader("Content-type", "application/json")
+					req.send()
+				}
+
+				function restEndpointResponse(e) {
+					console.info('Received response')
+
+					var xhr = e.target
+
+					if (xhr.status !== 200) {
+						// This is not OK..
+						console.error('Error while sending text message', xhr.response)
+						return
+					}
+					// In other case check your webhook url to see the response from Flow.ai
+				}
+
+				sendTextMessage()
+
+				setTimeout(function () {
+					getMessagingHistory()
+				}, 1000)
+
+				setTimeout(function () {
+					pauseBotForUser()
+				}, 2000)
+
+				setTimeout(function () {
+					resumeBotForUser()
+				}, 3000)
+			}())
+		</script>
+	</body>
+</html>
+```
