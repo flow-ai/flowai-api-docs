@@ -1,6 +1,6 @@
-# REST API (Alpha)
+# REST API
 
-An API to built conversational interfaces (e.g., chatbots, voice-powered apps and devices).
+An API to built conversational interfaces (e.g., chatbots, voice-powered apps and devices). Warning. It's a Beta version of our API
 
 ## Audience
 
@@ -378,12 +378,6 @@ Send coordinates
 ```http
 POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
-------WebKitFormBoundaryDJX0xmK2m2F6Mvka
-Content-Disposition: form-data; name="file"; filename="image.png"
-Content-Type: image/png
-
-------WebKitFormBoundaryDJX0xmK2m2F6Mvka
-Content-Disposition: form-data; name="query"
 {
 	"payload": {
 		"type": "media",
@@ -396,8 +390,6 @@ Content-Disposition: form-data; name="query"
 		}
 	}
 }
-------WebKitFormBoundaryDJX0xmK2m2F6Mvka--
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
 ```
 
 ```javascript
