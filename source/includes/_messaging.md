@@ -32,7 +32,7 @@ Any message that is sent requires a `threadId` that relates the message to a spe
 
 All the URLs referenced in the REST API have the following base:
 
-`https://app.flow.ai/v1/messages/`
+`https://app.flow.ai/channel-rest/v1/messages/`
 
 ### Authentication
 
@@ -133,12 +133,12 @@ An originator can contain additional profile information using the profile objec
 
 Sending a text message
 
-> POST /v1/messages/:threadId
+> POST channel-rest/v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+POST channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: app.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
@@ -154,7 +154,7 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://app.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://app.flow.ai/channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
@@ -199,12 +199,12 @@ const result = await request({
 
 ### Event message
 
-> POST /v1/messages/:threadId
+> POST channel-rest/v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+POST channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: app.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
@@ -221,7 +221,7 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://app.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://app.flow.ai/channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
@@ -269,12 +269,12 @@ Trigger events within Flow.ai by sending an event message.
 
 ### Location message
 
-> POST /v1/messages/:threadId
+> POST channel-rest/v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+POST channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: app.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
@@ -292,7 +292,7 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://app.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://app.flow.ai/channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
@@ -343,12 +343,12 @@ Send coordinates
 
 ### Media message
 
-> POST /v1/messages/:threadId
+> POST channel-rest/v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST /v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+POST channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: app.flow.ai
 ------WebKitFormBoundaryDJX0xmK2m2F6Mvka
 Content-Disposition: form-data; name="file"; filename="image.png"
@@ -388,7 +388,7 @@ formData.append('query', JSON.stringify(query: {
 
 const result = await request({
   method: 'POST',
-  url: 'https://app.flow.ai/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://app.flow.ai/channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY'
   },
@@ -465,6 +465,124 @@ This is a list of all the types of events we currently send. We may add more at 
 | `control.handover` | Called when the AI engine is handing off a specific threadId to your solution |
 | `control.pause` | Called when the AI engine has paused operation for a specific threadId |
 | `control.resume` | Called when the AI engine has resumed operation for a specific threadId |
+
+## Pausing and resuming bot
+
+We provide an ability to pause and resume bots for specific chats.
+
+### Endpoint
+
+Both `Pause` and `Resume` URLs have the following base:
+
+`https://app.flow.ai/channel-rest/v1/pause`
+
+### Authentication
+
+Authenticate your API requests by providing a REST API key as a bearer token. All API requests expect this bearer token to be present.
+
+You can get a new REST API key within the [integrations](https://app.flow.ai/default/integrations) section by adding a new REST API integration.
+
+<aside class="notice">
+Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
+</aside>
+
+### Pausing bot
+
+Pausing bot for specific chat (`threadId`)
+
+> POST channel-rest/v1/pause/:threadId
+
+> Example Request
+
+```http
+POST channel-rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: app.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+{}
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://app.flow.ai/channel-rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
+  headers: {
+    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {},
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+#### Parameters
+
+| | |
+|----:|---|
+| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+
+### Resuming bot
+
+Resuming bot for specific chat (`threadId`)
+
+> DELETE channel-rest/v1/pause/:threadId
+
+> Example Request
+
+```http
+DELETE channel-rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: app.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+{}
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'DELETE',
+  url: 'https://app.flow.ai/channel-rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
+  headers: {
+    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {},
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+#### Parameters
+
+| | |
+|----:|---|
+| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
 
 ## Example
 
