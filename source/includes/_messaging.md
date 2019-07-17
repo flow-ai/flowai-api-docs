@@ -32,7 +32,7 @@ Any message that is sent requires a `threadId` that relates the message to a spe
 
 All the URLs referenced in the REST API have the following base:
 
-`https://api.flow.ai/rest/v1/messages/`
+`https://api.flow.ai/rest/v1/`
 
 ### Authentication
 
@@ -508,12 +508,6 @@ This is a list of all the types of events we currently send. We may add more at 
 ## Pausing and resuming bot
 
 We provide an ability to pause and resume bots for specific chats.
-
-### Endpoint
-
-Both `Pause` and `Resume` URLs have the following base:
-
-`https://api.flow.ai/rest/v1/pause`
 
 ### Authentication
 
