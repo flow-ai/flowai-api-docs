@@ -51,6 +51,7 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 ```json
 {
 	"payload": {
+		"type": "text",
 		"speech": "hello",
 		"originator": {
 			"name": "John Doe",
@@ -65,6 +66,7 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 ```json
 {
 	"payload": {
+		"type": "text",
 		"speech": "hello",
 		"originator": {
 			"name": "John Doe",
@@ -102,7 +104,7 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 }
 ```
 
-With each message you can need to provide some information regarding the sender, user or as Flow.ai calls it, the originator of the message.
+With each message you need to provide some information regarding the sender, user or as Flow.ai calls it, the originator of the message.
 
 #### Attributes
 
@@ -144,7 +146,12 @@ Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
 	"payload": {
-		"speech": "Hello"
+		"type": "text",
+		"speech": "Hello",
+		"originator": {
+			"name": "John Doe",
+			"role": "external"
+		}
 	}
 }
 ```
@@ -161,7 +168,12 @@ const result = await request({
   },
   body: {
 		payload: {
-			speech: 'Hello'
+			type: 'text',
+			speech: 'Hello',
+			originator: {
+				name: "John Doe",
+				role: "external"
+		}
 		}
   },
   json: true
@@ -193,8 +205,8 @@ const result = await request({
 | **traceId** *number* | Optional unique number that is passed along to identify the message. Use this to verify message delivery. |
 | **type** *string* | Indicates the type of message. Should be `text` |
 | **text** *string* | The text or speech message to process. The maximum length of a message is 255 characters. |
-| **lang** *string* | Language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
-| **timezone** *integer* | UTF timezone offset in hours |
+| **lang** *string* | Optional language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
+| **timezone** *integer* | Optional UTF timezone offset in hours |
 | **params** *object* | Optional parameters |
 
 ### Event message
@@ -211,7 +223,11 @@ Authorization: Bearer MY_MESSAGING_API_KEY
 {
 	"payload": {
 		"type": "event",
-		"eventName": "MY_EVENT"
+		"eventName": "MY_EVENT",
+		"originator": {
+			"name": "John Doe",
+			"role": "external"
+		}
 	}
 }
 ```
@@ -229,7 +245,11 @@ const result = await request({
   body: {
 		payload: {
 			type: 'event',
-			eventName: "MY_EVENT"
+			eventName: "MY_EVENT",
+			originator: {
+				name: "John Doe",
+				role: "external"
+		}
 		}
   },
   json: true
@@ -263,8 +283,8 @@ Trigger events within Flow.ai by sending an event message.
 | **traceId** *number* | Optional unique number that is passed along to identify the message. Use this to verify message delivery. |
 | **type** *string* | Indicates the type of message. Should be `event` |
 | **eventName** *string* | The name of the event to trigger |
-| **lang** *string* | Language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
-| **timezone** *integer* | UTF timezone offset in hours |
+| **lang** *string* | Optional language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
+| **timezone** *integer* | Optional UTF timezone offset in hours |
 | **params** *object* | Optional parameters |
 
 ### Location message
@@ -282,7 +302,11 @@ Authorization: Bearer MY_MESSAGING_API_KEY
 	"payload": {
 		"type": "location",
 		"lat": "1232122422",
-		"lng": "2433343343"
+		"long": "2433343343",
+		"originator": {
+			"name": "John Doe",
+			"role": "external"
+		}
 	}
 }
 ```
@@ -301,7 +325,11 @@ const result = await request({
 		payload: {
 			type: 'location',
 			lat: "1232122422",
-			lng: "2433343343"
+			long: "2433343343",
+			originator: {
+				name: "John Doe",
+				role: "external"
+		}
 		}
   },
   json: true
@@ -335,9 +363,9 @@ Send coordinates
 | **traceId** *number* | Optional unique number that is passed along to identify the message. Use this to verify message delivery. |
 | **type** *string* | Indicates the type of message. Should be `location` |
 | **lat** *string* | Latitude |
-| **lng** *string* | Longitude |
-| **lang** *string* | Language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
-| **timezone** *integer* | UTF timezone offset in hours |
+| **long** *string* | Longitude |
+| **lang** *string* | Optional language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
+| **timezone** *integer* | Optional UTF timezone offset in hours |
 | **params** *object* | Optional parameters |
 
 
@@ -358,9 +386,14 @@ Content-Type: image/png
 Content-Disposition: form-data; name="query"
 {
 	"payload": {
-		"type": "location",
+		"type": "media",
 		"mediaType": "image",
-		"mimetype": "image/png"
+		"mimetype": "image/png",
+		"url": "https://source.unsplash.com/random/880x400",
+		"originator": {
+			"name": "John Doe",
+			"role": "external"
+		}
 	}
 }
 ------WebKitFormBoundaryDJX0xmK2m2F6Mvka--
@@ -382,7 +415,12 @@ formData.append('query', JSON.stringify(query: {
 	payload: {
 		type: 'media',
 		mediaType: 'image',
-		mimeType: "image/png"
+		mimeType: 'image/png;,
+		url: 'https://source.unsplash.com/random/880x400'
+		originator: {
+			name: 'John Doe,
+			role: external
+		}
 	}
 }))
 
@@ -425,9 +463,10 @@ For media you'll need to make a `POST` call that is `multipart/form-data`. The m
 | **traceId** *number* | Optional unique number that is passed along to identify the message. Use this to verify message delivery. |
 | **type** *string* | Indicates the type of message. Should be `media` |
 | **mediaType** *string* | Type of media, `image`, `file`, `audio`, or `video`  |
+| **url** *string* | URL of media attachment  |
 | **mimeType** *string* | Optionally specify the mime-type of the uploaded file |
-| **lang** *string* | Language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
-| **timezone** *integer* | UTF timezone offset in hours |
+| **lang** *string* | Optional language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
+| **timezone** *integer* | Optional UTF timezone offset in hours |
 | **params** *object* | Optional parameters |
 
 ##  Webhooks
@@ -607,6 +646,7 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 
 					var message = {
 						"payload": {
+							"type": "text",
 							"speech": "test",
 							"originator": {
 								"name": "John Doe",
@@ -637,6 +677,122 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 					req.setRequestHeader('Authorization', token)
 					req.setRequestHeader("Content-type", "application/json")
 					req.send(JSON.stringify(message))
+				}
+
+				function sendEventMessage() {
+					console.info('sendEventMessage')
+
+					var event = {
+						"payload": {
+							"type": "event",
+							"eventName": "test_event",
+							"originator": {
+								"name": "John Doe",
+								"role": "external",
+								"profile": {
+									"fullName": "John Doe",
+									"firstName": "John",
+									"lastName": "Doe",
+									"gender": "M",
+									"locale": "en-US",
+									"timezone": -5,
+									"country": "us",
+									"email": "notloving@spam.com",
+									"picture": "https://randompicture.org"
+								}
+							}
+						}
+					}
+
+					// Messaging/history endpoint
+					var messageUrl = 'https://app.flow.ai/channel-rest/v1/messages/' + threadId
+
+					// Create a POST request
+					var req = new XMLHttpRequest()
+					req.onload = restEndpointResponse
+					req.responseType = 'json'
+					req.open('POST', messageUrl, true)
+					req.setRequestHeader('Authorization', token)
+					req.setRequestHeader("Content-type", "application/json")
+					req.send(JSON.stringify(event))
+				}
+
+				function sendLocationMessage() {
+					console.info('sendLocationMessage')
+
+					var location = {
+						"payload": {
+							"type": "location",
+							"lat": "12.3",
+							"long": "3.21",
+							"originator": {
+								"name": "John Doe",
+								"role": "external",
+								"profile": {
+									"fullName": "John Doe",
+									"firstName": "John",
+									"lastName": "Doe",
+									"gender": "M",
+									"locale": "en-US",
+									"timezone": -5,
+									"country": "us",
+									"email": "notloving@spam.com",
+									"picture": "https://randompicture.org"
+								}
+							}
+						}
+					}
+
+					// Messaging/history endpoint
+					var messageUrl = 'https://app.flow.ai/channel-rest/v1/messages/' + threadId
+
+					// Create a POST request
+					var req = new XMLHttpRequest()
+					req.onload = restEndpointResponse
+					req.responseType = 'json'
+					req.open('POST', messageUrl, true)
+					req.setRequestHeader('Authorization', token)
+					req.setRequestHeader("Content-type", "application/json")
+					req.send(JSON.stringify(location))
+				}
+
+				function sendMediaMessage() {
+					console.info('sendMediaMessage')
+
+					var media = {
+						"payload": {
+							"type": "media",
+							"mediaType": "image",
+							"url": "https://source.unsplash.com/random/880x400",
+							"originator": {
+								"name": "John Doe",
+								"role": "external",
+								"profile": {
+									"fullName": "John Doe",
+									"firstName": "John",
+									"lastName": "Doe",
+									"gender": "M",
+									"locale": "en-US",
+									"timezone": -5,
+									"country": "us",
+									"email": "notloving@spam.com",
+									"picture": "https://randompicture.org"
+								}
+							}
+						}
+					}
+
+					// Messaging/history endpoint
+					var messageUrl = 'https://app.flow.ai/channel-rest/v1/messages/' + threadId
+
+					// Create a POST request
+					var req = new XMLHttpRequest()
+					req.onload = restEndpointResponse
+					req.responseType = 'json'
+					req.open('POST', messageUrl, true)
+					req.setRequestHeader('Authorization', token)
+					req.setRequestHeader("Content-type", "application/json")
+					req.send(JSON.stringify(media))
 				}
 
 				function getMessagingHistory() {
@@ -699,16 +855,29 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 					// In other case check your webhook url to see the response from Flow.ai
 				}
 
+				// Sending text message
 				sendTextMessage()
 
+				// Sending event message
+				sendEventMessage()
+
+				// Sending location message
+				sendLocationMessage()
+
+				// Sending media message
+				sendMediaMessage()
+
+				// Getting messaging history
 				setTimeout(function () {
 					getMessagingHistory()
 				}, 1000)
 
+				// Pausing bot
 				setTimeout(function () {
 					pauseBotForUser()
 				}, 2000)
 
+				// Resuming bot
 				setTimeout(function () {
 					resumeBotForUser()
 				}, 3000)
