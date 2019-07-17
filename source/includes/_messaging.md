@@ -1,6 +1,6 @@
-# REST API (Alpha)
+# REST API
 
-An API to built conversational interfaces (e.g., chatbots, voice-powered apps and devices).
+An API to built conversational interfaces (e.g., chatbots, voice-powered apps and devices). Warning. It's a Beta version of our API
 
 ## Audience
 
