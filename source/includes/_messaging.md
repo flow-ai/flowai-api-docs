@@ -629,260 +629,258 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 
 ```html
 <html>
-	<body>
-		<script>
-			(function () {
-				// Vanilla JS example
-				// When executing this script. Check your development console for any messages
+	<script>
+		(function () {
+			// Vanilla JS example
+			// When executing this script. Check your development console for any messages
 
-				// This identifies specific user's message
-				var threadId = 'USER_THREAD_ID'
+			// This identifies specific user's message
+			var threadId = 'USER_THREAD_ID'
 
-				// Can be found in 'Outgoing' section of your REST integration in Flow.ai dashboard
-				var token = 'YOUR_BEARER_TOKEN'
+			// Can be found in 'Outgoing' section of your REST integration in Flow.ai dashboard
+			var token = 'YOUR_BEARER_TOKEN'
 
-				function sendTextMessage() {
-					console.info('sendTextMessage')
+			function sendTextMessage() {
+				console.info('sendTextMessage')
 
-					var message = {
-						"payload": {
-							"type": "text",
-							"speech": "test",
-							"originator": {
-								"name": "John Doe",
-								"role": "external",
-								"profile": {
-									"fullName": "John Doe",
-									"firstName": "John",
-									"lastName": "Doe",
-									"gender": "M",
-									"locale": "en-US",
-									"timezone": -5,
-									"country": "us",
-									"email": "notloving@spam.com",
-									"picture": "https://randompicture.org"
-								}
+				var message = {
+					"payload": {
+						"type": "text",
+						"speech": "test",
+						"originator": {
+							"name": "John Doe",
+							"role": "external",
+							"profile": {
+								"fullName": "John Doe",
+								"firstName": "John",
+								"lastName": "Doe",
+								"gender": "M",
+								"locale": "en-US",
+								"timezone": -5,
+								"country": "us",
+								"email": "notloving@spam.com",
+								"picture": "https://randompicture.org"
 							}
 						}
 					}
-
-					// Messaging/history endpoint
-					var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
-
-					// Create a POST request
-					var req = new XMLHttpRequest()
-					req.onload = restEndpointResponse
-					req.responseType = 'json'
-					req.open('POST', messageUrl, true)
-					req.setRequestHeader('Authorization', token)
-					req.setRequestHeader("Content-type", "application/json")
-					req.send(JSON.stringify(message))
 				}
 
-				function sendEventMessage() {
-					console.info('sendEventMessage')
+				// Messaging/history endpoint
+				var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
 
-					var event = {
-						"payload": {
-							"type": "event",
-							"eventName": "test_event",
-							"originator": {
-								"name": "John Doe",
-								"role": "external",
-								"profile": {
-									"fullName": "John Doe",
-									"firstName": "John",
-									"lastName": "Doe",
-									"gender": "M",
-									"locale": "en-US",
-									"timezone": -5,
-									"country": "us",
-									"email": "notloving@spam.com",
-									"picture": "https://randompicture.org"
-								}
+				// Create a POST request
+				var req = new XMLHttpRequest()
+				req.onload = restEndpointResponse
+				req.responseType = 'json'
+				req.open('POST', messageUrl, true)
+				req.setRequestHeader('Authorization', token)
+				req.setRequestHeader("Content-type", "application/json")
+				req.send(JSON.stringify(message))
+			}
+
+			function sendEventMessage() {
+				console.info('sendEventMessage')
+
+				var event = {
+					"payload": {
+						"type": "event",
+						"eventName": "test_event",
+						"originator": {
+							"name": "John Doe",
+							"role": "external",
+							"profile": {
+								"fullName": "John Doe",
+								"firstName": "John",
+								"lastName": "Doe",
+								"gender": "M",
+								"locale": "en-US",
+								"timezone": -5,
+								"country": "us",
+								"email": "notloving@spam.com",
+								"picture": "https://randompicture.org"
 							}
 						}
 					}
-
-					// Messaging/history endpoint
-					var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
-
-					// Create a POST request
-					var req = new XMLHttpRequest()
-					req.onload = restEndpointResponse
-					req.responseType = 'json'
-					req.open('POST', messageUrl, true)
-					req.setRequestHeader('Authorization', token)
-					req.setRequestHeader("Content-type", "application/json")
-					req.send(JSON.stringify(event))
 				}
 
-				function sendLocationMessage() {
-					console.info('sendLocationMessage')
+				// Messaging/history endpoint
+				var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
 
-					var location = {
-						"payload": {
-							"type": "location",
-							"lat": "12.3",
-							"long": "3.21",
-							"originator": {
-								"name": "John Doe",
-								"role": "external",
-								"profile": {
-									"fullName": "John Doe",
-									"firstName": "John",
-									"lastName": "Doe",
-									"gender": "M",
-									"locale": "en-US",
-									"timezone": -5,
-									"country": "us",
-									"email": "notloving@spam.com",
-									"picture": "https://randompicture.org"
-								}
+				// Create a POST request
+				var req = new XMLHttpRequest()
+				req.onload = restEndpointResponse
+				req.responseType = 'json'
+				req.open('POST', messageUrl, true)
+				req.setRequestHeader('Authorization', token)
+				req.setRequestHeader("Content-type", "application/json")
+				req.send(JSON.stringify(event))
+			}
+
+			function sendLocationMessage() {
+				console.info('sendLocationMessage')
+
+				var location = {
+					"payload": {
+						"type": "location",
+						"lat": "12.3",
+						"long": "3.21",
+						"originator": {
+							"name": "John Doe",
+							"role": "external",
+							"profile": {
+								"fullName": "John Doe",
+								"firstName": "John",
+								"lastName": "Doe",
+								"gender": "M",
+								"locale": "en-US",
+								"timezone": -5,
+								"country": "us",
+								"email": "notloving@spam.com",
+								"picture": "https://randompicture.org"
 							}
 						}
 					}
-
-					// Messaging/history endpoint
-					var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
-
-					// Create a POST request
-					var req = new XMLHttpRequest()
-					req.onload = restEndpointResponse
-					req.responseType = 'json'
-					req.open('POST', messageUrl, true)
-					req.setRequestHeader('Authorization', token)
-					req.setRequestHeader("Content-type", "application/json")
-					req.send(JSON.stringify(location))
 				}
 
-				function sendMediaMessage() {
-					console.info('sendMediaMessage')
+				// Messaging/history endpoint
+				var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
 
-					var media = {
-						"payload": {
-							"type": "media",
-							"mediaType": "image",
-							"url": "https://source.unsplash.com/random/880x400",
-							"originator": {
-								"name": "John Doe",
-								"role": "external",
-								"profile": {
-									"fullName": "John Doe",
-									"firstName": "John",
-									"lastName": "Doe",
-									"gender": "M",
-									"locale": "en-US",
-									"timezone": -5,
-									"country": "us",
-									"email": "notloving@spam.com",
-									"picture": "https://randompicture.org"
-								}
+				// Create a POST request
+				var req = new XMLHttpRequest()
+				req.onload = restEndpointResponse
+				req.responseType = 'json'
+				req.open('POST', messageUrl, true)
+				req.setRequestHeader('Authorization', token)
+				req.setRequestHeader("Content-type", "application/json")
+				req.send(JSON.stringify(location))
+			}
+
+			function sendMediaMessage() {
+				console.info('sendMediaMessage')
+
+				var media = {
+					"payload": {
+						"type": "media",
+						"mediaType": "image",
+						"url": "https://source.unsplash.com/random/880x400",
+						"originator": {
+							"name": "John Doe",
+							"role": "external",
+							"profile": {
+								"fullName": "John Doe",
+								"firstName": "John",
+								"lastName": "Doe",
+								"gender": "M",
+								"locale": "en-US",
+								"timezone": -5,
+								"country": "us",
+								"email": "notloving@spam.com",
+								"picture": "https://randompicture.org"
 							}
 						}
 					}
-
-					// Messaging/history endpoint
-					var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
-
-					// Create a POST request
-					var req = new XMLHttpRequest()
-					req.onload = restEndpointResponse
-					req.responseType = 'json'
-					req.open('POST', messageUrl, true)
-					req.setRequestHeader('Authorization', token)
-					req.setRequestHeader("Content-type", "application/json")
-					req.send(JSON.stringify(media))
 				}
 
-				function getMessagingHistory() {
-					console.info('getMessagingHistory')
+				// Messaging/history endpoint
+				var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
 
-					// Messaging/history endpoint        
-					var historyUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
+				// Create a POST request
+				var req = new XMLHttpRequest()
+				req.onload = restEndpointResponse
+				req.responseType = 'json'
+				req.open('POST', messageUrl, true)
+				req.setRequestHeader('Authorization', token)
+				req.setRequestHeader("Content-type", "application/json")
+				req.send(JSON.stringify(media))
+			}
 
-					//Create a GET request
-					var req = new XMLHttpRequest()
-					req.onload = restEndpointResponse
-					req.responseType = 'json'
-					req.open('GET', historyUrl, true)
-					req.setRequestHeader('Authorization', token)
-					req.send()
+			function getMessagingHistory() {
+				console.info('getMessagingHistory')
+
+				// Messaging/history endpoint        
+				var historyUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
+
+				//Create a GET request
+				var req = new XMLHttpRequest()
+				req.onload = restEndpointResponse
+				req.responseType = 'json'
+				req.open('GET', historyUrl, true)
+				req.setRequestHeader('Authorization', token)
+				req.send()
+			}
+
+			function pauseBotForUser() {
+				console.info('pauseBotForUser')
+
+				// Pause/resume endpoint
+				var pauseUrl = 'https://api.flow.ai/rest/v1/pause/' + threadId
+
+				// Create a POST request
+				var req = new XMLHttpRequest()
+				req.onload = restEndpointResponse
+				req.responseType = 'json'
+				req.open('POST', pauseUrl, true)
+				req.setRequestHeader('Authorization', token)
+				req.setRequestHeader("Content-type", "application/json")
+				req.send()
+			}
+
+			function resumeBotForUser() {
+				console.info('pauseBotForUser')
+
+				// Pause/resume endpoint
+				var resumeUrl = 'https://api.flow.ai/rest/v1/pause' + threadId
+
+				// Create a DELETE request
+				var req = new XMLHttpRequest()
+				req.onload = restEndpointResponse
+				req.responseType = 'json'
+				req.open('DELETE', resumeUrl, true)
+				req.setRequestHeader('Authorization', token)
+				req.setRequestHeader("Content-type", "application/json")
+				req.send()
+			}
+
+			function restEndpointResponse(e) {
+				console.info('Received response')
+
+				var xhr = e.target
+
+				if (xhr.status !== 200) {
+					// This is not OK..
+					console.error('Error while sending text message', xhr.response)
+					return
 				}
+				// In other case check your webhook url to see the response from Flow.ai
+			}
 
-				function pauseBotForUser() {
-					console.info('pauseBotForUser')
+			// Sending text message
+			sendTextMessage()
 
-					// Pause/resume endpoint
-					var pauseUrl = 'https://api.flow.ai/rest/v1/pause/' + threadId
+			// Sending event message
+			sendEventMessage()
 
-					// Create a POST request
-					var req = new XMLHttpRequest()
-					req.onload = restEndpointResponse
-					req.responseType = 'json'
-					req.open('POST', pauseUrl, true)
-					req.setRequestHeader('Authorization', token)
-					req.setRequestHeader("Content-type", "application/json")
-					req.send()
-				}
+			// Sending location message
+			sendLocationMessage()
 
-				function resumeBotForUser() {
-					console.info('pauseBotForUser')
+			// Sending media message
+			sendMediaMessage()
 
-					// Pause/resume endpoint
-					var resumeUrl = 'https://api.flow.ai/rest/v1/pause' + threadId
+			// Getting messaging history
+			setTimeout(function () {
+				getMessagingHistory()
+			}, 1000)
 
-					// Create a DELETE request
-					var req = new XMLHttpRequest()
-					req.onload = restEndpointResponse
-					req.responseType = 'json'
-					req.open('DELETE', resumeUrl, true)
-					req.setRequestHeader('Authorization', token)
-					req.setRequestHeader("Content-type", "application/json")
-					req.send()
-				}
+			// Pausing bot
+			setTimeout(function () {
+				pauseBotForUser()
+			}, 2000)
 
-				function restEndpointResponse(e) {
-					console.info('Received response')
-
-					var xhr = e.target
-
-					if (xhr.status !== 200) {
-						// This is not OK..
-						console.error('Error while sending text message', xhr.response)
-						return
-					}
-					// In other case check your webhook url to see the response from Flow.ai
-				}
-
-				// Sending text message
-				sendTextMessage()
-
-				// Sending event message
-				sendEventMessage()
-
-				// Sending location message
-				sendLocationMessage()
-
-				// Sending media message
-				sendMediaMessage()
-
-				// Getting messaging history
-				setTimeout(function () {
-					getMessagingHistory()
-				}, 1000)
-
-				// Pausing bot
-				setTimeout(function () {
-					pauseBotForUser()
-				}, 2000)
-
-				// Resuming bot
-				setTimeout(function () {
-					resumeBotForUser()
-				}, 3000)
-			}())
-		</script>
-	</body>
+			// Resuming bot
+			setTimeout(function () {
+				resumeBotForUser()
+			}, 3000)
+		}())
+	</script>
 </html>
 ```
