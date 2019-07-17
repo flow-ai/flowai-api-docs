@@ -32,13 +32,13 @@ Any message that is sent requires a `threadId` that relates the message to a spe
 
 All the URLs referenced in the REST API have the following base:
 
-`https://app.flow.ai/channel-rest/v1/messages/`
+`https://api.flow.ai/rest/v1/messages/`
 
 ### Authentication
 
 Authenticate your API requests by providing a REST API key as a bearer token. All API requests expect this bearer token to be present.
 
-You can get a new REST API key within the [integrations](https://app.flow.ai/default/integrations) section by adding a new REST API integration.
+You can get a new REST API key within the [integrations](https://api.flow.ai/default/integrations) section by adding a new REST API integration.
 
 <aside class="notice">
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
@@ -135,13 +135,13 @@ An originator can contain additional profile information using the profile objec
 
 Sending a text message
 
-> POST channel-rest/v1/messages/:threadId
+> POST rest/v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: app.flow.ai
+POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
@@ -161,7 +161,7 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://app.flow.ai/channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
@@ -211,13 +211,13 @@ const result = await request({
 
 ### Event message
 
-> POST channel-rest/v1/messages/:threadId
+> POST rest/v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: app.flow.ai
+POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
@@ -237,7 +237,7 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://app.flow.ai/channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
@@ -289,13 +289,13 @@ Trigger events within Flow.ai by sending an event message.
 
 ### Location message
 
-> POST channel-rest/v1/messages/:threadId
+> POST rest/v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: app.flow.ai
+POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {
@@ -316,7 +316,7 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://app.flow.ai/channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
@@ -371,13 +371,13 @@ Send coordinates
 
 ### Media message
 
-> POST channel-rest/v1/messages/:threadId
+> POST rest/v1/messages/:threadId
 
 > Example Request:
 
 ```http
-POST channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: app.flow.ai
+POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: api.flow.ai
 ------WebKitFormBoundaryDJX0xmK2m2F6Mvka
 Content-Disposition: form-data; name="file"; filename="image.png"
 Content-Type: image/png
@@ -426,7 +426,7 @@ formData.append('query', JSON.stringify(query: {
 
 const result = await request({
   method: 'POST',
-  url: 'https://app.flow.ai/channel-rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY'
   },
@@ -513,7 +513,7 @@ We provide an ability to pause and resume bots for specific chats.
 
 Both `Pause` and `Resume` URLs have the following base:
 
-`https://app.flow.ai/channel-rest/v1/pause`
+`https://api.flow.ai/rest/v1/pause`
 
 ### Authentication
 
@@ -529,13 +529,13 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 
 Pausing bot for specific chat (`threadId`)
 
-> POST channel-rest/v1/pause/:threadId
+> POST rest/v1/pause/:threadId
 
 > Example Request
 
 ```http
-POST channel-rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: app.flow.ai
+POST rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {}
@@ -546,7 +546,7 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://app.flow.ai/channel-rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://api.flow.ai/rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
@@ -578,13 +578,13 @@ const result = await request({
 
 Resuming bot for specific chat (`threadId`)
 
-> DELETE channel-rest/v1/pause/:threadId
+> DELETE rest/v1/pause/:threadId
 
 > Example Request
 
 ```http
-DELETE channel-rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: app.flow.ai
+DELETE rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: api.flow.ai
 Content-Type: application/json
 Authorization: Bearer MY_MESSAGING_API_KEY
 {}
@@ -595,7 +595,7 @@ import request from "async-request";
 
 const result = await request({
   method: 'DELETE',
-  url: 'https://app.flow.ai/channel-rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://api.flow.ai/rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
@@ -667,7 +667,7 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 					}
 
 					// Messaging/history endpoint
-					var messageUrl = 'https://app.flow.ai/channel-rest/v1/messages/' + threadId
+					var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
 
 					// Create a POST request
 					var req = new XMLHttpRequest()
@@ -705,7 +705,7 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 					}
 
 					// Messaging/history endpoint
-					var messageUrl = 'https://app.flow.ai/channel-rest/v1/messages/' + threadId
+					var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
 
 					// Create a POST request
 					var req = new XMLHttpRequest()
@@ -744,7 +744,7 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 					}
 
 					// Messaging/history endpoint
-					var messageUrl = 'https://app.flow.ai/channel-rest/v1/messages/' + threadId
+					var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
 
 					// Create a POST request
 					var req = new XMLHttpRequest()
@@ -783,7 +783,7 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 					}
 
 					// Messaging/history endpoint
-					var messageUrl = 'https://app.flow.ai/channel-rest/v1/messages/' + threadId
+					var messageUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
 
 					// Create a POST request
 					var req = new XMLHttpRequest()
@@ -799,7 +799,7 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 					console.info('getMessagingHistory')
 
 					// Messaging/history endpoint        
-					var historyUrl = 'https://app.flow.ai/channel-rest/v1/messages/' + threadId
+					var historyUrl = 'https://api.flow.ai/rest/v1/messages/' + threadId
 
 					//Create a GET request
 					var req = new XMLHttpRequest()
@@ -814,7 +814,7 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 					console.info('pauseBotForUser')
 
 					// Pause/resume endpoint
-					var pauseUrl = 'https://app.flow.ai/channel-rest/v1/pause/' + threadId
+					var pauseUrl = 'https://api.flow.ai/rest/v1/pause/' + threadId
 
 					// Create a POST request
 					var req = new XMLHttpRequest()
@@ -830,7 +830,7 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 					console.info('pauseBotForUser')
 
 					// Pause/resume endpoint
-					var resumeUrl = 'https://app.flow.ai/channel-rest/v1/pause' + threadId
+					var resumeUrl = 'https://api.flow.ai/rest/v1/pause' + threadId
 
 					// Create a DELETE request
 					var req = new XMLHttpRequest()
