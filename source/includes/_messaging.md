@@ -461,6 +461,53 @@ For media you'll need to make a `POST` call that is `multipart/form-data`. The m
 | **timezone** *integer* | Optional UTF timezone offset in hours |
 | **params** *object* | Optional parameters |
 
+## Thread History
+
+Flow.ai allows you to request messaging history for specific `threadId`.
+
+> GET rest/v1/messages/:threadId
+
+> Example Request
+
+```http
+GET rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  headers: {
+    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+#### Parameters
+
+| | |
+|----:|---|
+| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+
 ##  Webhooks
 
 Webhooks are the way Flow.ai will deliver replies and notify your app of other type of events.
