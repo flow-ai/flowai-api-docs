@@ -456,7 +456,7 @@ For media you'll need to make a `POST` call that is `multipart/form-data`. The m
 | **type** *string* | Indicates the type of message. Should be `media` |
 | **mediaType** *string* | Type of media, `image`, `file`, `audio`, or `video`  |
 | **url** *string* | URL of media attachment  |
-| **mimeType** *string* | Optionally specify the mime-type of the uploaded file |
+| **mimeType** *string* | Optionally specify the mime-type of the uploaded file, supported media formats are channel specific |
 | **lang** *string* | Optional language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
 | **timezone** *integer* | Optional UTF timezone offset in hours |
 | **params** *object* | Optional parameters |
