@@ -38,9 +38,9 @@ All the URLs referenced in the REST API have the following base:
 
 ### Authentication
 
-Authenticate your API requests by providing a REST API key as a bearer token. All API requests expect this bearer token to be present.
+Authenticate your API requests by providing an API key as a value of `Authorization` header. All API requests expect this header to be present.
 
-You can get a new REST API key within the [integrations](https://api.flow.ai/default/integrations) section by adding a new REST API integration.
+You can get a new API key within the `Organisation settings` section by selecting `API Keys` tab and pressing `Create a new API Token` button. After that you need to select this API key in `Outgoing` section of your REST API integration in [integrations](https://api.flow.ai/default/integrations) section and press `Save` button.
 
 <aside class="notice">
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
