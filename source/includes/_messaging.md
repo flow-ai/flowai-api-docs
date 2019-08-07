@@ -20,6 +20,8 @@ The REST API works asynchronous. Unlike other NLP APIs, Flow.ai will not return 
 
 Instead, the API will send a POST request to your configured [webhook](#webhooks) whenever a reply is being sent.
 
+For some queries we added an optional sync support. To enable sync mode add sync=enabled flag to supported query.
+
 ![Receive replies using Webhooks](/images/receiving.svg "Receiving replies from Flow.ai")
 
 ## Sending messages
