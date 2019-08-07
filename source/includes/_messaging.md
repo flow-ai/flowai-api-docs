@@ -20,7 +20,7 @@ The REST API works asynchronous. Unlike other NLP APIs, Flow.ai will not return 
 
 Instead, the API will send a POST request to your configured [webhook](#webhooks) whenever a reply is being sent.
 
-For some queries we added an optional sync support. To enable sync mode add sync=enabled flag to supported query.
+For some queries we added an optional sync support. To enable sync mode add sync=true flag to supported query.
 
 ![Receive replies using Webhooks](/images/receiving.svg "Receiving replies from Flow.ai")
 
@@ -510,6 +510,194 @@ const result = await request({
 |----:|---|
 | **threadId** *string* | Unique identifier for the target chat or user of the target channel |
 
+#### Query parameters
+| | |
+|----:|---|
+| **sync** *string* | Optional parameter for enabling sync mode |
+
+> GET rest/v1/messages/:threadId?sync=true
+
+> Example Request
+
+```http
+GET rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true',
+  headers: {
+    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok",
+	"result": {
+		"history": [
+			{
+				"originator": {
+					"name": "visitor_abc",
+					"role": "user",
+					"profile": {}
+				},
+				"messages": [
+					{
+						"fallback": "test",
+						"replyTo": null,
+						"contexts": [],
+						"params": {},
+						"intents": [],
+						"createdAt": "2019-06-25T12:45:11.857Z",
+						"responses": [
+								{
+										"type": "text",
+										"payload": {
+												"text": "test"
+										}
+								}
+						]
+					},
+					...
+				]
+			},
+			...
+		],
+		"threadId": "6ecfd199-853a-448f-9f91-ef397588ff87"
+	}
+}
+```
+
+## Business hours
+
+Flow.ai allows you to request business hours for your project.
+
+> GET rest/v1/businesshours
+
+> Example Request
+
+```http
+GET rest/v1/businesshours HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/businesshours',
+  headers: {
+    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok",
+}
+```
+
+#### Query parameters
+| | |
+|----:|---|
+| **sync** *string* | Optional parameter for enabling sync mode |
+
+> GET rest/v1/businesshours?sync=true
+
+> Example Request
+
+```http
+GET rest/v1/businesshours?sync=true HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/businesshours?sync=true',
+  headers: {
+    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok",
+	"businessHours": [
+		{
+			"weekdays": [
+				{
+					"weekday": "Monday",
+					"content": [
+						{
+							"from": "0:20",
+							"to": "4:19"
+						},
+						{
+							"from": "10:00",
+							"to": "22:22"
+						},
+						...
+					]
+				},
+				...
+			],
+			"holidays": [
+				{
+					"holiday": "New Year",
+					"date": "2019-12-31T00:00:00.000Z"
+				},
+				...
+			],
+			"label": "test BH",
+			"timezone": "(UTC+03:00) Minsk"
+		},
+		...
+	]
+}
+```
+
 ##  Webhooks
 
 Webhooks are the way Flow.ai will deliver replies and notify your app of other type of events.
@@ -657,6 +845,98 @@ const result = await request({
 | | |
 |----:|---|
 | **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+
+### Bot status
+
+Getting bot's status (is bot paused or not) for specific `threadId`
+
+> GET rest/v1/pause/:threadId
+
+> Example Request
+
+```http
+GET rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
+  headers: {
+    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {},
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+#### Parameters
+| | |
+|----:|---|
+| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+
+#### Query parameters
+| | |
+|----:|---|
+| **sync** *string* | Optional parameter for enabling sync mode |
+
+> GET rest/v1/pause/:threadId?sync=true
+
+> Example Request
+
+```http
+GET rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: Bearer MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true',
+  headers: {
+    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {},
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok",
+	"isPaued": false,
+	"threadId": "6ecfd199-853a-448f-9f91-ef397588ff87"
+}
+```
 
 ## Example
 
