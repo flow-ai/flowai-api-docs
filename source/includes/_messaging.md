@@ -40,7 +40,7 @@ All the URLs referenced in the REST API have the following base:
 
 Authenticate your API requests by providing an API key as a value of `Authorization` header. All API requests expect this header to be present.
 
-You can get a new API key within the `Organisation settings` section by selecting `API Keys` tab and pressing `Create a new API Token` button. After that you need to select this API key in `Outgoing` section of your REST API integration in [integrations](https://api.flow.ai/default/integrations) section and press `Save` button.
+You can get a new API key within the `Organisation settings` section by selecting `API Keys` tab and pressing `Create a new API Token` button. After that you need to select this API key in `Outbound` section of your REST API integration in [integrations](https://api.flow.ai/default/integrations) section and press `Save` button.
 
 <aside class="notice">
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
@@ -952,7 +952,7 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
       // This identifies specific user's message
       var threadId = 'USER_THREAD_ID'
 
-      // Can be found in 'Outgoing' section of your REST integration in Flow.ai dashboard
+      // Can be found in 'Outbound' section of your REST integration in Flow.ai dashboard
       var token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudElkIjoiODkxZjBiZjQtNmYwYi00NWEyLThiYjUtMDk5MTI3MDdhZjQ0IiwiY2hhbm5lbElkIjoiOWUxYzZhOWUtMjE4ZC00NGFkLTg3OWYtNzEwMjFmMTgyYWU3IiwiaWF0IjoxNTYxMzk1MjM2fQ.sBzBBCplIPMzoOxBkQgkZtm7jN2TIrz_PWcI-bUjiOI'
 
       var url = 'https://api.flow.ai/rest/v1/'
