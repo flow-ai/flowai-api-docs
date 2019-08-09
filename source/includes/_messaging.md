@@ -465,7 +465,7 @@ For media you'll need to make a `POST` call that is `multipart/form-data`. The m
 
 ## Thread History
 
-Flow.ai allows you to request messaging history for specific `threadId`.
+Flow.ai allows you to request messaging history for specific `threadId`. One history request is limited with 20 entries, if you need to retrieve more entries you should use optional parameter `page`.
 
 > GET rest/v1/messages/:threadId
 
@@ -514,6 +514,7 @@ const result = await request({
 | | |
 |----:|---|
 | **sync** *string* | Optional parameter for enabling sync mode |
+| **page** *number* | Optional parameter for pagination |
 
 > GET rest/v1/messages/:threadId?sync=true
 
@@ -531,7 +532,7 @@ import request from "async-request";
 
 const result = await request({
   method: 'GET',
-  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true',
+  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true&page=3',
   headers: {
     'Authorization': 'Bearer MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
@@ -579,7 +580,9 @@ const result = await request({
 			},
 			...
 		],
-		"threadId": "6ecfd199-853a-448f-9f91-ef397588ff87"
+    "threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",
+    "page": 3,
+    "pages": 10
 	}
 }
 ```
