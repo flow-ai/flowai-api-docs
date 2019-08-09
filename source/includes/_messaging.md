@@ -24,6 +24,10 @@ For some queries we added an optional sync support. To enable sync mode add sync
 
 ![Receive replies using Webhooks](/images/receiving.svg "Receiving replies from Flow.ai")
 
+<aside class="notice">
+To make life easier, some APIs can be called with a <em>sync</em> parameter. This will cause them to send a direct reply instead of having to rely on a webhook event.
+</aside>
+
 ## Sending messages
 
 Many types of unstructured content can be sent to the Flow.ai platform, including text, audio, images, video, and files. Our powerful AI engine will process any query and send back replies using the provided [webhook](#webhooks).
@@ -198,7 +202,7 @@ const result = await request({
 
 | | |
 |----:|---|
-| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+| **threadId** *string* | Unique identifier of the thread |
 
 #### Arguments
 
@@ -276,7 +280,7 @@ Trigger events within Flow.ai by sending an event message.
 
 | | |
 |----:|---|
-| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+| **threadId** *string* | Unique identifier of the thread |
 
 #### Arguments
 
@@ -356,7 +360,7 @@ Send coordinates
 
 | | |
 |----:|---|
-| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+| **threadId** *string* | Unique identifier of the thread |
 
 #### Arguments
 
@@ -448,7 +452,7 @@ For media you'll need to make a `POST` call that is `multipart/form-data`. The m
 
 | | |
 |----:|---|
-| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+| **threadId** *string* | Unique identifier of the thread |
 
 #### Arguments
 
@@ -463,9 +467,9 @@ For media you'll need to make a `POST` call that is `multipart/form-data`. The m
 | **timezone** *integer* | Optional UTF timezone offset in hours |
 | **params** *object* | Optional parameters |
 
-## Thread History
+## Thread messages
 
-Flow.ai allows you to request messaging history for specific `threadId`.
+Retrieve a list of all historic messages for a specific thread.
 
 > GET rest/v1/messages/:threadId
 
@@ -508,9 +512,10 @@ const result = await request({
 
 | | |
 |----:|---|
-| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+| **threadId** *string* | Unique identifier of the thread |
 
 #### Query parameters
+
 | | |
 |----:|---|
 | **sync** *string* | Optional parameter for enabling sync mode |
@@ -586,7 +591,7 @@ const result = await request({
 
 ## Business hours
 
-Flow.ai allows you to request business hours for your project.
+Retrieve a list of configured business hours for your project.
 
 > GET rest/v1/businesshours
 
@@ -698,7 +703,7 @@ const result = await request({
 }
 ```
 
-##  Webhooks
+## Webhooks
 
 Webhooks are the way Flow.ai will deliver replies and notify your app of other type of events.
 
@@ -724,8 +729,6 @@ We will attempt to deliver your webhooks for up to two 4 hours with an exponenti
 
 This is a list of all the types of events we currently send. We may add more at any time, so in developing and maintaining your code, you should not assume that only these types exist.
 
-#### message.reply
-
 | | |
 |----:|---|
 | `message.reply` | Called whenever Flow.ai is sending a reply message |
@@ -734,23 +737,13 @@ This is a list of all the types of events we currently send. We may add more at 
 | `control.pause` | Called when the AI engine has paused operation for a specific threadId |
 | `control.resume` | Called when the AI engine has resumed operation for a specific threadId |
 
-## Pausing and resuming bot
+## Bot control
 
-We provide an ability to pause and resume bots for specific chats.
+We provide the ability to pause and resume bots for specific threads.
 
-### Authentication
+### Pause
 
-Authenticate your API requests by providing a REST API key as a bearer token. All API requests expect this bearer token to be present.
-
-You can get a new REST API key within the [integrations](https://app.flow.ai/default/integrations) section by adding a new REST API integration.
-
-<aside class="notice">
-Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
-</aside>
-
-### Pausing bot
-
-Pausing bot for specific chat (`threadId`)
+Pause a bot for specific thread
 
 > POST rest/v1/pause/:threadId
 
@@ -795,11 +788,11 @@ const result = await request({
 
 | | |
 |----:|---|
-| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+| **threadId** *string* | Unique identifier of the thread |
 
-### Resuming bot
+### Resume
 
-Resuming bot for specific chat (`threadId`)
+Resume a bot for a specific thread
 
 > DELETE rest/v1/pause/:threadId
 
@@ -844,11 +837,11 @@ const result = await request({
 
 | | |
 |----:|---|
-| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+| **threadId** *string* | Unique identifier of the thread |
 
 ### Bot status
 
-Getting bot's status (is bot paused or not) for specific `threadId`
+Retrieve the status of a bot (if it's paused or active) for a specific `threadId`
 
 > GET rest/v1/pause/:threadId
 
@@ -891,7 +884,7 @@ const result = await request({
 #### Parameters
 | | |
 |----:|---|
-| **threadId** *string* | Unique identifier for the target chat or user of the target channel |
+| **threadId** *string* | Unique identifier of the thread |
 
 #### Query parameters
 | | |
@@ -940,7 +933,7 @@ const result = await request({
 
 ## Example
 
-We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the following example demonstrates opening a connection and sending a test message using vanilla JavaScript in the browser.
+The following example demonstrates opening a connection and sending a test message using vanilla JavaScript in the browser.
 
 ```html
 <html>
