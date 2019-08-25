@@ -149,7 +149,7 @@ Sending a text message
 POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
+Authorization: MY_MESSAGING_API_KEY
 {
 	"payload": {
 		"type": "text",
@@ -169,7 +169,7 @@ const result = await request({
   method: 'POST',
   url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {
@@ -225,7 +225,7 @@ const result = await request({
 POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
+Authorization: MY_MESSAGING_API_KEY
 {
 	"payload": {
 		"type": "event",
@@ -245,7 +245,7 @@ const result = await request({
   method: 'POST',
   url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {
@@ -303,7 +303,7 @@ Trigger events within Flow.ai by sending an event message.
 POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
+Authorization: MY_MESSAGING_API_KEY
 {
 	"payload": {
 		"type": "location",
@@ -324,7 +324,7 @@ const result = await request({
   method: 'POST',
   url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {
@@ -426,7 +426,7 @@ const result = await request({
   method: 'POST',
   url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY'
+    'Authorization': 'MY_MESSAGING_API_KEY'
   },
   body: formData
 })
@@ -479,7 +479,7 @@ Flow.ai allows you to request messaging history for specific `threadId`. One his
 GET rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
+Authorization: MY_MESSAGING_API_KEY
 ```
 
 ```javascript
@@ -489,7 +489,7 @@ const result = await request({
   method: 'GET',
   url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   json: true
@@ -521,15 +521,15 @@ const result = await request({
 | **sync** *string* | Optional parameter for enabling sync mode |
 | **page** *number* | Optional parameter for pagination |
 
-> GET rest/v1/messages/:threadId?sync=true
+> GET rest/v1/messages/:threadId?sync=true&page=3
 
 > Example Request
 
 ```http
-GET rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true HTTP/1.1
+GET rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true&page=3 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
+Authorization: MY_MESSAGING_API_KEY
 ```
 
 ```javascript
@@ -539,7 +539,7 @@ const result = await request({
   method: 'GET',
   url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true&page=3',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   json: true
@@ -592,6 +592,298 @@ const result = await request({
 }
 ```
 
+## Get threads
+
+Flow.ai allows you to request threads. One threads request is limited with 20 entries, if you need to retrieve more entries you should use optional parameter `page`.
+
+> GET rest/v1/threads
+
+> Example Request
+
+```http
+GET rest/v1/threads HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/threads',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+#### Query parameters
+
+| | |
+|----:|---|
+| **sync** *string* | Optional parameter for enabling sync mode |
+| **page** *number* | Required parameter for pagination |
+
+> GET rest/v1/threads?sync=true
+
+> Example Request
+
+```http
+GET rest/v1/threads?sync=true&page=1 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/threads?sync=true&page=1',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+    "status": "ok",
+    "result": {
+        "threads": [
+            "14ee0879-afa7-45ed-a3db-42c4b538d42c|o_4f4f442c-cd6c-44f1-8f3d-28d9668ab72c",
+            "2a1b5693-133b-4d92-84e8-005d5350ca2e|o_4f4f442c-cd6c-44f1-8f3d-28d9668ab72c",
+            "98e1c5a8-1647-42db-bbb5-9d835f53ee95|o_4f4f442c-cd6c-44f1-8f3d-28d9668ab72c",
+            ...
+        ],
+        "page": "1",
+        "pages": 100
+    }
+}
+```
+
+## Send takeover action
+
+Send takeover action for specific thread
+
+#### Parameters
+
+| | |
+|----:|---|
+| **threadId** *string* | Unique identifier of the thread |
+
+> POST rest/v1/takeover/:threadId
+
+> Example Request
+
+```http
+POST rest/v1/takeover/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+{}
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/takeover/6ecfd199-853a-448f-9f91-ef397588ff87',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {},
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+## Triggering events
+
+### Get events for triggering
+
+Flow.ai allows you to request events for triggering. Be sure that you have events with `ENABLE MANUAL TRIGGER` selected checkbox. For selecting this checkbox click on your event trigger in your flow and select the `ENABLE MANUAL TRIGGER` checkbox in right sidebar.
+
+> GET rest/v1/trigger/event
+
+> Example Request
+
+```http
+GET rest/v1/trigger/event HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/trigger/event',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+#### Query parameters
+
+| | |
+|----:|---|
+| **sync** *string* | Optional parameter for enabling sync mode |
+
+> GET rest/v1/trigger/event?sync=true
+
+> Example Request
+
+```http
+GET rest/v1/trigger/event?sync=true HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/trigger/event?sync=true',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+    "status": "ok",
+    "result": {
+        "items": [
+            "EVENT 1",
+            "EVENT 2",
+            "EVENT 3"
+        ]
+    }
+}
+```
+
+### To trigger an event
+
+Trigger an event for specific thread
+
+> POST rest/v1/trigger/event/:threadId
+
+> Example Request
+
+```http
+POST rest/v1/trigger/event/6ecfd199-853a-448f-9f91-ef397588ff87?eventName=MY_EVENT HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+{}
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/trigger/event/6ecfd199-853a-448f-9f91-ef397588ff87?eventName=MY_EVENT',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {},
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+#### Parameters
+
+| | |
+|----:|---|
+| **threadId** *string* | Unique identifier of the thread |
+
+#### Query parameters
+
+| | |
+|----:|---|
+| **eventName** *string* | Required parameter |
+
 ## Business hours
 
 Retrieve a list of configured business hours for your project.
@@ -604,7 +896,7 @@ Retrieve a list of configured business hours for your project.
 GET rest/v1/businesshours HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
+Authorization: MY_MESSAGING_API_KEY
 ```
 
 ```javascript
@@ -614,7 +906,7 @@ const result = await request({
   method: 'GET',
   url: 'https://api.flow.ai/rest/v1/businesshours',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   json: true
@@ -646,7 +938,7 @@ const result = await request({
 GET rest/v1/businesshours?sync=true HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
+Authorization: MY_MESSAGING_API_KEY
 ```
 
 ```javascript
@@ -656,7 +948,7 @@ const result = await request({
   method: 'GET',
   url: 'https://api.flow.ai/rest/v1/businesshours?sync=true',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   json: true
@@ -739,6 +1031,9 @@ This is a list of all the types of events we currently send. We may add more at 
 | `control.handover` | Called when the AI engine is handing off a specific threadId to your solution |
 | `control.pause` | Called when the AI engine has paused operation for a specific threadId |
 | `control.resume` | Called when the AI engine has resumed operation for a specific threadId |
+| `inbound` | Called whenever user sends message to Flow.ai from non-rest channel |
+| `outbound` | Called whenever AI engine sends message to user from non-rest channel |
+| `takeover` | Called when the takeover action is executed |
 
 ## Bot control
 
@@ -756,7 +1051,7 @@ Pause a bot for specific thread
 POST rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
+Authorization: MY_MESSAGING_API_KEY
 {}
 ```
 
@@ -767,7 +1062,7 @@ const result = await request({
   method: 'POST',
   url: 'https://api.flow.ai/rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {},
@@ -805,7 +1100,7 @@ Resume a bot for a specific thread
 DELETE rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
+Authorization: MY_MESSAGING_API_KEY
 {}
 ```
 
@@ -816,7 +1111,7 @@ const result = await request({
   method: 'DELETE',
   url: 'https://api.flow.ai/rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {},
@@ -854,7 +1149,7 @@ Retrieve the status of a bot (if it's paused or active) for a specific `threadId
 GET rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
+Authorization: MY_MESSAGING_API_KEY
 ```
 
 ```javascript
@@ -864,7 +1159,7 @@ const result = await request({
   method: 'GET',
   url: 'https://api.flow.ai/rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {},
@@ -902,7 +1197,7 @@ const result = await request({
 GET rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true HTTP/1.1
 Host: api.flow.ai
 Content-Type: application/json
-Authorization: Bearer MY_MESSAGING_API_KEY
+Authorization: MY_MESSAGING_API_KEY
 ```
 
 ```javascript
@@ -912,7 +1207,7 @@ const result = await request({
   method: 'GET',
   url: 'https://api.flow.ai/rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true',
   headers: {
-    'Authorization': 'Bearer MY_MESSAGING_API_KEY',
+    'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
   },
   body: {},
@@ -949,7 +1244,7 @@ The following example demonstrates opening a connection and sending a test messa
       var threadId = 'USER_THREAD_ID'
 
       // Can be found in 'Outbound' section of your REST integration in Flow.ai dashboard
-      var token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudElkIjoiODkxZjBiZjQtNmYwYi00NWEyLThiYjUtMDk5MTI3MDdhZjQ0IiwiY2hhbm5lbElkIjoiOWUxYzZhOWUtMjE4ZC00NGFkLTg3OWYtNzEwMjFmMTgyYWU3IiwiaWF0IjoxNTYxMzk1MjM2fQ.sBzBBCplIPMzoOxBkQgkZtm7jN2TIrz_PWcI-bUjiOI'
+      var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudElkIjoiODkxZjBiZjQtNmYwYi00NWEyLThiYjUtMDk5MTI3MDdhZjQ0IiwiY2hhbm5lbElkIjoiOWUxYzZhOWUtMjE4ZC00NGFkLTg3OWYtNzEwMjFmMTgyYWU3IiwiaWF0IjoxNTYxMzk1MjM2fQ.sBzBBCplIPMzoOxBkQgkZtm7jN2TIrz_PWcI-bUjiOI'
 
       var url = 'https://api.flow.ai/rest/v1/'
 
