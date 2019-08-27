@@ -1026,11 +1026,14 @@ This is a list of all the types of events we currently send. We may add more at 
 
 | | |
 |----:|---|
-| `message.reply` | Called whenever Flow.ai is sending a reply message |
-| `message.delivered` | Called when your message that you sent has been successfully received |
-| `control.handover` | Called when the AI engine is handing off a specific threadId to your solution |
-| `control.pause` | Called when the AI engine has paused operation for a specific threadId |
-| `control.resume` | Called when the AI engine has resumed operation for a specific threadId |
+| `message` | Called whenever Flow.ai is sending reply message for a specific threadId |
+| `history` | Called whenever Flow.ai is sending messaging history for a specific threadId |
+| `threads` | Called whenever Flow.ai is sending list of threads in user's project |
+| `trigger.events` | Called whenever Flow.ai is sending list of events that can be triggered manually |
+| `businessHours` | Called whenever Flow.ai is sending business hours information |
+| `paused` | Called when the AI engine has paused operation for a specific threadId |
+| `resumed` | Called when the AI engine has resumed operation for a specific threadId |
+| `isPaused` | Called whenever Flow.ai is sending bot status for a specific threadId |
 | `inbound` | Called whenever user sends message to Flow.ai from non-rest channel |
 | `outbound` | Called whenever AI engine sends message to user from non-rest channel |
 | `takeover` | Called when the takeover action is executed |
