@@ -400,35 +400,26 @@ Host: api.flow.ai
 
 ```javascript
 import request from "async-request";
-import { createReadStream } from 'fs';
-import FormData from 'form-data';
-
-// Stream the binary file
-const stream = createReadStream('./test.png')
-
-// Create a formData and append the file and query (JSON)
-const formData = new FormData()
-formData.append('file', stream)
-formData.append('query', JSON.stringify(query: {
-	payload: {
-		type: 'media',
-		mediaType: 'image',
-		mimeType: 'image/png;,
-		url: 'https://source.unsplash.com/random/880x400'
-		originator: {
-			name: 'John Doe,
-			role: external
-		}
-	}
-}))
 
 const result = await request({
   method: 'POST',
   url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
   headers: {
-    'Authorization': 'MY_MESSAGING_API_KEY'
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
   },
-  body: formData
+  body: {
+    payload: {
+      type: 'media',
+      mediaType: 'image',
+      mimeType: 'image/png;,
+      url: 'https://source.unsplash.com/random/880x400'
+      originator: {
+        name: 'John Doe,
+        role: external
+        }
+	  }
+  }
 })
 ```
 
@@ -445,8 +436,6 @@ const result = await request({
 ```
 
 The API allows you to send images, files and other media files.
-
-For media you'll need to make a `POST` call that is `multipart/form-data`. The maximum file size you can upload is 250MB.
 
 #### Parameters
 
