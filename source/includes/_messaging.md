@@ -412,11 +412,11 @@ const result = await request({
     payload: {
       type: 'media',
       mediaType: 'image',
-      mimeType: 'image/png;,
-      url: 'https://source.unsplash.com/random/880x400'
+      mimeType: 'image/png',
+      url: 'https://source.unsplash.com/random/880x400',
       originator: {
-        name: 'John Doe,
-        role: external
+        name: 'John Doe',
+        role: 'external'
         }
 	  }
   }
