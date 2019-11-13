@@ -309,6 +309,7 @@ Authorization: MY_MESSAGING_API_KEY
 		"type": "location",
 		"lat": "1232122422",
 		"long": "2433343343",
+    "title": "Example title",
 		"originator": {
 			"name": "John Doe",
 			"role": "external"
@@ -330,11 +331,12 @@ const result = await request({
   body: {
 		payload: {
 			type: 'location',
-			lat: "1232122422",
-			long: "2433343343",
+			lat: '1232122422',
+      long: '2433343343',
+      title: 'Example title',
 			originator: {
-				name: "John Doe",
-				role: "external"
+				name: 'John Doe',
+				role: 'external'
 		}
 		}
   },
@@ -370,6 +372,7 @@ Send coordinates
 | **type** *string* | Indicates the type of message. Should be `location` |
 | **lat** *string* | Latitude |
 | **long** *string* | Longitude |
+| **title** *string* | Optional title of location |
 | **lang** *string* | Optional language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
 | **timezone** *integer* | Optional UTF timezone offset in hours |
 | **params** *object* | Optional parameters |
@@ -389,6 +392,7 @@ Host: api.flow.ai
 		"type": "media",
 		"mediaType": "image",
 		"mimetype": "image/png",
+    "title": "Example title",
 		"url": "https://source.unsplash.com/random/880x400",
 		"originator": {
 			"name": "John Doe",
@@ -413,6 +417,7 @@ const result = await request({
       type: 'media',
       mediaType: 'image',
       mimeType: 'image/png',
+      title: 'Example title',
       url: 'https://source.unsplash.com/random/880x400',
       originator: {
         name: 'John Doe',
@@ -451,6 +456,7 @@ The API allows you to send images, files and other media files.
 | **type** *string* | Indicates the type of message. Should be `media` |
 | **mediaType** *string* | Type of media, `image`, `file`, `audio`, or `video`  |
 | **url** *string* | URL of media attachment  |
+| **title** *string* | Optional title of location |
 | **mimeType** *string* | Optionally specify the mime-type of the uploaded file, supported media formats are channel specific |
 | **lang** *string* | Optional language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
 | **timezone** *integer* | Optional UTF timezone offset in hours |
