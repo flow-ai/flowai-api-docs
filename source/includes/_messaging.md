@@ -786,7 +786,7 @@ Send handover action for a specific thread. If `secondsToPause` specified, bot w
 
 | | |
 |----:|---|
-| **thread** *string* | Unique thread THREAD_ID|o_CHANNEL_ID |
+| **thread** *string* | Unique thread | [//]: <> (THREAD_ID|o_CHANNEL_ID)
 
 #### Arguments
 
