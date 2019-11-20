@@ -733,7 +733,7 @@ const result = await request({
 
 ## Send handover action
 
-> POST rest/v1/handover/:thread
+> POST rest/v1/handover/:threadId
 
 > Example Request:
 
@@ -786,7 +786,7 @@ Send handover action for a specific thread. If `secondsToPause` specified, bot w
 
 | | |
 |----:|---|
-| **thread** *string* | Unique thread | [//]: <> (THREAD_ID|o_CHANNEL_ID)
+| **threadId** *string* | Unique threadId | [//]: <> (THREAD_ID|o_CHANNEL_ID)
 
 #### Arguments
 
