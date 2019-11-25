@@ -730,6 +730,53 @@ const result = await request({
 	"status": "ok"
 }
 ```
+## Send resolve action
+
+> POST rest/v1/resolve/:threadId
+
+> Example Request:
+
+```http
+POST rest/v1/resolve/a4ad8a025763451da6f15f2b50991651|o_21361542-a262-4aaa-8edb-0f8f88e07d89 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/resolve/a4ad8a025763451da6f15f2b50991651|o_21361542-a262-4aaa-8edb-0f8f88e07d89',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+Send resolve action for a specific threadId. Resolve will remove `takeover` and `pause` from the bot and set `control_state` tag with value `resolved`.
+
+#### Parameters
+
+| | |
+|----:|---|
+| **threadId** *string* | Unique threadId | [//]: <> (THREAD_ID|o_CHANNEL_ID)
+
 
 ## Triggering events
 
