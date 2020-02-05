@@ -8,7 +8,7 @@ initalReadinessDelay: 25
 replicaCount: 1
 
 image:
-  repository: gcr.io/env-flowai/github-flow-ai-api-docs-web
+  repository: gcr.io/env-flowai/gitlab-api-docs-web
   tag: 1ceaabb6daecf88b867e677deb5891853db2eb5e
   pullPolicy: Always
 
