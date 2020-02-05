@@ -683,7 +683,7 @@ const result = await request({
 }
 ```
 
-## Send takeover action
+## Send takeover action (deprecated)
 
 Send takeover action for specific thread
 
@@ -731,6 +731,117 @@ const result = await request({
 	"status": "ok"
 }
 ```
+## Send resolve action
+
+> POST rest/v1/resolve/:threadId
+
+> Example Request:
+
+```http
+POST rest/v1/resolve/a4ad8a025763451da6f15f2b50991651|o_21361542-a262-4aaa-8edb-0f8f88e07d89 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/resolve/a4ad8a025763451da6f15f2b50991651|o_21361542-a262-4aaa-8edb-0f8f88e07d89',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+Send resolve action for a specific threadId. Resolve will remove `takeover` and `pause` from the bot and set `control_state` tag with value `resolved`.
+
+#### Parameters
+
+| | |
+|----:|---|
+| **threadId** *string* | Unique threadId | [//]: <> (THREAD_ID|o_CHANNEL_ID)
+
+
+## Send handover action
+
+> POST rest/v1/handover/:threadId
+
+> Example Request:
+
+```http
+POST rest/v1/handover/a4ad8a025763451da6f15f2b50991651|o_21361542-a262-4aaa-8edb-0f8f88e07d89 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+{
+	{
+	  "secondsToPause": 600
+  }
+}
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/handover/a4ad8a025763451da6f15f2b50991651|o_21361542-a262-4aaa-8edb-0f8f88e07d89',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {
+		{
+	    "secondsToPause": 600
+    }
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+Send handover action for a specific thread. If `secondsToPause` specified, bot will pause for this number of seconds. 
+
+#### Parameters
+
+| | |
+|----:|---|
+| **threadId** *string* | Unique threadId | [//]: <> (THREAD_ID|o_CHANNEL_ID)
+
+#### Arguments
+
+| | |
+|----:|---|
+| **secondsToPause** *number* | Optional. Number of seconds to pause bot. |
+
 
 ## Triggering events
 
