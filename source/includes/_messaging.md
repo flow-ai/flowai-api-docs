@@ -50,6 +50,84 @@ You can get a new API key within the `Organisation settings` section by selectin
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
 </aside>
 
+### Text message
+
+Sending a text message
+
+> POST rest/v1/messages/:threadId
+
+> Example Request:
+
+```http
+POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+{
+	"payload": {
+		"type": "text",
+		"speech": "Hello",
+		"originator": {
+			"name": "John Doe",
+			"role": "external"
+		}
+	}
+}
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {
+		payload: {
+			type: 'text',
+			speech: 'Hello',
+			originator: {
+				name: "John Doe",
+				role: "external"
+		}
+		}
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+#### Parameters
+
+| | |
+|----:|---|
+| **threadId** *string* | Unique identifier of the thread |
+
+#### Arguments
+
+| | |
+|----:|---|
+| **traceId** *number* | Optional unique number that is passed along to identify the message. Use this to verify message delivery. |
+| **type** *string* | Indicates the type of message. Should be `text` |
+| **text** *string* | The text or speech message to process. The maximum length of a message is 255 characters. |
+| **lang** *string* | Optional language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
+| **timezone** *integer* | Optional UTF timezone offset in hours |
+| **params** *object* | Optional parameters |
+
 ### Originator
 
 > Example Message:
@@ -137,83 +215,6 @@ An originator can contain additional profile information using the profile objec
 | **email** *string* | Email address |
 | **picture** *string* | URL to profile picture |
 
-### Text message
-
-Sending a text message
-
-> POST rest/v1/messages/:threadId
-
-> Example Request:
-
-```http
-POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: api.flow.ai
-Content-Type: application/json
-Authorization: MY_MESSAGING_API_KEY
-{
-	"payload": {
-		"type": "text",
-		"speech": "Hello",
-		"originator": {
-			"name": "John Doe",
-			"role": "external"
-		}
-	}
-}
-```
-
-```javascript
-import request from "async-request";
-
-const result = await request({
-  method: 'POST',
-  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87',
-  headers: {
-    'Authorization': 'MY_MESSAGING_API_KEY',
-    'Content-Type': 'application/json'
-  },
-  body: {
-		payload: {
-			type: 'text',
-			speech: 'Hello',
-			originator: {
-				name: "John Doe",
-				role: "external"
-		}
-		}
-  },
-  json: true
-})
-```
-
-> Example Response:
-
-```
-200 OK
-```
-
-```json
-{
-	"status": "ok"
-}
-```
-
-#### Parameters
-
-| | |
-|----:|---|
-| **threadId** *string* | Unique identifier of the thread |
-
-#### Arguments
-
-| | |
-|----:|---|
-| **traceId** *number* | Optional unique number that is passed along to identify the message. Use this to verify message delivery. |
-| **type** *string* | Indicates the type of message. Should be `text` |
-| **text** *string* | The text or speech message to process. The maximum length of a message is 255 characters. |
-| **lang** *string* | Optional language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
-| **timezone** *integer* | Optional UTF timezone offset in hours |
-| **params** *object* | Optional parameters |
 
 ### Event message
 
