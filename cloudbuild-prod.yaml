@@ -18,4 +18,4 @@ substitutions:
     _HELM_CHART_WEB: nodejs-lb
     _HELM_CHART_WORKER: nodejs
     _GCR_PROJECT_ID: env-flowai
-    _REPO_BASE: github-flow-ai-
+    _REPO_BASE: gitlab-
