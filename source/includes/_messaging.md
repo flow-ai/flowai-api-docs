@@ -1389,26 +1389,30 @@ const result = await request({
 
 | | |
 |----:|---|
-| **audience** *array* | The audience to send a message to |
-| **channel.channelName** *string* | Type of the channel to send the message |
-| **channel.externalId** *string* | Identifier of the channel to send the message |
-| **payload.type** *string* | Should be `event`|
-| **payload.eventName** *string* | Name of the event to trigger |
-| **payload.metadata.language** *object* | Optional language to use |
-| **payload.metadata.timezone** *object* | Optional UTC timezone offset to use |
-| **payload.metadata.params** *object* | Optional params to use |
+| **audience** *array* | A list of originator objects. See [audience](#rest-api-broadcast-bot-status-parameters-audience) below. |
+| **channel** *object* | See [channel](#rest-api-broadcast-bot-status-parameters-channel) below |
+| **payload** *object* | See [payload](#rest-api-broadcast-bot-status-parameters-payload) below |
 
 ##### Audience
 
-Please see the [originator](#originator) format.
+The intended audience to send a message to. Please see the [originator](#originator) format for more details
 
 | | |
 |----:|---|
-| **name** *string* | Mandatory name. For example `Anonymous` |
+| **name** *string* | Mandatory name, for example `Anonymous` |
 | **phoneNumber** *string* | Mandatory MSISDN (phone number in [E164](https://en.wikipedia.org/wiki/E.164) format)  |
-| **profile** *string* | See the [profile](#profile) format |
+| **profile** *string* | Optional [profile](#profile) data |
 
-##### channelName
+##### Channel
+
+Information about the Flow.ai integration used to send a message from.
+
+| | |
+|----:|---|
+| **channelName** *string* | Type of channel to send the message, see the reference table below |
+| **externalId** *string* | Identifier of the channel to send the message, see the table below where to find this |
+
+**channelName**
 
 Use the reference table below to determine the `channel.channelName` to copy and paste:
 
@@ -1421,11 +1425,11 @@ Use the reference table below to determine the `channel.channelName` to copy and
 | WhatsApp | `whatsapp` |
 | Khoros | `khoros` |
 
-##### externalId
+**externalId**
 
-Within the Flow.ai dashboard, open the messaging channel you'd like to use to send a message. Use the reference table below to find the value to copy and paste.
+Within the Flow.ai dashboard, open the messaging channel you'd like to use to send a message. Use the reference table below to find the value to use within your API call.
 
-| Channel | externalId (copy value from field) |
+| Channel | externalId |
 |------------|--------------|
 | Google RBM | Project ID |
 | MessageMedia | Phone Number |
@@ -1434,6 +1438,21 @@ Within the Flow.ai dashboard, open the messaging channel you'd like to use to se
 | WhatsApp | Production phone number |
 | Khoros | Phone number |
 
+###### Payload
+
+| | |
+|----:|---|
+| **type** *string* | Should be `event`|
+| **eventName** *string* | Name of the Flow.ai [event](/docs/triggers/event) to trigger |
+| **metadata** *object* | See metadata below |
+
+###### Metadata
+
+| | |
+|----:|---|
+| **language** *object* | Optional language to use |
+| **timezone** *object* | Optional UTC timezone offset to use |
+| **params** *object* | Optional params to use |
 
 ## Webhooks
 
