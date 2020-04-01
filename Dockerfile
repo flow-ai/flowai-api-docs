@@ -4,7 +4,7 @@ EXPOSE 80
 RUN apk update \
  && apk add coreutils git make g++ nodejs
 
-RUN git clone https://gitlab.com/flowaihq/flowai-api-docs.git /slate/source_orig
+RUN git clone https://github.com/flow-ai/flowai-api-docs /slate/source_orig
 
 RUN cd /slate/source_orig && bundle install
 
