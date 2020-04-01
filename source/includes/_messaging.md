@@ -1,26 +1,32 @@
 # REST API
 
-An API to built conversational interfaces (e.g., chatbots, voice-powered apps and devices). Warning. It's a Beta version of our API
+An API to automate messaging (e.g., chatbots, voice-powered apps and devices)
 
 ## Audience
 
-The API is specifically made for developers that want to use the Flow.ai engine within their own technology stack or solution.
+The API is specifically intended for developers that want to use the Flow.ai platform within their own technology stack or solution.
 
-Some example use cases:
+Some example use cases are:
 
-- Combine Flow.ai with a customer service solution
-- Use Flow.ai with any other backend service
-- Hardware or other integrations
+- Automating a customer service solution
+- Integrating a bot with a custom backend service
+- Hardware or other server-side integrations
+
+For use cases that connect with client interfaces, like mobile apps and websites, we offer a real-time [websocket API](#socket-api)
 
 ## You call us, we'll call you
 
-The REST API works asynchronous. Unlike other NLP APIs, Flow.ai will not return any direct reply to a [Send](#sending-messages) call.
+The REST API works asynchronous. Unlike other NLP APIs, it will not always returns a direct reply to a [Send](#sending-messages) call.
 
 ![Send messages using REST API](/images/sending.svg "Sending messages to Flow.ai")
 
-Instead, the API will send a POST request to your configured [webhook](#webhooks) whenever a reply is being sent.
+Instead, the API will send a POST request to your configured [webhook](#webhooks) whenever an event takes place.
 
-For some queries we added an optional sync support. To enable sync mode add sync=true flag to supported query.
+### Sync mode 
+
+To make life easier, some calls do support an optional synchronous reply mode. If enabled, you'll get a direct reply with your request instead of having to wait for your webhook to be called.
+
+To enable this sync mode add a `sync=true` flag to the called endpoint.
 
 ![Receive replies using Webhooks](/images/receiving.svg "Receiving replies from Flow.ai")
 
@@ -188,7 +194,7 @@ const result = await request({
 }
 ```
 
-With each message you need to provide some information regarding the sender, user or as Flow.ai calls it, the originator of the message.
+With each message you need to provide some information regarding the sender, user or as we call it, the originator of the message.
 
 #### Attributes
 
@@ -214,7 +220,6 @@ An originator can contain additional profile information using the profile objec
 | **country** *string* | Two letter country code |
 | **email** *string* | Email address |
 | **picture** *string* | URL to profile picture |
-
 
 ### Event message
 
@@ -465,7 +470,7 @@ The API allows you to send images, files and other media files.
 
 ## Thread messages
 
-Flow.ai allows you to request messaging history for specific `threadId`. One history request is limited with 20 entries, if you need to retrieve more entries you should use optional parameter `page`.
+We provide a way to request the messaging history of a specific `threadId`. Each request is limited to 20 entries and supports pagination to retrieve more entries by specifying a `page` parameter.
 
 > GET rest/v1/messages/:threadId
 
@@ -590,7 +595,7 @@ const result = await request({
 
 ## Get threads
 
-Flow.ai allows you to request threads. One threads request is limited with 20 entries, if you need to retrieve more entries you should use optional parameter `page`.
+This API call provides a way to load *threads*. A thread represents a conversation and each request is limited to 20 entries. If you need to retrieve more entries we provide pagination using an optional `page` parameter.
 
 > GET rest/v1/threads
 
@@ -847,7 +852,7 @@ Send handover action for a specific thread. If `secondsToPause` specified, bot w
 
 ### Get events for triggering
 
-Flow.ai allows you to request events for triggering. Be sure that you have events with `ENABLE MANUAL TRIGGER` selected checkbox. For selecting this checkbox click on your event trigger in your flow and select the `ENABLE MANUAL TRIGGER` checkbox in right sidebar.
+This API provides a way to retrieve a list of events that are allowed to be triggered by agents. Be sure that you have events with the `ENABLE MANUAL TRIGGER` checkbox checked. You can find this checkbox in the sidebar on the right when you select an event inside a flow.
 
 > GET rest/v1/trigger/event
 
@@ -1105,46 +1110,6 @@ const result = await request({
 }
 ```
 
-## Webhooks
-
-Webhooks are the way Flow.ai will deliver replies and notify your app of other type of events.
-
-### Receiving calls
-
-Creating a webhook endpoint on your server is no different from creating any page on your website.
-
-Webhook data is sent as [JSON](https://www.json.org/) in the `POST` request body. The full event details are included and can be used directly, after parsing the JSON into an Event object.
-
-Your webhook must meet with the following requirements:
-
-- HTTPS support
-- A valid SSL certificate
-- An open port that accepts `GET` and `POST` requests
-
-### Responding to a call
-
-To acknowledge receipt of a webhook call, your endpoint should return a 2xx HTTP status code. All response codes outside this range, including 3xx codes, will indicate to Flow.ai that you did not receive the webhook. This does mean that a URL redirection or a "Not Modified" response will be treated as a failure. Flow.ai will ignore any other information returned in the request headers or request body.
-
-We will attempt to deliver your webhooks for up to two 4 hours with an exponential back off. Webhooks cannot be manually retried after this time.
-
-### Type of Events
-
-This is a list of all the types of events we currently send. We may add more at any time, so in developing and maintaining your code, you should not assume that only these types exist.
-
-| | |
-|----:|---|
-| `message` | Called whenever Flow.ai is sending reply message for a specific threadId |
-| `history` | Called whenever Flow.ai is sending messaging history for a specific threadId |
-| `threads` | Called whenever Flow.ai is sending list of threads in user's project |
-| `trigger.events` | Called whenever Flow.ai is sending list of events that can be triggered manually |
-| `businessHours` | Called whenever Flow.ai is sending business hours information |
-| `paused` | Called when the AI engine has paused operation for a specific threadId |
-| `resumed` | Called when the AI engine has resumed operation for a specific threadId |
-| `isPaused` | Called whenever Flow.ai is sending bot status for a specific threadId |
-| `inbound` | Called whenever user sends message to Flow.ai from non-rest channel |
-| `outbound` | Called whenever AI engine sends message to user from non-rest channel |
-| `takeover` | Called when the takeover action is executed |
-
 ## Bot control
 
 We provide the ability to pause and resume bots for specific threads.
@@ -1339,6 +1304,179 @@ const result = await request({
 }
 ```
 
+## Broadcast
+
+The broadcast API provides a way to engage with customers without them starting an initial conversation. For example, sending a WhatsApp templated or SMS (text) message to a phone number (MSISDN).
+
+> POST rest/v1/broadcast/instant
+
+> Example Request
+
+```http
+POST rest/v1/broadcast/instant HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+{
+	"audience": [{
+		"name": "John Doe",
+		"phoneNumber": "+12345678901",
+		"profile": {}
+	}],
+	"channel": {
+		"channelName": "whatsapp",
+		"externalId": "+10987654321"
+	},
+	"payload": {
+		"type": "event",
+		"eventName": "Send template"
+	}
+}
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {
+    audience: [{
+      name: 'John Doe',
+      phoneNumber: "+12345678901",
+      profile: {
+      }
+    }],
+    channel: {
+      channelName: "whatsapp",
+      externalId: "+10987654321"
+    },
+    payload: {
+      type: 'event',
+      eventName: "Send template",
+      metadata: {
+        language: "fr",
+        timezone: "-2",
+        params: {
+          customerId: [{
+            value: "1234223422232"
+          }]
+        }
+      }
+    }
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+#### Parameters
+
+| | |
+|----:|---|
+| **audience** *array* | The audience to send a message to |
+| **channel.channelName** *string* | Type of the channel to send the message |
+| **channel.externalId** *string* | Identifier of the channel to send the message |
+| **payload.type** *string* | Should be `event`|
+| **payload.eventName** *string* | Name of the event to trigger |
+| **payload.metadata.language** *object* | Optional language to use |
+| **payload.metadata.timezone** *object* | Optional UTC timezone offset to use |
+| **payload.metadata.params** *object* | Optional params to use |
+
+##### Audience
+
+Please see the [originator](#originator) format.
+
+| | |
+|----:|---|
+| **name** *string* | Mandatory name. For example `Anonymous` |
+| **phoneNumber** *string* | Mandatory MSISDN (phone number in [E164](https://en.wikipedia.org/wiki/E.164) format)  |
+| **profile** *string* | See the [profile](#profile) format |
+
+##### channelName
+
+Use the reference table below to determine the `channel.channelName` to copy and paste:
+
+| Channel | channelName |
+|------------|--------------|
+| Google RBM | `rbm` |
+| MessageMedia | `messagemedia` |
+| Telekom RBM | `telekom` |
+| Twilio | `twilio` |
+| WhatsApp | `whatsapp` |
+| Khoros | `khoros` |
+
+##### externalId
+
+Within the Flow.ai dashboard, open the messaging channel you'd like to use to send a message. Use the reference table below to find the value to copy and paste.
+
+| Channel | externalId (copy value from field) |
+|------------|--------------|
+| Google RBM | Project ID |
+| MessageMedia | Phone Number |
+| Telekom RBM | Telekom bot ID |
+| Twilio | Phone Number |
+| WhatsApp | Production phone number |
+| Khoros | Phone number |
+
+
+## Webhooks
+
+Webhooks are the way we deliver replies and notify your app of other type of events.
+
+### Receiving calls
+
+Creating a webhook endpoint on your server is no different from creating any page on your website.
+
+Webhook data is sent as [JSON](https://www.json.org/) in the `POST` request body. The full event details are included and can be used directly, after parsing the JSON into an Event object.
+
+Your webhook must meet with the following requirements:
+
+- HTTPS support
+- A valid SSL certificate
+- An open port that accepts `GET` and `POST` requests
+
+### Responding to a call
+
+To acknowledge receiving successful webhook call, your endpoint should return a 2xx HTTP status code. All response codes outside this range, including 3xx codes, will indicate to us that you did not receive the webhook call. 
+
+This does mean that a URL redirection or a "Not Modified" response will be treated as a failure. we will ignore any other information returned in the request headers or request body.
+
+We will attempt to deliver your webhook calls for up to two 4 hours with an exponential back off. Webhooks cannot be manually retried after this time.
+
+### Type of Events
+
+This is a list of all the types of events we currently send. We may add more at any time, so in developing and maintaining your code, you should not assume that only these types exist.
+
+| | |
+|----:|---|
+| `message` | Called whenever Flow.ai is sending reply message for a specific threadId |
+| `history` | Called whenever Flow.ai is sending messaging history for a specific threadId |
+| `threads` | Called whenever Flow.ai is sending list of threads in user's project |
+| `trigger.events` | Called whenever Flow.ai is sending list of events that can be triggered manually |
+| `businessHours` | Called whenever Flow.ai is sending business hours information |
+| `paused` | Called when the AI engine has paused operation for a specific threadId |
+| `resumed` | Called when the AI engine has resumed operation for a specific threadId |
+| `isPaused` | Called whenever Flow.ai is sending bot status for a specific threadId |
+| `inbound` | Called whenever user sends message to Flow.ai from non-rest channel |
+| `outbound` | Called whenever AI engine sends message to user from non-rest channel |
+| `takeover` | Called when the takeover action is executed |
+
 ## Example
 
 The following example demonstrates opening a connection and sending a test message using vanilla JavaScript in the browser.
@@ -1353,7 +1491,7 @@ The following example demonstrates opening a connection and sending a test messa
       // This identifies specific user's message
       var threadId = 'USER_THREAD_ID'
 
-      // Can be found in 'Outbound' section of your REST integration in Flow.ai dashboard
+      // Can be found within the 'Outbound' section of your REST integration inside the Flow.ai dashboard
       var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudElkIjoiODkxZjBiZjQtNmYwYi00NWEyLThiYjUtMDk5MTI3MDdhZjQ0IiwiY2hhbm5lbElkIjoiOWUxYzZhOWUtMjE4ZC00NGFkLTg3OWYtNzEwMjFmMTgyYWU3IiwiaWF0IjoxNTYxMzk1MjM2fQ.sBzBBCplIPMzoOxBkQgkZtm7jN2TIrz_PWcI-bUjiOI'
 
       var url = 'https://api.flow.ai/rest/v1/'
