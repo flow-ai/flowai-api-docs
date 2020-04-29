@@ -847,12 +847,13 @@ Send handover action for a specific thread. If `secondsToPause` specified, bot w
 |----:|---|
 | **secondsToPause** *number* | Optional. Number of seconds to pause bot. |
 
-
 ## Triggering events
 
-### Get events for triggering
+We provide a way to trigger events for specific threads. An example use case can be a customer service agent doing a hand back and triggering a bot flow for a customer.
 
-This API provides a way to retrieve a list of events that are allowed to be triggered by agents. Be sure that you have events with the `ENABLE MANUAL TRIGGER` checkbox checked. You can find this checkbox in the sidebar on the right when you select an event inside a flow.
+### Get a list of events
+
+This API provides a way to retrieve a list of events that are allowed to be triggered. Be sure that you have events with the `ENABLE MANUAL TRIGGER` checkbox checked. You can find this checkbox in the sidebar on the right when you select an event inside the flow designer.
 
 > GET rest/v1/trigger/event
 
@@ -941,9 +942,9 @@ const result = await request({
 }
 ```
 
-### To trigger an event
+### Trigger an event
 
-Trigger an event for specific thread
+Use this API to trigger an event for a specific thread. If you are interested to trigger events for multiple customers at once, please have a look at our instant [broadcast](#broadcast) API.
 
 > POST rest/v1/trigger/event/:threadId
 
@@ -1306,7 +1307,7 @@ const result = await request({
 
 ## Broadcast
 
-The broadcast API provides a way to engage with customers without them starting an initial conversation. For example, sending a WhatsApp templated or SMS (text) message to a phone number (MSISDN).
+The broadcast API provides a way to send bulk messages. You can use this API to re-engage or engage with customers without them starting an initial conversation. For example, sending a WhatsApp templated message or SMS (text) message to a phone number (MSISDN).
 
 > POST rest/v1/broadcast/instant
 
@@ -1400,8 +1401,11 @@ The intended audience to send a message to. Please see the [originator](#origina
 | | |
 |----:|---|
 | **name** *string* | Mandatory name, for example `Anonymous` |
-| **phoneNumber** *string* | Mandatory MSISDN (phone number in [E164](https://en.wikipedia.org/wiki/E.164) format)  |
+| **phoneNumber** *string* | Mandatory^1^ MSISDN (phone number in [E164](https://en.wikipedia.org/wiki/E.164) format)  |
+| **identifier** *string* | Mandatory^1^ identifier  |
 | **profile** *string* | Optional [profile](#profile) data |
+
+1: Either the `phoneNumber` of `identifier` needs to be provided
 
 ##### Channel
 
@@ -1424,6 +1428,9 @@ Use the reference table below to determine the `channel.channelName` to copy and
 | Twilio | `twilio` |
 | WhatsApp | `whatsapp` |
 | Khoros | `khoros` |
+| Messenger^1^ | `messenger` |
+
+1: Facebook Messenger requires a user scoped page ID. We do not support phone numbers at this time
 
 **externalId**
 
@@ -1437,6 +1444,7 @@ Within the Flow.ai dashboard, open the messaging channel you'd like to use to se
 | Twilio | Phone Number |
 | WhatsApp | Production phone number |
 | Khoros | Phone number |
+| Messenger | Page ID |
 
 ###### Payload
 
