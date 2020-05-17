@@ -14,6 +14,16 @@ Some example use cases are:
 
 For use cases that connect with client interfaces, like mobile apps and websites, we offer a real-time [websocket API](#socket-api)
 
+<aside class="notice">
+  <strong>Need some inspiration?</strong>
+  <p>There are different ways to leverage the Flow.ai platform:<p>
+  <ul>
+    <li>ShopCtrl uses to automates customer service</li>
+    <li>Samsung reflects calls to WhatsApp</li>
+    <li>Parley connects their secure communication platform</li>
+  </ul>
+</aside>
+
 ## You call us, we'll call you
 
 The REST API works asynchronous. Unlike other NLP APIs, it will not always returns a direct reply to a [Send](#sending-messages) call.
@@ -217,7 +227,7 @@ An originator can contain additional profile information using the profile objec
 | **gender** *string* | Gender, M, F or U |
 | **locale** *string* | Locale code \(ISO\)
 | **timezone** *number* | Number of hours of UTC |
-| **country** *string* | Two letter country code |
+| **country** *string* | Lowercase, two letter country code (https://en.wikipedia.org/wiki/ISO_639-1) |
 | **email** *string* | Email address |
 | **picture** *string* | URL to profile picture |
 
