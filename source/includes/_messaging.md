@@ -18,9 +18,9 @@ For use cases that connect with client interfaces, like mobile apps and websites
   <strong>Need some inspiration?</strong>
   <p>There are different ways to leverage the Flow.ai platform:</p>
   <ul>
-    <li>Parley connects their secure communication platform</li>
-    <li>ShopCtrl uses the API to automates customer service</li>
-    <li>Samsung reflects phone calls to WhatsApp</li>
+    <li><a href="https://www.tracebuzz.com/">Tracebuzz</a> connects their social media chat and messaging platform</li>
+    <li><a href="https://www.shopctrl.com/">ShopCtrl</a> automates online retailers</li>
+    <li><a href="https://www.teleperformance.com/en-us/solutions/digital-platforms">Telepeformance</a> deflects phone calls and automates contact centers</li>
   </ul>
 </aside>
 
