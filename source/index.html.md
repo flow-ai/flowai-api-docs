@@ -19,6 +19,6 @@ search: true
 
 # Introduction
 
-The Flow.ai API is organized around [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer). Our API has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients.
+Anyone can integrate with Flow.ai. Whether it's customer facing, like websites and mobile apps, or server-side, like chat and customer service software.
 
-Our messaging API supports [cross-origin resource sharing](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing), allowing you to interact securely with our API from a client-side web application (though you should never expose your secret API key in any public client-side code). [JSON](http://www.json.org/) is returned by all API responses, including errors.
+For all these different use-cases we've made dedicated APIs.
