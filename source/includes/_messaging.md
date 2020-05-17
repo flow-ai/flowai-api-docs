@@ -2,6 +2,17 @@
 
 An API to automate messaging (e.g., chatbots, voice-powered apps and devices)
 
+<aside class="notice">
+  <strong>Need some inspiration?</strong>
+  <p>There are different ways to leverage the Flow.ai platform:</p>
+  <ul>
+    <li><a href="https://www.tracebuzz.com/">Tracebuzz</a> connects their social media chat and messaging platform</li>
+    <li><a href="https://www.shopctrl.com/">ShopCtrl</a> automates online retailers</li>
+    <li><a href="https://www.teleperformance.com/en-us/solutions/digital-platforms">Telepeformance</a> deflects phone calls and automates contact centers</li>
+  </ul>
+</aside>
+
+
 ## Audience
 
 The API is specifically intended for developers that want to use the Flow.ai platform within their own technology stack or solution.
@@ -13,16 +24,6 @@ Some example use cases are:
 - Hardware or other server-side integrations
 
 For use cases that connect with client interfaces, like mobile apps and websites, we offer a real-time [websocket API](#socket-api)
-
-<aside class="notice">
-  <strong>Need some inspiration?</strong>
-  <p>There are different ways to leverage the Flow.ai platform:</p>
-  <ul>
-    <li><a href="https://www.tracebuzz.com/">Tracebuzz</a> connects their social media chat and messaging platform</li>
-    <li><a href="https://www.shopctrl.com/">ShopCtrl</a> automates online retailers</li>
-    <li><a href="https://www.teleperformance.com/en-us/solutions/digital-platforms">Telepeformance</a> deflects phone calls and automates contact centers</li>
-  </ul>
-</aside>
 
 ## You call us, we'll call you
 
