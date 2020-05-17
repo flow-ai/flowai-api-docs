@@ -16,11 +16,11 @@ For use cases that connect with client interfaces, like mobile apps and websites
 
 <aside class="notice">
   <strong>Need some inspiration?</strong>
-  <p>There are different ways to leverage the Flow.ai platform:<p>
+  <p>There are different ways to leverage the Flow.ai platform:</p>
   <ul>
-    <li>ShopCtrl uses to automates customer service</li>
-    <li>Samsung reflects calls to WhatsApp</li>
     <li>Parley connects their secure communication platform</li>
+    <li>ShopCtrl uses the API to automates customer service</li>
+    <li>Samsung reflects phone calls to WhatsApp</li>
   </ul>
 </aside>
 
