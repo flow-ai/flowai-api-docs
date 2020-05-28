@@ -29,13 +29,13 @@ An overview how the API works:
 > Example Request:
 
 ```shell
-curl -X GET -H "Content-Type: application/json" "https://api.flow.ai/socket.info?clientId=YOUR_CLIENT_ID&sessionId=123432"
+curl -X GET -H "Content-Type: application/json" "https://sdk.flow.ai/socket.info?clientId=YOUR_CLIENT_ID&sessionId=123432"
 ```
 
 ```js
 var request = require("request");
 
-var options = { method: 'GET', url: 'https://api.flow.ai/socket.info/?clientId=YOUR_CLIENT_ID&sessionId=1234' };
+var options = { method: 'GET', url: 'https://sdk.flow.ai/socket.info/?clientId=YOUR_CLIENT_ID&sessionId=1234' };
 
 request(options, function (error, response, body) {
   if (error) throw new Error(error);
@@ -45,13 +45,13 @@ request(options, function (error, response, body) {
 ```
 
 ```csharp
-var client = new RestClient("https://api.flow.ai/socket.info?clientId=YOUR_CLIENT_ID&sessionId=1234");
+var client = new RestClient("https://sdk.flow.ai/socket.info?clientId=YOUR_CLIENT_ID&sessionId=1234");
 var request = new RestRequest(Method.GET);
 IRestResponse response = client.Execute(request);
 ```
 
 ```swift
-var request = NSMutableURLRequest(URL: NSURL(string: "https://api.flow.ai/socket.info/?clientId=YOUR_CLIENT_ID&sessionId=1234")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "https://sdk.flow.ai/socket.info/?clientId=YOUR_CLIENT_ID&sessionId=1234")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 ```
@@ -66,12 +66,12 @@ var request = NSMutableURLRequest(URL: NSURL(string: "https://api.flow.ai/socket
 {
   "status": "ok",
   "payload": {
-    "endpoint": "wss://api.flow.ai/ws/8c3b7d7ea9400..."
+    "endpoint": "wss://sdk.flow.ai/ws/8c3b7d7ea9400..."
   }
 }
 ```
 
-To start a connection you'll need to make a `GET` call to the `socket.info` API method to the API endpoint at `https://api.flow.ai`. This provides a temporary WebSocket URL.
+To start a connection you'll need to make a `GET` call to the `socket.info` API method to the API endpoint at `https://sdk.flow.ai`. This provides a temporary WebSocket URL.
 
 The `socket.info` method requires a `sessionId` and a `clientId`.
 
@@ -595,7 +595,7 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
       function getWsEndpoint() {
         console.info('Request endpoint')
         // socket.info endpoint
-        var socketInfoUrl = 'https://api.flow.ai/socket.info?clientId=' + clientId + '&sessionId=' + Date.now();
+        var socketInfoUrl = 'https://sdk.flow.ai/socket.info?clientId=' + clientId + '&sessionId=' + Date.now();
 
         // Create a GET request
         var req = new XMLHttpRequest();
