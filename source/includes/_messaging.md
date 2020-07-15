@@ -1319,7 +1319,96 @@ const result = await request({
 }
 ```
 
-## Broadcast
+## Get audience segments
+
+This API call provides a way to load a list of [segments](https://flow.ai/docs/guides/audience#segments) created in Flow.ai. Segment is a list of your bot's contacts that are grouped by one or multiple conditions.
+
+> GET rest/v1/broadcast/segments?sync=true
+
+> Example Request
+
+```http
+GET rest/v1/broadcast/segments?sync=true HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/broadcast/segments?sync=true',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response
+
+```
+200 OK
+```
+
+```json
+{
+  "status": "ok",
+  "segments":     [{
+                      "_id": "5f0f2445e11c9f0032bb0772",
+                      "agentId": "ea6e8bde-8bf3-4bf2-abc1-e4d2865bae10",
+                      "audienceId": "befce22b-7a3e-40fb-8b44-4de3688509f8",
+                      "__v": 0,
+                      "channels": [
+                          "eazy"
+                      ],
+                      "conditions": [],
+                      "contact": "all",
+                      "createdAfterCondition": "2020-07-14T21:00:00.000Z",
+                      "createdAt": "2020-07-15T15:44:05.831Z",
+                      "createdBeforeCondition": "2020-07-15T21:00:00.000Z",
+                      "importCondition": "all_contacts",
+                      "title": "Created on 15th of July (Eazy)",
+                      "type": "segment",
+                      "updatedAt": "2020-07-15T15:44:05.828Z"
+                  },
+                  {
+                      "_id": "5f0f2465e11c9f0032bb0773",
+                      "agentId": "ea6e8bde-8bf3-4bf2-abc1-e4d2865bae10",
+                      "audienceId": "164b9fa3-db65-4aaf-9b07-9eab3b4ff459",
+                      "__v": 0,
+                      "channels": [
+                          "messenger"
+                      ],
+                      "conditions": [
+                          {
+                              "condition": "has_tag_name",
+                              "conditionValue": "OPTIN"
+                          }
+                      ],
+                      "contact": "messenger",
+                      "createdAfterCondition": null,
+                      "createdAt": "2020-07-15T15:44:37.013Z",
+                      "createdBeforeCondition": null,
+                      "importCondition": "all_contacts",
+                      "title": "OPTIN tag (Messenger)",
+                      "type": "segment",
+                      "updatedAt": "2020-07-15T15:44:37.012Z"
+                  }
+              ]
+}
+```
+
+#### Query parameters
+
+| | |
+|----:|---|
+| **sync** *string* | Optional parameter for enabling sync mode |
+
+## Broadcast to MSISDN
 
 The broadcast API provides a way to send bulk messages. You can use this API to re-engage or engage with customers without them starting an initial conversation. For example, sending a WhatsApp templated message or SMS (text) message to a phone number (MSISDN).
 
@@ -1354,7 +1443,7 @@ import request from "async-request";
 
 const result = await request({
   method: 'POST',
-  url: 'https://api.flow.ai/rest/v1/pause/6ecfd199-853a-448f-9f91-ef397588ff87',
+  url: 'https://api.flow.ai/rest/v1/broadcast/instant',
   headers: {
     'Authorization': 'MY_MESSAGING_API_KEY',
     'Content-Type': 'application/json'
@@ -1404,9 +1493,9 @@ const result = await request({
 
 | | |
 |----:|---|
-| **audience** *array* | A list of originator objects. See [audience](#rest-api-broadcast-bot-status-parameters-audience) below. |
-| **channel** *object* | See [channel](#rest-api-broadcast-bot-status-parameters-channel) below |
-| **payload** *object* | See [payload](#rest-api-broadcast-bot-status-parameters-payload) below |
+| **audience** *array* | A list of originator objects. See [audience](#rest-api-broadcast-to-msisdn-parameters-audience) below |
+| **channel** *object* | See [channel](#rest-api-broadcast-to-msisdn-parameters-channel) below |
+| **payload** *object* | See [payload](#rest-api-broadcast-to-msisdn-parameters-payload) below |
 
 ##### Audience
 
@@ -1419,7 +1508,7 @@ The intended audience to send a message to. Please see the [originator](#origina
 | **identifier** *string* | Mandatory^1^ identifier  |
 | **profile** *string* | Optional [profile](#profile) data |
 
-1: Either the `phoneNumber` of `identifier` needs to be provided
+1: Either the `phoneNumber` or `identifier` needs to be provided
 
 ##### Channel
 
@@ -1475,6 +1564,101 @@ Within the Flow.ai dashboard, open the messaging channel you'd like to use to se
 | **language** *object* | Optional language to use |
 | **timezone** *object* | Optional UTC timezone offset to use |
 | **params** *object* | Optional params to use |
+
+## Broadcast to segments
+
+This broadcast API call provides a way to trigger one or multiple events for specified segments. You can specify either name of segment or it's id taken from [Segments list](#rest-api-get-audience-segments)
+
+> POST rest/v1/broadcast/instant/segment
+
+> Example Request
+
+```http
+POST rest/v1/broadcast/instant/segment HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+{
+    "audience": [{
+        "name": "MY_SEGMENT_1"
+    }, {
+        "id": "ID_OF_MY_SEGMENT_2"
+    }, {
+        "name": "MY_SEGMENT_3",
+        "id": "ID_OF_MY_SEGMENT_3"
+    }],
+    "events": [{
+        "name": "MY_EVENT_1"
+    }, {
+        "name": "MY_EVENT_2"
+    }]
+}
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/broadcast/instant/segment',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {
+    audience: [{
+      name: 'MY_SEGMENT_1',
+    }, {
+      id: 'ID_OF_MY_SEGMENT_2'
+    }, {
+      name: 'MY_SEGMENT_3',
+      id: 'ID_OF_MY_SEGMENT_3'
+    }],
+    events: [{
+      name: 'MY_EVENT_1'
+    }, {
+      name: 'MY_EVENT_2'
+    }]
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+#### Parameters
+
+| | |
+|----:|---|
+| **audience** *array* | A list of segment objects. See [audience](#rest-api-broadcast-to-segments-parameters-audience) below |
+| **events** *array* | A list of event objects. See [events](#rest-api-broadcast-to-segments-parameters-events) below |
+
+##### Audience
+
+The segment to trigger event for.
+
+| | |
+|----:|---|
+| **name** *string* | Name of your segment, for example `MY_SEGMENT_1` |
+| **id** *string* | ID of your segment. Can be obtained [here](#rest-api-get-audience-segments)  |
+
+1: Either the `name` or `id` needs to be provided.
+
+##### Events
+
+| | |
+|----:|---|
+| **name** *string* | Name of the [event](/docs/triggers/event) to trigger. For example `MY_EVENT_1`|
 
 ## Webhooks
 
