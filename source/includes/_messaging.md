@@ -36,11 +36,11 @@ The REST API works asynchronous. Unlike other NLP APIs, it will not always retur
 
 Instead, the API will send a POST request to your configured [webhook](#webhooks) whenever an event takes place.
 
-### Sync mode 
+### Synchronous responses
 
 To make life easier, some calls do support an optional synchronous reply mode. If enabled, you'll get a direct reply with your request instead of having to wait for your webhook to be called.
 
-To enable this sync mode add a `sync=true` flag to the called endpoint.
+To enable this *sync mode* add a `sync=true` flag to the called endpoint.
 
 ![Receive replies using Webhooks](/images/receiving.svg "Receiving replies from Flow.ai")
 
@@ -482,7 +482,11 @@ The API allows you to send images, files and other media files.
 | **timezone** *integer* | Optional UTF timezone offset in hours |
 | **params** *object* | Optional parameters |
 
-## Thread messages
+## Loading messages
+
+Using the REST API you are able to load a list of messages.
+
+### Get a list of messages
 
 We provide a way to request the messaging history of a specific `threadId`. Each request is limited to 20 entries and supports pagination to retrieve more entries by specifying a `page` parameter.
 
@@ -607,9 +611,9 @@ const result = await request({
 }
 ```
 
-## Get threads
+### Get a list of threads
 
-This API call provides a way to load *threads*. A thread represents a conversation and each request is limited to 20 entries. If you need to retrieve more entries we provide pagination using an optional `page` parameter.
+This API call provides a way to load a list of *threads*. A thread represents a conversation and each request is limited to 20 entries. If you need to retrieve more entries we provide pagination using an optional `page` parameter.
 
 > GET rest/v1/threads
 
@@ -702,103 +706,15 @@ const result = await request({
 }
 ```
 
-## Send takeover action (deprecated)
+## Conversation control
 
-Send takeover action for specific thread
+Each conversation has a certain state. It can be either open, in handover or resolved. The REST API provides a way to manipulate the state of conversations by sending different actions.
 
-#### Parameters
+### Handover action
 
-| | |
-|----:|---|
-| **threadId** *string* | Unique identifier of the thread |
+Triggering a handover will indicate a conversation needs the attention of a human agent. When triggering the handover the bot is automatically paused for a number of seconds. By default the bot will pause as long as is configured inside the dashboard settings. 
 
-> POST rest/v1/takeover/:threadId
-
-> Example Request
-
-```http
-POST rest/v1/takeover/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
-Host: api.flow.ai
-Content-Type: application/json
-Authorization: MY_MESSAGING_API_KEY
-{}
-```
-
-```javascript
-import request from "async-request";
-
-const result = await request({
-  method: 'POST',
-  url: 'https://api.flow.ai/rest/v1/takeover/6ecfd199-853a-448f-9f91-ef397588ff87',
-  headers: {
-    'Authorization': 'MY_MESSAGING_API_KEY',
-    'Content-Type': 'application/json'
-  },
-  body: {},
-  json: true
-})
-```
-
-> Example Response:
-
-```
-200 OK
-```
-
-```json
-{
-	"status": "ok"
-}
-```
-## Send resolve action
-
-> POST rest/v1/resolve/:threadId
-
-> Example Request:
-
-```http
-POST rest/v1/resolve/a4ad8a025763451da6f15f2b50991651|o_21361542-a262-4aaa-8edb-0f8f88e07d89 HTTP/1.1
-Host: api.flow.ai
-Content-Type: application/json
-Authorization: MY_MESSAGING_API_KEY
-```
-
-```javascript
-import request from "async-request";
-
-const result = await request({
-  method: 'POST',
-  url: 'https://api.flow.ai/rest/v1/resolve/a4ad8a025763451da6f15f2b50991651|o_21361542-a262-4aaa-8edb-0f8f88e07d89',
-  headers: {
-    'Authorization': 'MY_MESSAGING_API_KEY',
-    'Content-Type': 'application/json'
-  },
-  json: true
-})
-```
-
-> Example Response:
-
-```
-200 OK
-```
-
-```json
-{
-	"status": "ok"
-}
-```
-
-Send resolve action for a specific threadId. Resolve will remove `takeover` and `pause` from the bot and set `control_state` tag with value `resolved`.
-
-#### Parameters
-
-| | |
-|----:|---|
-| **threadId** *string* | Unique threadId | [//]: <> (THREAD_ID|o_CHANNEL_ID)
-
-
-## Send handover action
+Provide `secondsToPause` to specify a custom number of seconds to pause.
 
 > POST rest/v1/handover/:threadId
 
@@ -847,8 +763,6 @@ const result = await request({
 }
 ```
 
-Send handover action for a specific thread. If `secondsToPause` specified, bot will pause for this number of seconds. 
-
 #### Parameters
 
 | | |
@@ -859,7 +773,110 @@ Send handover action for a specific thread. If `secondsToPause` specified, bot w
 
 | | |
 |----:|---|
-| **secondsToPause** *number* | Optional. Number of seconds to pause bot. |
+| **secondsToPause** *number* | Optional. Number of seconds to pause the bot. |
+
+### Takeover action (deprecated)
+
+<aside class="notice">
+  <strong>Deprecated</strong>
+  <p>The takoever action is deprecated in favor for the <a href="#rest-api-handover-action">handover</a> action</p>
+</aside>
+
+Send a takeover action for a specific thread
+
+#### Parameters
+
+| | |
+|----:|---|
+| **threadId** *string* | Unique identifier of the thread |
+
+> POST rest/v1/takeover/:threadId
+
+> Example Request
+
+```http
+POST rest/v1/takeover/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+{}
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/takeover/6ecfd199-853a-448f-9f91-ef397588ff87',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {},
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "status": "ok"
+}
+```
+
+### Resolve action
+
+Resolving a conversation is similar to archiving or removing a conversation. It's the final state. Once a conversation is resolved it cannot be undone.
+
+> POST rest/v1/resolve/:threadId
+
+> Example Request:
+
+```http
+POST rest/v1/resolve/a4ad8a025763451da6f15f2b50991651|o_21361542-a262-4aaa-8edb-0f8f88e07d89 HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/resolve/a4ad8a025763451da6f15f2b50991651|o_21361542-a262-4aaa-8edb-0f8f88e07d89',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+	"status": "ok"
+}
+```
+
+Send a resolve action for a specific threadId. Resolve will complete a `handover`, `resume` the bot and set the `control_state` tag with a value of `resolved`.
+
+#### Parameters
+
+| | |
+|----:|---|
+| **threadId** *string* | Unique threadId | [//]: <> (THREAD_ID|o_CHANNEL_ID)
 
 ## Triggering events
 
@@ -1319,98 +1336,13 @@ const result = await request({
 }
 ```
 
-## Get audience segments
+## Broadcast
 
-This API call provides a way to load a list of [segments](https://flow.ai/docs/guides/audience#segments) created in Flow.ai. Segment is a list of your bot's contacts that are grouped by one or multiple conditions.
+The broadcast API provides a way to send bulk messages. You can use this API to re-engage or engage with customers without them starting an initial conversation. For example, sending a WhatsApp templated message or SMS (text) message to a phone number (MSISDN) or segment of contacts.
 
-> GET rest/v1/broadcast/segments?sync=true
+### Broadcast to MSISDN
 
-> Example Request
-
-```http
-GET rest/v1/broadcast/segments?sync=true HTTP/1.1
-Host: api.flow.ai
-Content-Type: application/json
-Authorization: MY_MESSAGING_API_KEY
-```
-
-```javascript
-import request from "async-request";
-
-const result = await request({
-  method: 'GET',
-  url: 'https://api.flow.ai/rest/v1/broadcast/segments?sync=true',
-  headers: {
-    'Authorization': 'MY_MESSAGING_API_KEY',
-    'Content-Type': 'application/json'
-  },
-  json: true
-})
-```
-
-> Example Response
-
-```
-200 OK
-```
-
-```json
-{
-  "status": "ok",
-  "segments":     [{
-                      "_id": "5f0f2445e11c9f0032bb0772",
-                      "agentId": "ea6e8bde-8bf3-4bf2-abc1-e4d2865bae10",
-                      "audienceId": "befce22b-7a3e-40fb-8b44-4de3688509f8",
-                      "__v": 0,
-                      "channels": [
-                          "eazy"
-                      ],
-                      "conditions": [],
-                      "contact": "all",
-                      "createdAfterCondition": "2020-07-14T21:00:00.000Z",
-                      "createdAt": "2020-07-15T15:44:05.831Z",
-                      "createdBeforeCondition": "2020-07-15T21:00:00.000Z",
-                      "importCondition": "all_contacts",
-                      "title": "Created on 15th of July (Eazy)",
-                      "type": "segment",
-                      "updatedAt": "2020-07-15T15:44:05.828Z"
-                  },
-                  {
-                      "_id": "5f0f2465e11c9f0032bb0773",
-                      "agentId": "ea6e8bde-8bf3-4bf2-abc1-e4d2865bae10",
-                      "audienceId": "164b9fa3-db65-4aaf-9b07-9eab3b4ff459",
-                      "__v": 0,
-                      "channels": [
-                          "messenger"
-                      ],
-                      "conditions": [
-                          {
-                              "condition": "has_tag_name",
-                              "conditionValue": "OPTIN"
-                          }
-                      ],
-                      "contact": "messenger",
-                      "createdAfterCondition": null,
-                      "createdAt": "2020-07-15T15:44:37.013Z",
-                      "createdBeforeCondition": null,
-                      "importCondition": "all_contacts",
-                      "title": "OPTIN tag (Messenger)",
-                      "type": "segment",
-                      "updatedAt": "2020-07-15T15:44:37.012Z"
-                  }
-              ]
-}
-```
-
-#### Query parameters
-
-| | |
-|----:|---|
-| **sync** *string* | Optional parameter for enabling sync mode |
-
-## Broadcast to MSISDN
-
-The broadcast API provides a way to send bulk messages. You can use this API to re-engage or engage with customers without them starting an initial conversation. For example, sending a WhatsApp templated message or SMS (text) message to a phone number (MSISDN).
+Send a WhatsApp templated message or SMS (text) message to a list of phone numbers (MSISDN).
 
 > POST rest/v1/broadcast/instant
 
@@ -1565,9 +1497,9 @@ Within the Flow.ai dashboard, open the messaging channel you'd like to use to se
 | **timezone** *object* | Optional UTC timezone offset to use |
 | **params** *object* | Optional params to use |
 
-## Broadcast to segments
+### Broadcast to segments
 
-This broadcast API call provides a way to trigger one or multiple events for specified segments. You can specify either name of segment or it's id taken from [Segments list](#rest-api-get-audience-segments)
+This broadcast API call provides a way to trigger one or multiple events for specific segments. You can specify either the name of the segment or it's id taken from the [Segments list](#rest-api-get-audience-segments)
 
 > POST rest/v1/broadcast/instant/segment
 
@@ -1659,6 +1591,96 @@ The segment to trigger event for.
 | | |
 |----:|---|
 | **name** *string* | Name of the [event](/docs/triggers/event) to trigger. For example `MY_EVENT_1`|
+
+### Get audience segments
+
+This API call provides a way to load a list of [segments](https://flow.ai/docs/guides/audience#segments) created in Flow.ai. Segment is a list of your bot's contacts that are grouped by one or multiple conditions.
+
+> GET rest/v1/broadcast/segments?sync=true
+
+> Example Request
+
+```http
+GET rest/v1/broadcast/segments?sync=true HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'GET',
+  url: 'https://api.flow.ai/rest/v1/broadcast/segments?sync=true',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response
+
+```
+200 OK
+```
+
+```json
+{
+  "status": "ok",
+  "segments":     [{
+                      "_id": "5f0f2445e11c9f0032bb0772",
+                      "agentId": "ea6e8bde-8bf3-4bf2-abc1-e4d2865bae10",
+                      "audienceId": "befce22b-7a3e-40fb-8b44-4de3688509f8",
+                      "__v": 0,
+                      "channels": [
+                          "eazy"
+                      ],
+                      "conditions": [],
+                      "contact": "all",
+                      "createdAfterCondition": "2020-07-14T21:00:00.000Z",
+                      "createdAt": "2020-07-15T15:44:05.831Z",
+                      "createdBeforeCondition": "2020-07-15T21:00:00.000Z",
+                      "importCondition": "all_contacts",
+                      "title": "Created on 15th of July (Eazy)",
+                      "type": "segment",
+                      "updatedAt": "2020-07-15T15:44:05.828Z"
+                  },
+                  {
+                      "_id": "5f0f2465e11c9f0032bb0773",
+                      "agentId": "ea6e8bde-8bf3-4bf2-abc1-e4d2865bae10",
+                      "audienceId": "164b9fa3-db65-4aaf-9b07-9eab3b4ff459",
+                      "__v": 0,
+                      "channels": [
+                          "messenger"
+                      ],
+                      "conditions": [
+                          {
+                              "condition": "has_tag_name",
+                              "conditionValue": "OPTIN"
+                          }
+                      ],
+                      "contact": "messenger",
+                      "createdAfterCondition": null,
+                      "createdAt": "2020-07-15T15:44:37.013Z",
+                      "createdBeforeCondition": null,
+                      "importCondition": "all_contacts",
+                      "title": "OPTIN tag (Messenger)",
+                      "type": "segment",
+                      "updatedAt": "2020-07-15T15:44:37.012Z"
+                  }
+              ]
+}
+```
+
+#### Query parameters
+
+| | |
+|----:|---|
+| **sync** *string* | Optional parameter for enabling sync mode |
+
 
 ## Webhooks
 
