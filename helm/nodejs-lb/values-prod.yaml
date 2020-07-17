@@ -1,4 +1,4 @@
 ingress:
   host: flow.ai
-  nodeSelector: {"cloud.google.com/gke-nodepool": "default-custom-6"}    
-nodeSelector: {"cloud.google.com/gke-nodepool": "default-custom-6"}      
+  nodeSelector: {"cloud.google.com/gke-nodepool": "default-custom-8-n2d"}
+nodeSelector: {"cloud.google.com/gke-nodepool": "default-custom-8-n2d"}
