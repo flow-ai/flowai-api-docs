@@ -155,7 +155,7 @@ html, body {
     display: block;
     padding-left: $nav-padding;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 12px;
     color: $nav-title-text;
     margin-top: 32px;
   }
@@ -180,7 +180,7 @@ html, body {
 
   .toc-h2 {
     padding-left: $nav-padding + $nav-indent;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .toc-list-h3 {
@@ -191,7 +191,7 @@ html, body {
 
   .toc-h3 {
     padding-left: $nav-padding + $nav-indent + $nav-indent;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .toc-footer {
@@ -372,7 +372,7 @@ html, body {
 
   h1 {
     @extend %header-font;
-    font-size: 27px;
+    font-size: 28px;
     padding-top: 47px;
     padding-bottom: 8px;
     margin-bottom: $h1-margin-bottom;
@@ -390,7 +390,7 @@ html, body {
 
   h2 {
     @extend %header-font;
-    font-size: 23px;
+    font-size: 24px;
     margin-top: 48px;
     margin-bottom: 0;
     border-top: 1px solid $h2-border-color;
@@ -410,7 +410,7 @@ html, body {
   h3, h4, h5, h6 {
     @extend %header-font;
     @extend %bold-font;
-    font-size: 18px;
+    font-size: 20px;
     margin-top: 2.5em;
     margin-bottom: 0.8em;
   }
@@ -418,7 +418,9 @@ html, body {
   h4, h5, h6 {
     @extend %bold-font;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 14px;
+    margin-top: 64px;
+    color: #28282E;
   }
 
   a {

@@ -70,7 +70,7 @@ $logo-margin: 0px !default; // margin below logo
 $main-padding: 40px !default; // padding to left and right of content & examples
 $nav-padding: 16px !default; // padding to left and right of navbar
 $nav-v-padding: 16px !default; // padding used vertically around search boxes and results
-$nav-indent: 8px !default; // extra padding for ToC subitems
+$nav-indent: 12px !default; // extra padding for ToC subitems
 $code-annotation-padding: 24px !default; // padding inside code annotations
 $h1-margin-bottom: 16px !default; // padding under the largest header tags
 $tablet-width: 930px !default; // min width before reverting to tablet size
@@ -117,9 +117,9 @@ $phone-width: $tablet-width - $nav-width !default; // min width before reverting
 $nav-footer-border-color: #33333A !default;
 $search-box-border-color: #33333A !default;
 
-$h1-border-color: rgba(0,0,0,0.05) !default;
-$h2-border-color: rgba(0,0,0,0.05) !default;
-$table-border-color: rgba(0,0,0,0.05) !default;
+$h1-border-color: rgba(0,0,0,0.1) !default;
+$h2-border-color: rgba(0,0,0,0.1) !default;
+$table-border-color: rgba(0,0,0,0.06) !default;
 
 
 ////////////////////////////////////////////////////////////////////////////////

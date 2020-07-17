@@ -30,23 +30,19 @@ For use cases that connect with client interfaces, like mobile apps and websites
 
 ## You call us, we'll call you
 
-The REST API works asynchronous. Unlike other NLP APIs, it will not always returns a direct reply to a [Send](#sending-messages) call.
+The REST API works asynchronous. Unlike other NLP APIs, it will not return a direct reply to a [Send message](#sending-messages) call.
 
 ![Send messages using REST API](/images/sending.svg "Sending messages to Flow.ai")
 
-Instead, the API will send a POST request to your configured [webhook](#webhooks) whenever an event takes place.
+Instead, the API will respond by sending a POST request to your configured [webhook](#webhooks) url whenever an event takes place.
 
 ### Synchronous responses
 
-To make life easier, some calls do support an optional synchronous reply mode. If enabled, you'll get a direct reply with your request instead of having to wait for your webhook to be called.
+To make life easier, some calls do support an optional synchronous reply mode. If enabled, you'll get a direct reply to your request instead of having to wait for your webhook to be called.
 
-To enable this *sync mode* add a `sync=true` flag to the called endpoint.
+To enable this *sync mode* add a `?sync=true` query parameter to the URL of the requested API endpoint.
 
 ![Receive replies using Webhooks](/images/receiving.svg "Receiving replies from Flow.ai")
-
-<aside class="notice">
-To make life easier, some APIs can be called with a <em>sync</em> parameter. This will cause them to send a direct reply instead of having to rely on a webhook event.
-</aside>
 
 ## Sending messages
 
@@ -208,7 +204,13 @@ const result = await request({
 }
 ```
 
-With each message you need to provide some information regarding the sender, user or as we call it, the originator of the message.
+With each message you need to provide some information regarding the sender, user or as we call it, the originator of the message. 
+
+Each originator has a `role` within the conversation. When sending messages to the REST API this can be either `external` or `moderator`.
+
+The `external` role is used to indicate the originator is a customer, end-user or external user sending a message. The `moderator` role is reserved for human agents or employees replying to customers or external users.
+
+Specifying the right role is important. When Flow.ai receives a message originating from a `moderator` the bot will automatically pause.
 
 #### Attributes
 
@@ -229,10 +231,12 @@ An originator can contain additional profile information using the profile objec
 | **firstName** *string* | First name |
 | **lastName** *string* | Family name |
 | **gender** *string* | Gender, M, F or U |
-| **locale** *string* | Locale code \(ISO\)
+| **language** *string* | Two letter [language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for example `fr` |
+| **country** *string* | Lowercase, two letter [country code](https://en.wikipedia.org/wiki/ISO_639-1) |
+| **locale** *string* | Locale code that combines the language and country code for example `en-GB` |
 | **timezone** *number* | Number of hours of UTC |
-| **country** *string* | Lowercase, two letter country code (https://en.wikipedia.org/wiki/ISO_639-1) |
 | **email** *string* | Email address |
+| **phoneNumber** *string* | Phone number in [E.164 format](https://en.wikipedia.org/wiki/E.164) |
 | **picture** *string* | URL to profile picture |
 
 ### Event message
