@@ -1523,11 +1523,10 @@ Authorization: MY_MESSAGING_API_KEY
         "name": "MY_SEGMENT_3",
         "id": "ID_OF_MY_SEGMENT_3"
     }],
-    "events": [{
-        "name": "MY_EVENT_1"
-    }, {
-        "name": "MY_EVENT_2"
-    }]
+    "payload": {
+        "type": "event",
+        "eventName": "EVENT_NAME"
+    }
 }
 ```
 
@@ -1550,11 +1549,10 @@ const result = await request({
       name: 'MY_SEGMENT_3',
       id: 'ID_OF_MY_SEGMENT_3'
     }],
-    events: [{
-      name: 'MY_EVENT_1'
-    }, {
-      name: 'MY_EVENT_2'
-    }]
+    payload: {
+        type: 'event',
+        eventName: 'EVENT_NAME'
+    }
   },
   json: true
 })
@@ -1577,7 +1575,7 @@ const result = await request({
 | | |
 |----:|---|
 | **audience** *array* | A list of segment objects. See [audience](#rest-api-broadcast-to-segments-parameters-audience) below |
-| **events** *array* | A list of event objects. See [events](#rest-api-broadcast-to-segments-parameters-events) below |
+| **payload** *object* | A list of event objects. See [events](#rest-api-broadcast-to-segments-parameters-events) below |
 
 ##### Audience
 
@@ -1590,11 +1588,15 @@ The segment to trigger event for.
 
 1: Either the `name` or `id` needs to be provided.
 
-##### Events
+##### Payload
 
 | | |
 |----:|---|
-| **name** *string* | Name of the [event](/docs/triggers/event) to trigger. For example `MY_EVENT_1`|
+| **type** *enum* | `text/event/location/media`|
+| **speech** *string* | `used for text message type`|
+| **url** *string* | `used for media message type`|
+| **lat** *string* | `tused for location message type`|
+| **eventName** *string* | `Name of the [event](/docs/triggers/event) to trigger. For example `MY_EVENT_1``|
 
 ### Get audience segments
 
