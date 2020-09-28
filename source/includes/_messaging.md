@@ -80,14 +80,14 @@ Host: api.flow.ai
 Content-Type: application/json
 Authorization: MY_MESSAGING_API_KEY
 {
-	"payload": {
-		"type": "text",
-		"speech": "Hello",
-		"originator": {
-			"name": "John Doe",
-			"role": "external"
-		}
-	}
+  "payload": {
+    "type": "text",
+    "speech": "Hello",
+    "originator": {
+      "name": "John Doe",
+      "role": "external"
+    }
+  }
 }
 ```
 
@@ -102,14 +102,14 @@ const result = await request({
     'Content-Type': 'application/json'
   },
   body: {
-		payload: {
-			type: 'text',
-			speech: 'Hello',
-			originator: {
-				name: "John Doe",
-				role: "external"
-		}
-		}
+    payload: {
+      type: 'text',
+      speech: 'Hello',
+      originator: {
+        name: "John Doe",
+        role: "external"
+    }
+    }
   },
   json: true
 })
@@ -123,7 +123,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -140,9 +140,13 @@ const result = await request({
 | **traceId** *number* | Optional unique number that is passed along to identify the message. Use this to verify message delivery. |
 | **type** *string* | Indicates the type of message. Should be `text` |
 | **text** *string* | The text or speech message to process. The maximum length of a message is 255 characters. |
-| **lang** *string* | Optional language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
-| **timezone** *integer* | Optional UTF timezone offset in hours |
-| **params** *object* | Optional parameters |
+| **metadata** *object* | Optional meta data (see below) |
+
+| | |
+|----:|---|
+| **metadata.language** *string* | Optional language code in [ISO format](https://en.wikipedia.org/wiki/ISO_639-1) (2 letters) |
+| **metadata.timezone** *integer* | Optional UTF timezone offset in hours |
+| **metadata.params** *object* | Optional parameters |
 
 ### Originator
 
@@ -150,14 +154,14 @@ const result = await request({
 
 ```json
 {
-	"payload": {
-		"type": "text",
-		"speech": "hello",
-		"originator": {
-			"name": "John Doe",
-			"role": "external"
-		}
-	}
+  "payload": {
+    "type": "text",
+    "speech": "hello",
+    "originator": {
+      "name": "John Doe",
+      "role": "external"
+    }
+  }
 }
 ```
 
@@ -165,25 +169,39 @@ const result = await request({
 
 ```json
 {
-	"payload": {
-		"type": "text",
-		"speech": "hello",
-		"originator": {
-			"name": "John Doe",
-			"role": "external",
-			"profile": {
-				"fullName": "John Doe",
-				"firstName": "John",
-				"lastName": "Doe",
-				"gender": "M",
-				"locale": "en-US",
-				"timezone": -5,
-				"country": "us",
-				"email": "johndoe@dmail.com",
-				"picture": "https://..."
-			}	
-		}
-	}
+  "payload": {
+    "type": "text",
+    "speech": "hello",
+    "originator": {
+      "name": "John Doe",
+      "role": "external",
+      "profile": {
+        "fullName": "John Doe",
+        "firstName": "John",
+        "lastName": "Doe",
+        "gender": "M",
+        "locale": "en-US",
+        "timezone": -5,
+        "country": "us",
+        "email": "johndoe@dmail.com",
+        "picture": "https://..."
+      }  
+    },
+    "metadata": {
+      "language": "en",
+      "timezone": 5,
+      "params": {
+        "product": [{
+          "value": "Dish washer"
+        }],
+        "problems": [{
+          "value": "Noise"
+        }, {
+          "value": "Leaks"
+        }]
+      }
+    }
+  }
 }
 ```
 
@@ -191,16 +209,16 @@ const result = await request({
 
 ```json
 {
-	...
-	"originator": {
-		"name": "John Doe",
-		"role": "external",
-		"metadata": {
-			"clientNumber": "asddaasq333ee332",
-			"preference": "A,B,G"
-		}
-	}
-	...
+  ...
+  "originator": {
+    "name": "John Doe",
+    "role": "external",
+    "metadata": {
+      "clientNumber": "asddaasq333ee332",
+      "preference": "A,B,G"
+    }
+  }
+  ...
 }
 ```
 
@@ -251,14 +269,14 @@ Host: api.flow.ai
 Content-Type: application/json
 Authorization: MY_MESSAGING_API_KEY
 {
-	"payload": {
-		"type": "event",
-		"eventName": "MY_EVENT",
-		"originator": {
-			"name": "John Doe",
-			"role": "external"
-		}
-	}
+  "payload": {
+    "type": "event",
+    "eventName": "MY_EVENT",
+    "originator": {
+      "name": "John Doe",
+      "role": "external"
+    }
+  }
 }
 ```
 
@@ -273,14 +291,14 @@ const result = await request({
     'Content-Type': 'application/json'
   },
   body: {
-		payload: {
-			type: 'event',
-			eventName: "MY_EVENT",
-			originator: {
-				name: "John Doe",
-				role: "external"
-		}
-		}
+    payload: {
+      type: 'event',
+      eventName: "MY_EVENT",
+      originator: {
+        name: "John Doe",
+        role: "external"
+    }
+    }
   },
   json: true
 })
@@ -294,7 +312,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -329,16 +347,16 @@ Host: api.flow.ai
 Content-Type: application/json
 Authorization: MY_MESSAGING_API_KEY
 {
-	"payload": {
-		"type": "location",
-		"lat": "1232122422",
-		"long": "2433343343",
+  "payload": {
+    "type": "location",
+    "lat": "1232122422",
+    "long": "2433343343",
     "title": "Example title",
-		"originator": {
-			"name": "John Doe",
-			"role": "external"
-		}
-	}
+    "originator": {
+      "name": "John Doe",
+      "role": "external"
+    }
+  }
 }
 ```
 
@@ -353,16 +371,16 @@ const result = await request({
     'Content-Type': 'application/json'
   },
   body: {
-		payload: {
-			type: 'location',
-			lat: '1232122422',
+    payload: {
+      type: 'location',
+      lat: '1232122422',
       long: '2433343343',
       title: 'Example title',
-			originator: {
-				name: 'John Doe',
-				role: 'external'
-		}
-		}
+      originator: {
+        name: 'John Doe',
+        role: 'external'
+    }
+    }
   },
   json: true
 })
@@ -376,7 +394,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -412,17 +430,17 @@ Send coordinates
 POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87 HTTP/1.1
 Host: api.flow.ai
 {
-	"payload": {
-		"type": "media",
-		"mediaType": "image",
-		"mimetype": "image/png",
+  "payload": {
+    "type": "media",
+    "mediaType": "image",
+    "mimetype": "image/png",
     "title": "Example title",
-		"url": "https://source.unsplash.com/random/880x400",
-		"originator": {
-			"name": "John Doe",
-			"role": "external"
-		}
-	}
+    "url": "https://source.unsplash.com/random/880x400",
+    "originator": {
+      "name": "John Doe",
+      "role": "external"
+    }
+  }
 }
 ```
 
@@ -447,7 +465,7 @@ const result = await request({
         name: 'John Doe',
         role: 'external'
         }
-	  }
+    }
   }
 })
 ```
@@ -460,7 +478,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -527,7 +545,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -577,41 +595,41 @@ const result = await request({
 
 ```json
 {
-	"status": "ok",
-	"result": {
-		"history": [
-			{
-				"originator": {
-					"name": "visitor_abc",
-					"role": "user",
-					"profile": {}
-				},
-				"messages": [
-					{
-						"fallback": "test",
-						"replyTo": null,
-						"contexts": [],
-						"params": {},
-						"intents": [],
-						"createdAt": "2019-06-25T12:45:11.857Z",
-						"responses": [
-								{
-										"type": "text",
-										"payload": {
-												"text": "test"
-										}
-								}
-						]
-					},
-					...
-				]
-			},
-			...
-		],
+  "status": "ok",
+  "result": {
+    "history": [
+      {
+        "originator": {
+          "name": "visitor_abc",
+          "role": "user",
+          "profile": {}
+        },
+        "messages": [
+          {
+            "fallback": "test",
+            "replyTo": null,
+            "contexts": [],
+            "params": {},
+            "intents": [],
+            "createdAt": "2019-06-25T12:45:11.857Z",
+            "responses": [
+                {
+                    "type": "text",
+                    "payload": {
+                        "text": "test"
+                    }
+                }
+            ]
+          },
+          ...
+        ]
+      },
+      ...
+    ],
     "threadId": "6ecfd199-853a-448f-9f91-ef397588ff87",
     "page": 3,
     "pages": 10
-	}
+  }
 }
 ```
 
@@ -652,7 +670,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -730,8 +748,8 @@ Host: api.flow.ai
 Content-Type: application/json
 Authorization: MY_MESSAGING_API_KEY
 {
-	{
-	  "secondsToPause": 600
+  {
+    "secondsToPause": 600
   }
 }
 ```
@@ -747,8 +765,8 @@ const result = await request({
     'Content-Type': 'application/json'
   },
   body: {
-		{
-	    "secondsToPause": 600
+    {
+      "secondsToPause": 600
     }
   },
   json: true
@@ -763,7 +781,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -870,7 +888,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -923,7 +941,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -1016,7 +1034,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -1069,7 +1087,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok",
+  "status": "ok",
 }
 ```
 
@@ -1111,38 +1129,38 @@ const result = await request({
 
 ```json
 {
-	"status": "ok",
-	"businessHours": [
-		{
-			"weekdays": [
-				{
-					"weekday": "Monday",
-					"content": [
-						{
-							"from": "0:20",
-							"to": "4:19"
-						},
-						{
-							"from": "10:00",
-							"to": "22:22"
-						},
-						...
-					]
-				},
-				...
-			],
-			"holidays": [
-				{
-					"holiday": "New Year",
-					"date": "2019-12-31T00:00:00.000Z"
-				},
-				...
-			],
-			"label": "test BH",
-			"timezone": "(UTC+03:00) Minsk"
-		},
-		...
-	]
+  "status": "ok",
+  "businessHours": [
+    {
+      "weekdays": [
+        {
+          "weekday": "Monday",
+          "content": [
+            {
+              "from": "0:20",
+              "to": "4:19"
+            },
+            {
+              "from": "10:00",
+              "to": "22:22"
+            },
+            ...
+          ]
+        },
+        ...
+      ],
+      "holidays": [
+        {
+          "holiday": "New Year",
+          "date": "2019-12-31T00:00:00.000Z"
+        },
+        ...
+      ],
+      "label": "test BH",
+      "timezone": "(UTC+03:00) Minsk"
+    },
+    ...
+  ]
 }
 ```
 
@@ -1189,7 +1207,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -1238,7 +1256,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -1286,7 +1304,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -1334,9 +1352,9 @@ const result = await request({
 
 ```json
 {
-	"status": "ok",
-	"isPaued": false,
-	"threadId": "6ecfd199-853a-448f-9f91-ef397588ff87"
+  "status": "ok",
+  "isPaued": false,
+  "threadId": "6ecfd199-853a-448f-9f91-ef397588ff87"
 }
 ```
 
@@ -1358,19 +1376,41 @@ Host: api.flow.ai
 Content-Type: application/json
 Authorization: MY_MESSAGING_API_KEY
 {
-	"audience": [{
-		"name": "John Doe",
-		"phoneNumber": "+12345678901",
-		"profile": {}
-	}],
-	"channel": {
-		"channelName": "whatsapp",
-		"externalId": "+10987654321"
-	},
-	"payload": {
-		"type": "event",
-		"eventName": "Send template"
-	}
+  "audience": [{
+    "name": "John Doe",
+    "phoneNumber": "+12345678901",
+    "profile": {}
+  }],
+  "channel": {
+    "channelName": "whatsapp",
+    "externalId": "+10987654321"
+  },
+  "payload": {
+    "type": "text",
+    "speech": "I'm searching for the address of your store in New York"
+  }
+}
+```
+
+```http
+POST rest/v1/broadcast/instant HTTP/1.1
+Host: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+{
+  "audience": [{
+    "name": "John Doe",
+    "phoneNumber": "+12345678901",
+    "profile": {}
+  }],
+  "channel": {
+    "channelName": "whatsapp",
+    "externalId": "+10987654321"
+  },
+  "payload": {
+    "type": "event",
+    "eventName": "Send template"
+  }
 }
 ```
 
@@ -1413,6 +1453,36 @@ const result = await request({
 })
 ```
 
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/broadcast/instant',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {
+    audience: [{
+      name: 'John Doe',
+      phoneNumber: "+12345678901",
+      profile: {
+      }
+    }],
+    channel: {
+      channelName: "whatsapp",
+      externalId: "+10987654321"
+    },
+    payload: {
+      type: 'text',
+      speech: "I'm searching for the address of your store in New York"
+    }
+  },
+  json: true
+})
+```
+
 > Example Response:
 
 ```
@@ -1421,7 +1491,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -1467,9 +1537,7 @@ Use the reference table below to determine the `channel.channelName` to copy and
 | Twilio | `twilio` |
 | WhatsApp | `whatsapp` |
 | Khoros | `khoros` |
-| Messenger^1^ | `messenger` |
-
-1: Facebook Messenger requires a user scoped page ID. We do not support phone numbers at this time
+| Messenger | `messenger` |
 
 **externalId**
 
@@ -1489,8 +1557,9 @@ Within the Flow.ai dashboard, open the messaging channel you'd like to use to se
 
 | | |
 |----:|---|
-| **type** *string* | Should be `event`|
-| **eventName** *string* | Name of the Flow.ai [event](/docs/triggers/event) to trigger |
+| **type** *string* | Should be `event` or `text` |
+| **eventName** *string* | Mandatory if type is `event`. This is the name of the [event](/docs/triggers/event) to trigger |
+| **speech** *string* | Mandatory if type is `text`. Use this to run text classification. |
 | **metadata** *object* | See metadata below |
 
 ###### Metadata
@@ -1568,7 +1637,7 @@ const result = await request({
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
@@ -1633,49 +1702,44 @@ const result = await request({
 
 ```json
 {
+{
   "status": "ok",
-  "segments":     [{
-                      "_id": "5f0f2445e11c9f0032bb0772",
-                      "agentId": "ea6e8bde-8bf3-4bf2-abc1-e4d2865bae10",
-                      "audienceId": "befce22b-7a3e-40fb-8b44-4de3688509f8",
-                      "__v": 0,
-                      "channels": [
-                          "eazy"
-                      ],
-                      "conditions": [],
-                      "contact": "all",
-                      "createdAfterCondition": "2020-07-14T21:00:00.000Z",
-                      "createdAt": "2020-07-15T15:44:05.831Z",
-                      "createdBeforeCondition": "2020-07-15T21:00:00.000Z",
-                      "importCondition": "all_contacts",
-                      "title": "Created on 15th of July (Eazy)",
-                      "type": "segment",
-                      "updatedAt": "2020-07-15T15:44:05.828Z"
-                  },
-                  {
-                      "_id": "5f0f2465e11c9f0032bb0773",
-                      "agentId": "ea6e8bde-8bf3-4bf2-abc1-e4d2865bae10",
-                      "audienceId": "164b9fa3-db65-4aaf-9b07-9eab3b4ff459",
-                      "__v": 0,
-                      "channels": [
-                          "messenger"
-                      ],
-                      "conditions": [
-                          {
-                              "condition": "has_tag_name",
-                              "conditionValue": "OPTIN"
-                          }
-                      ],
-                      "contact": "messenger",
-                      "createdAfterCondition": null,
-                      "createdAt": "2020-07-15T15:44:37.013Z",
-                      "createdBeforeCondition": null,
-                      "importCondition": "all_contacts",
-                      "title": "OPTIN tag (Messenger)",
-                      "type": "segment",
-                      "updatedAt": "2020-07-15T15:44:37.012Z"
-                  }
-              ]
+  "segments": [{
+      "agentId": "ea6e8bde-8bf3-4bf2-abc1-e4d2865bae10",
+      "audienceId": "befce22b-7a3e-40fb-8b44-4de3688509f8",
+      "channels": [
+        "eazy"
+      ],
+      "conditions": [],
+      "contact": "all",
+      "createdAfterCondition": "2020-07-14T21:00:00.000Z",
+      "createdAt": "2020-07-15T15:44:05.831Z",
+      "createdBeforeCondition": "2020-07-15T21:00:00.000Z",
+      "importCondition": "all_contacts",
+      "title": "Created on 15th of July (Eazy)",
+      "type": "segment",
+      "updatedAt": "2020-07-15T15:44:05.828Z"
+    },
+    {
+      "agentId": "ea6e8bde-8bf3-4bf2-abc1-e4d2865bae10",
+      "audienceId": "164b9fa3-db65-4aaf-9b07-9eab3b4ff459",
+      "channels": [
+        "messenger"
+      ],
+      "conditions": [{
+        "condition": "has_tag_name",
+        "conditionValue": "OPTIN"
+      }],
+      "contact": "messenger",
+      "createdAfterCondition": null,
+      "createdAt": "2020-07-15T15:44:37.013Z",
+      "createdBeforeCondition": null,
+      "importCondition": "all_contacts",
+      "title": "OPTIN tag (Messenger)",
+      "type": "segment",
+      "updatedAt": "2020-07-15T15:44:37.012Z"
+    }
+  ]
 }
 ```
 
@@ -1734,8 +1798,8 @@ The following example demonstrates opening a connection and sending a test messa
 
 ```html
 <html>
-	<script>
-		(function () {
+  <script>
+    (function () {
       // Vanilla JS example
       // When executing this script. Check your development console for any messages
 
@@ -2089,6 +2153,6 @@ The following example demonstrates opening a connection and sending a test messa
         resumeBotForUser()
       }, 3000)
     }())
-	</script>
+  </script>
 </html>
 ```
