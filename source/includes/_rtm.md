@@ -24,18 +24,54 @@ An overview how the API works:
 3. [Send](#web-socket-api-sending-messages) and [receive](#web-socket-api-receiving-messages) messages
 4. [Keep the connection alive](#web-socket-api-keep-alive)
 
+## Nonce overview
+
+The nonce (or secret) is created to provide more security for the socket interactions. To enable it go to your project
+and chose your widget integration, select the advanced section, scroll down and select the checkbox `ENABLE CLIENT NONCE`
+
+The [Flow AI JS SDK library](https://github.com/flow-ai/flowai-js) is already support nonce
+
+How it works:
+
+- If you call us for the first time for specific `threadId` you don't need to provide a `nonce` (secret)
+in responce you will receive the `nonce` (secret) and you need to store it for this `threadId`
+
+- Nonce is linked to `thredId`, that means if you change the `threadId` you will receive new `nonce` in the response
+
+- If you have a `nonce` for specific `threadId` you need to provide it in the headers `x-flowai-secret` for rest request
+or if you sending message with type `message.send` by socket connection you need to put the `nonce` in the `payload` to key `nonce`
+
 ## Request an endpoint
 
 > Example Request:
 
 ```shell
-curl -X GET -H "Content-Type: application/json" "https://sdk.flow.ai/socket.info?clientId=YOUR_CLIENT_ID&sessionId=123432"
+curl 'https://sdk.flow.ai/socket.info' \
+  -H 'x-flowai-secret: SECRET' \
+  -H 'x-flowai-threadid: THREAD_ID' \
+  -H 'x-flowai-clientid: CLIENT_ID' \
+  -H 'x-flowai-sessionid: SESSION_ID' \
+  -H 'content-type: application/json' \
+  -H 'accept: */*' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-dest: empty' \
+  --compressed
 ```
 
 ```js
 var request = require("request");
 
-var options = { method: 'GET', url: 'https://sdk.flow.ai/socket.info/?clientId=YOUR_CLIENT_ID&sessionId=1234' };
+var options = {
+  method: 'GET',
+  url: 'https://sdk.flow.ai/socket.info',
+  headers: {
+    'x-flowai-secret': 'SECRET',
+    'x-flowai-threadid': 'THREAD_ID',
+    'x-flowai-clientid': 'CLIENT_ID',
+    'x-flowai-sessionid': 'SESSION_ID'
+  }
+};
 
 request(options, function (error, response, body) {
   if (error) throw new Error(error);
@@ -45,8 +81,14 @@ request(options, function (error, response, body) {
 ```
 
 ```csharp
-var client = new RestClient("https://sdk.flow.ai/socket.info?clientId=YOUR_CLIENT_ID&sessionId=1234");
+var client = new RestClient("https://sdk.flow.ai/socket.info");
 var request = new RestRequest(Method.GET);
+
+request.AddHeader("x-flowai-secret", "SECRET");
+request.AddHeader("x-flowai-threadid", "THREAD_ID");
+request.AddHeader("x-flowai-clientid", "CLIENT_ID");
+request.AddHeader("x-flowai-sessionid", "SESSION_ID");
+
 IRestResponse response = client.Execute(request);
 ```
 
@@ -54,6 +96,10 @@ IRestResponse response = client.Execute(request);
 var request = NSMutableURLRequest(URL: NSURL(string: "https://sdk.flow.ai/socket.info/?clientId=YOUR_CLIENT_ID&sessionId=1234")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
+request.addValue("SECRET", forHTTPHeaderField: "x-flowai-secret")
+request.addValue("THREAD_ID", forHTTPHeaderField: "x-flowai-threadid")
+request.addValue("CLIENT_ID", forHTTPHeaderField: "x-flowai-clientid")
+request.addValue("SESSION_ID", forHTTPHeaderField: "x-flowai-sessionid")
 ```
 
 > Example response:
@@ -67,18 +113,21 @@ var request = NSMutableURLRequest(URL: NSURL(string: "https://sdk.flow.ai/socket
   "status": "ok",
   "payload": {
     "endpoint": "wss://sdk.flow.ai/ws/8c3b7d7ea9400..."
-  }
+  },
+  "secret": "SECRET"
 }
 ```
 
 To start a connection you'll need to make a `GET` call to the `socket.info` API method to the API endpoint at `https://sdk.flow.ai`. This provides a temporary WebSocket URL.
 
-The `socket.info` method requires a `sessionId` and a `clientId`.
+The `socket.info` method requires a `secret`, `sessionId`, `clientId`, and a `threadId`.
 
-| **Query param** | Description |
+| **Headers** | Description |
 | :--- | :--- |
-| **sessionId** | The sessionId is something unique you need to create for every call. This can be something like a [UIUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Each connection is partly identified on our end using this key |
-| **clientId** | Check the [Channels](https://app.flow.ai/channels) app of the [dashboard](https://app.flow.ai) to find your unique clientId. |
+| **x-flowai-secret** | The [secret](#socket-api-nonce-overview) is used for more security |
+| **x-flowai-threadid** | The thread ID of the conversation |
+| **x-flowai-sessionid** | The sessionId is something unique you need to create for every call. This can be something like a [UIUID](https://en.wikipedia.org/wiki/Universally_unique_identifier). Each connection is partly identified on our end using this key |
+| **x-flowai-clientid** | Check the [Channels](https://app.flow.ai/channels) app of the [dashboard](https://app.flow.ai) to find your unique clientId. |
 
 ## Open a connection
 
@@ -150,6 +199,7 @@ The easiest way to send a simple text message in real time
 | --- | --- |
 | **threadId** **required** | Unique key identifying a user or channel |
 | **traceId** *optional* | Optional number used to track message delivery |
+| **nonce** *optional* | The [secret](#socket-api-nonce-overview) is used for more security |
 | **speech** **required** | Text of message |
 
 ### Originator object
@@ -162,6 +212,7 @@ The easiest way to send a simple text message in real time
   "payload": {
     "threadId": "58ca9e327348ed3bd1439e7b",
     "traceId": 1519091841666,
+    "nonce": "SECRET",
     "speech": "Turn off the lights in the Living room",
     "originator": {
       "name": "John Doe",
