@@ -1,5 +1,5 @@
 
-# Management API (Beta)
+# Flow Management API
 
 ## Authentication
 
@@ -21,9 +21,7 @@ You can register a new Management API key within your [organisation settings](ht
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
 </aside>
 
-
 ## Flows
-
 
 > Example Flow object:
 
@@ -80,7 +78,7 @@ Treat API keys with care. Never share keys with other users or applications. Do 
 }
 ```
 
-A Flow represents a [conversation topic](https://docs.flow.ai/docs/thinking-in-flows.html). It's combines a series of [Step objects](#the-step-object) that the AI engine uses to determine what actions to perform.
+A Flow represents a [conversation topic](https://flow.ai/docs/thinking-in-flows.html). It's combines a series of [Step objects](#the-step-object) that the AI engine uses to determine what actions to perform.
 
 ### The Flow object
 

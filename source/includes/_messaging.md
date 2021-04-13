@@ -1,10 +1,10 @@
-# REST API
+# Flow REST API
 
 An API to automate messaging (e.g., chatbots, voice-powered apps and devices)
 
 <aside class="notice">
   <strong>Need some inspiration?</strong>
-  <p>There are different ways to leverage the Flow.ai platform:</p>
+  <p>There are different ways to leverage the Khoros Flow platform:</p>
   <ul>
     <li><a href="https://www.tracebuzz.com/">Tracebuzz</a> connects their social media chat and messaging platform</li>
     <li><a href="https://www.shopctrl.com/">ShopCtrl</a> automates online retailers</li>
@@ -18,21 +18,20 @@ Our REST API supports [cross-origin resource sharing](http://en.wikipedia.org/wi
 
 ## Audience
 
-The API is specifically intended for developers that want to use the Flow.ai platform within their own technology stack or solution.
+The API is specifically intended for developers that want to use the Khoros Flow platform within their own technology stack or solution.
 
 Some example use cases are:
 
-- Automating a customer service solution
-- Integrating a bot with a custom backend service
-- Hardware or other server-side integrations
+- Automating a customer experience solution
+- Integrating with a custom backend service
+- Other server-side integrations
 
 For use cases that connect with client interfaces, like mobile apps and websites, we offer a real-time [websocket API](#socket-api)
-
 ## You call us, we'll call you
 
 The REST API works asynchronous. Unlike other NLP APIs, it will not return a direct reply to a [Send message](#sending-messages) call.
 
-![Send messages using REST API](/images/sending.svg "Sending messages to Flow.ai")
+![Send messages using REST API](/images/sending.svg "Sending messages to Flow")
 
 Instead, the API will respond by sending a POST request to your configured [webhook](#webhooks) url whenever an event takes place.
 
@@ -42,11 +41,11 @@ To make life easier, some calls do support an optional synchronous reply mode. I
 
 To enable this *sync mode* add a `?sync=true` query parameter to the URL of the requested API endpoint.
 
-![Receive replies using Webhooks](/images/receiving.svg "Receiving replies from Flow.ai")
+![Receive replies using Webhooks](/images/receiving.svg "Receiving replies from Flow")
 
 ## Sending messages
 
-Many types of unstructured content can be sent to the Flow.ai platform, including text, audio, images, video, and files. Our powerful AI engine will process any query and send back replies using the provided [webhook](#webhooks).
+Many types of unstructured content can be sent to the Khoros Flow platform, including text, audio, images, video, and files. Our powerful AI engine will process any query and send back replies using the provided [webhook](#webhooks).
 
 Any message that is sent requires a `threadId` that relates the message to a specific user, chat or thread. Optionally you can provide a `traceId` that will help keep track of the message when you receive delivery events.
 
@@ -228,7 +227,7 @@ Each originator has a `role` within the conversation. When sending messages to t
 
 The `external` role is used to indicate the originator is a customer, end-user or external user sending a message. The `moderator` role is reserved for human agents or employees replying to customers or external users.
 
-Specifying the right role is important. When Flow.ai receives a message originating from a `moderator` the bot will automatically pause.
+Specifying the right role is important. When Flow receives a message originating from a `moderator` the bot will automatically pause.
 
 #### Attributes
 
@@ -316,7 +315,7 @@ const result = await request({
 }
 ```
 
-Trigger events within Flow.ai by sending an event message.
+Trigger events within Flow by sending an event message.
 
 #### Parameters
 
@@ -1518,7 +1517,7 @@ The intended audience to send a message to. Please see the [originator](#origina
 
 ##### Channel
 
-Information about the Flow.ai integration used to send a message from.
+Information about the Flow integration used to send a message from.
 
 | | |
 |----:|---|
@@ -1541,7 +1540,7 @@ Use the reference table below to determine the `channel.channelName` to copy and
 
 **externalId**
 
-Within the Flow.ai dashboard, open the messaging channel you'd like to use to send a message. Use the reference table below to find the value to use within your API call.
+Within the Khoros Flow dashboard, open the messaging channel you'd like to use to send a message. Use the reference table below to find the value to use within your API call.
 
 | Channel | externalId |
 |------------|--------------|
@@ -1669,7 +1668,7 @@ The segment to trigger event for.
 
 ### Get audience segments
 
-This API call provides a way to load a list of [segments](https://flow.ai/docs/guides/audience#segments) created in Flow.ai. Segment is a list of your bot's contacts that are grouped by one or multiple conditions.
+This API call provides a way to load a list of [segments](https://flow.ai/docs/guides/audience#segments) created in Flow. Segment is a list of your bot's contacts that are grouped by one or multiple conditions.
 
 > GET rest/v1/broadcast/segments?sync=true
 
@@ -1782,15 +1781,15 @@ This is a list of all the types of events we currently send. We may add more at 
 
 | | |
 |----:|---|
-| `message` | Called whenever Flow.ai is sending reply message for a specific threadId |
-| `history` | Called whenever Flow.ai is sending messaging history for a specific threadId |
-| `threads` | Called whenever Flow.ai is sending list of threads in user's project |
-| `trigger.events` | Called whenever Flow.ai is sending list of events that can be triggered manually |
-| `businessHours` | Called whenever Flow.ai is sending business hours information |
+| `message` | Called whenever Flow is sending reply message for a specific threadId |
+| `history` | Called whenever Flow is sending messaging history for a specific threadId |
+| `threads` | Called whenever Flow is sending list of threads in user's project |
+| `trigger.events` | Called whenever Flow is sending list of events that can be triggered manually |
+| `businessHours` | Called whenever Flow is sending business hours information |
 | `paused` | Called when the AI engine has paused operation for a specific threadId |
 | `resumed` | Called when the AI engine has resumed operation for a specific threadId |
-| `isPaused` | Called whenever Flow.ai is sending bot status for a specific threadId |
-| `inbound` | Called whenever user sends message to Flow.ai from non-rest channel |
+| `isPaused` | Called whenever Flow is sending bot status for a specific threadId |
+| `inbound` | Called whenever user sends message to Flow from non-rest channel |
 | `outbound` | Called whenever AI engine sends message to user from non-rest channel |
 | `takeover` | Called when the takeover action is executed |
 
@@ -1808,7 +1807,7 @@ The following example demonstrates opening a connection and sending a test messa
       // This identifies specific user's message
       var threadId = 'USER_THREAD_ID'
 
-      // Can be found within the 'Outbound' section of your REST integration inside the Flow.ai dashboard
+      // Can be found within the 'Outbound' section of your REST integration inside the Khoros Flow dashboard
       var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudElkIjoiODkxZjBiZjQtNmYwYi00NWEyLThiYjUtMDk5MTI3MDdhZjQ0IiwiY2hhbm5lbElkIjoiOWUxYzZhOWUtMjE4ZC00NGFkLTg3OWYtNzEwMjFmMTgyYWU3IiwiaWF0IjoxNTYxMzk1MjM2fQ.sBzBBCplIPMzoOxBkQgkZtm7jN2TIrz_PWcI-bUjiOI'
 
       var url = 'https://api.flow.ai/rest/v1/'
@@ -2104,7 +2103,7 @@ The following example demonstrates opening a connection and sending a test messa
           console.error('Error while sending text message', xhr.response)
           return
         }
-        // In other case check your webhook url to see the response from Flow.ai
+        // In other case check your webhook url to see the response from Flow
       }
 
       function restEndpointResponseSync(e) {

@@ -1,13 +1,13 @@
-# Socket API
+# Flow Socket API
 
-A real time messaging API that allows you to send and receive messages from Flow.ai using web sockets.
+A real time messaging API that allows you to send and receive messages from Flow using web sockets.
 
 ## Audience
 
-The Socket API is specifically intended for developers looking to integrate Flow.ai in a client facing app. For example:
+The Socket API is specifically intended for developers looking to integrate Flow in a client facing app. For example:
 
 - Building a custom web chat widget
-- Integrating Flow.ai inside a mobile app
+- Integrating Flow inside a mobile app
 
 <aside class="notice">
  We provide a <a href="https://github.com/flow-ai/flowai-js">JavaScript SDK</a>, and for iOS a <a href="https://github.com/flow-ai/flowai-swift">Swift SDK</a>.
@@ -26,22 +26,17 @@ An overview how the API works:
 
 ## Nonce overview
 
-The nonce (or secret) is created to provide more security for the socket interactions. To enable it go to your project
-and chose your widget integration, select the advanced section, scroll down and select the checkbox `ENABLE CLIENT NONCE`
-
-The [Flow AI JS SDK library](https://github.com/flow-ai/flowai-js) is already support nonce
+The nonce (or secret) is created to provide more security for websocket interactions. To enable it, go to your project
+and choose the Flow widget integration, select the advanced section, scroll down and check the box `ENABLE CLIENT NONCE`
 
 How it works:
 
-- If you call us for the first time for specific `threadId` you don't need to provide a `nonce` (secret)
-in responce you will receive the `nonce` (secret) and you need to store it for this `threadId`
-
-- Nonce is linked to `thredId`, that means if you change the `threadId` you will receive new `nonce` in the response
-
-- If you have a `nonce` for specific `threadId` you need to provide it in the headers `x-flowai-secret` for rest request
-or if you sending message with type `message.send` by socket connection you need to put the `nonce` in the `payload` to key `nonce`
-
-## Request an endpoint
+- If you call us for the first time for a specific `threadId` you don't need to provide a `nonce` (secret)
+in response you will receive the `nonce` (secret) and you need to store it for this specific `threadId`
+- A nonce is linked to a `threadId`, that means if you change the `threadId`, you will receive new `nonce` in the response
+- If you have a `nonce` for a specific `threadId` you'll need to provide it in the headers `x-flowai-secret` for any `REST` request
+- If you send a websocket message of the type `message.send` you'll need to send the `nonce` in the message `payload` with a key named `nonce`
+## Requesting an endpoint
 
 > Example Request:
 
@@ -270,7 +265,7 @@ The easiest way to send a simple text message in real time
 }
 ```
 
-With each message you can customize information regarding the sender, user or as Flow.ai calls it, the originator of the message.
+With each message you can customize information regarding the sender, user or as Flow calls it, the originator of the message.
 
 #### Attributes
 
@@ -387,7 +382,7 @@ The params object resembles the matched result created by the AI engine using en
 }
 ```
 
-Instead of simple text messages, Flow.ai also supports sending attachments like files or events.
+Instead of simple text messages, Flow also supports sending attachments like files or events.
 
 <aside class="notice">
 Note: we currently only support sending event attachments. Image and file attachments will follow soon.
