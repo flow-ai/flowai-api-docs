@@ -503,6 +503,233 @@ The API allows you to send images, files and other media files.
 | **timezone** *integer* | Optional UTF timezone offset in hours |
 | **params** *object* | Optional parameters |
 
+### Sync mode
+
+> POST rest/v1/messages/:threadId?sync=true
+
+> Example Request:
+
+```http
+POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true HTTP/1.1
+Host: api.flow.ai
+{
+  "payload": {
+    "type": "media",
+    "mediaType": "image",
+    "mimetype": "image/png",
+    "title": "Example title",
+    "url": "https://source.unsplash.com/random/880x400",
+    "originator": {
+      "name": "John Doe",
+      "role": "external"
+    }
+  }
+}
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87?sync=true',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {
+    payload: {
+      type: 'media',
+      mediaType: 'image',
+      mimeType: 'image/png',
+      title: 'Example title',
+      url: 'https://source.unsplash.com/random/880x400',
+      originator: {
+        name: 'John Doe',
+        role: 'external'
+        }
+    }
+  }
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "status": "ok",
+  "activityId": "66832bd8-46b1-42b5-aefb-81856a7680bd",
+  "agentId": "a_EbAZzSW",
+  "channelId": "a_EbAZzSW",
+  "channelName": "gateway",
+  "threadId": "4a10d62d-79b4-4543-9373-053924209cc7",
+  "messages": [
+    {
+      "fallback": "Hello",
+      "silent": false,
+      "replyTo": "hi",
+      "originator": {
+        "userId": "flowai|system",
+        "name": "system",
+        "role": "bot",
+        "profile": {
+          "picture": "https://flow.ai/img/brains/flowai.svg"
+        }
+      },
+      "actions": [],
+      "responses": [
+        {
+          "type": "text",
+          "payload": {
+            "text": "Hello"
+          }
+        }
+      ],
+      "intents": [],
+      "entities": [],
+      "flow": {
+        "flowId": "fF5gEqEko",
+        "title": "Untitled",
+        "group": "Default",
+        "metadata": []
+      },
+      "step": {
+        "stepId": "sXaM8etEl",
+        "title": "Hi",
+        "type": "INTENT"
+      },
+      "slot": false,
+      "params": {},
+      "contexts": [],
+      "meta": {
+        "msgId": "61cfa141-6b60-47fd-950c-16634d3f2eef",
+        "prevMsgId": null,
+        "childMsgId": "4a7c7027-29b7-4768-832d-56a6d1eaa8c6",
+        "prevChildMsgId": null,
+        "createdAt": 1632166271745,
+        "keepTyping": false
+      }
+    }
+  ],
+  "sentiment": 0,
+  "accuracy": 0,
+  "originator": {
+    "userId": "flowai|system",
+    "name": "system",
+    "role": "bot",
+    "profile": {
+      "picture": "https://flow.ai/img/brains/flowai.svg"
+    }
+  },
+  "traceId": "6beafa70c487a59c:23cab391bd64d5f1:6beafa70c487a59c:1",
+  "createdAt": "2021-09-20T19:31:12.031Z",
+  "replyTo": "hi",
+  "user": {
+    "name": "M B",
+    "role": "external",
+    "profile": {
+      "fullName": "M B",
+      "firstName": "M",
+      "lastName": "B",
+      "email": "M.B@mail.com",
+      "locale": "en",
+      "timezone": 3,
+      "gender": "U"
+    }
+  },
+  "metadata": {
+    "params": {}
+  },
+  "connectionKey": "a5b2eb9a-cebd-428c-b3e8-8689bd42d842"
+}
+
+```
+
+This mode allows to process your message in synchronous way. As a response you will get a reply from our system
+
+#### Query Parameters
+
+| | |
+|----:|---|
+| **sync** *string* | Indicates that this message should be processed in sync mode, the value should be true |
+
+
+### WriteConcern mode
+
+> POST rest/v1/messages/:threadId?writeConcern=true
+
+> Example Request:
+
+```http
+POST rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87?writeConcern=true HTTP/1.1
+Host: api.flow.ai
+{
+  "payload": {
+    "type": "media",
+    "mediaType": "image",
+    "mimetype": "image/png",
+    "title": "Example title",
+    "url": "https://source.unsplash.com/random/880x400",
+    "originator": {
+      "name": "John Doe",
+      "role": "external"
+    }
+  }
+}
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/messages/6ecfd199-853a-448f-9f91-ef397588ff87?writeConcern=true',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: {
+    payload: {
+      type: 'media',
+      mediaType: 'image',
+      mimeType: 'image/png',
+      title: 'Example title',
+      url: 'https://source.unsplash.com/random/880x400',
+      originator: {
+        name: 'John Doe',
+        role: 'external'
+        }
+    }
+  }
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "status": "ok"
+}
+
+```
+
+This mode allows to process your message in synchronous way. The main purpose of it is to respond on request only when the message is processed and saved to database
+
+#### Query Parameters
+
+| | |
+|----:|---|
+| **writeConcern** *string* | Indicates that this message should be processed in writeConcern mode, the value should be true |
+
+
 ## Loading messages
 
 Using the REST API you are able to load a list of messages.
