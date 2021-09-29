@@ -649,7 +649,11 @@ const result = await request({
 
 ```
 
-This mode allows to process your message in synchronous way. As a response you will get a reply from our system
+The Flow REST API is asynchronous. Whenever a request is sent, a result will be returned to the configured webhook endpoint. There are circumstances that won't allow the use of a webhook endpoint to receive results.
+
+For these use cases we provide a synchronous mode for certain endpoints. Instead of returning the result of the API request to your webhook, it's returned directly as a response to the request.
+
+Note: sync mode is an exception and has several limitations for the messaging endpoint. For example, timers and delays cannot work in this mode! If you are considering using the REST API to connect Flow to a client side app, please consider the socket API first.
 
 #### Query Parameters
 
@@ -721,7 +725,11 @@ const result = await request({
 
 ```
 
-This mode allows to process your message in synchronous way. The main purpose of it is to respond on request only when the message is processed and saved to database
+Because of the asynchronous nature of the REST API, any call made to the endpoint will not guarantee that the system has completed the action when you receive a response.
+
+For example, calling the resolve endpoint will immediately return a response to your request, but actually resolving the conversation might be done at a later time.
+
+Using the writeConcern mode we guarantee the action has completed when you receive the response.
 
 #### Query Parameters
 
