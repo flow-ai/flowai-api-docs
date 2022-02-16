@@ -1,0 +1,13 @@
+#variables that needs to be adjusted during project creation stage
+
+
+variables:
+  _APP: api-docs
+      #do we need to build web
+  WEB_ENABLED: 'true'
+  #do we need to build worker
+  WORKER_ENABLED: 'false'
+
+  TESTS_WORKER_ENABLED: 'false'
+  TESTS_WEB_ENABLED: 'false'
+
