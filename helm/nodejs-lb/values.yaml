@@ -20,8 +20,8 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: "web"
     nginx.ingress.kubernetes.io/ssl-redirect: false
-    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
-  path: /api-docs(/|$)(.*)
+    nginx.ingress.kubernetes.io/rewrite-target: "/$1"
+  path: /(.*)
   host: web-dev.flow.ai
 
 
