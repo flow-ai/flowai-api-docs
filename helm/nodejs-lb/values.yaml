@@ -17,13 +17,13 @@ service:
 
 ingress:
   enabled: true
-  annotations: 
+  annotations:
     kubernetes.io/ingress.class: "web"
     nginx.ingress.kubernetes.io/ssl-redirect: false
-    nginx.ingress.kubernetes.io/rewrite-target: "/docs/api-docs"
-  path: /docs/api-docs
+    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+  path: /api-docs(/|$)(.*)
   host: web-dev.flow.ai
-  
+
 
 #settings for legacy ip enabled urls
 
@@ -33,7 +33,7 @@ nginx-ingress:
     ingressClass: api-web
 lb:
   enabled: true
-  annotations: 
+  annotations:
     kubernetes.io/ingress.class: "api-docs"
     nginx.ingress.kubernetes.io/ssl-redirect: false
   #  nginx.ingress.kubernetes.io/rewrite-target: "/"
