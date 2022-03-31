@@ -1,2 +1,4 @@
 ingress:
-  host: web-stg.flow.ai
+  host: app-stg.flow.ai
+  annotations:
+    kubernetes.io/ingress.class: "app"
