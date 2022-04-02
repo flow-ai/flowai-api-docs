@@ -1,4 +1,10 @@
 ingress:
-  host: app-stg.flow.ai
+  host: api-docs-stg.flow.ai
   annotations:
     kubernetes.io/ingress.class: "app"
+
+nginx-ingress:
+  enabled: false
+
+lb:
+  enabled: false
