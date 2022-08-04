@@ -4,6 +4,7 @@ env:
 
    #created due to https://jira.flow.ai/browse/FLOW-249 remove after solve!
 initalReadinessDelay: 25
+timeoutSeconds: 2
 
 replicaCount: 1
 
