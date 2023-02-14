@@ -65,6 +65,48 @@ You can get a new API key within the `Organisation settings` section by selectin
 Treat API keys with care. Never share keys with other users or applications. Do not publish keys in public code repositories.
 </aside>
 
+### Generating threadId
+
+In case you're using REST API as a `messaging channel` you can use this endpoint to generate valid Flow.ai `threadId`.
+
+This endpoint is optional and you can still pass your own values as a `threadId` to the Flow.ai REST API endpoints. In this case you will need to compose threadIds following next structure: `{unique_identifier}|w_{channelId}` where `unique_idendtifier` is something that identifies user in your system, `|_w` static required part, `channelId` is ID of your REST API integration in Flow.ai, it can be found in URL (last part of an URL) when you open `Integrations` tab in Flow.ai UI and select your REST API integration. 
+
+> Example Request:
+
+```http
+POST rest/v1/messages HTTP/1.1
+HOST: api.flow.ai
+Content-Type: application/json
+Authorization: MY_MESSAGING_API_KEY
+```
+
+```javascript
+import request from "async-request";
+
+const result = await request({
+  method: 'POST',
+  url: 'https://api.flow.ai/rest/v1/messages',
+  headers: {
+    'Authorization': 'MY_MESSAGING_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  json: true
+})
+```
+
+> Example Response:
+
+```
+200 OK
+```
+
+```json
+{
+    "status": "ok",
+    "threadId": "1f85dbe7-fc0a-4f43-a1a0-87216587ab7b|w_caRv6my_8"
+}
+```
+
 ### Text message
 
 Sending a text message
