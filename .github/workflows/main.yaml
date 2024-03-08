@@ -1,0 +1,24 @@
+on:
+  push:
+    branches:
+      - '**'
+jobs:
+  trigger-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+             owner: "flow-ai",
+             repo: "flow-ci-templates",
+             workflow_id: "ci-template.yaml",
+             ref: "master",
+             inputs: {
+             sha: "${{ github.sha }}",
+             app: "api-docs",
+             web_enabled: true,
+             worker_enabled: false
+             }
+            })
