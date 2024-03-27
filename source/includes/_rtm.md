@@ -588,7 +588,7 @@ We provide a [JavaScript SDK](https://github.com/flow-ai/flowai-js), but the fol
 
     (function () {
       // Vanilla JS example
-      // When executing this script. Check your development console for any messages
+      // When executing this script, check your development console for any messages
 
       // This identifies the channel we want to connect with
       var clientId = 'YOUR CLIENTID'
