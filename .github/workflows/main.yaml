@@ -21,6 +21,6 @@ jobs:
              sha: "${{ github.sha }}",
              app: "api-docs",
              params: "{watcher_enabled: false, web_enabled: true, worker_enabled: false, grpc_worker_enabled: false, cron_enabled: false, job_worker_enabled: false, dagster_enabled: false, is_eks_docker: false}",
-             gh_meta: `{"ref_name": "${{ github.ref_name }}", "ref_type": "${{ github.ref_type }}", "message": "${{ github.event.head_commit.message.replace(/\n/g, " ") }}", "pusher": "${{ github.actor }}"}`
+             gh_meta: `{"ref_name": "${{ github.ref_name }}", "ref_type": "${{ github.ref_type }}", "message": "${context.payload.head_commit.message.replace(/\n/g, ' ')}", "pusher": "${{ github.actor }}"}`,
              }
             })
